@@ -16,7 +16,7 @@ This project builds a complete **data warehouse** from the public Olist Brazilia
 
 ## 🏗️ Architecture
 
-The project adopts a **three-layer (Medallion) architecture** implemented entirely in 
+The project adopts a **three-layer (Medallion) architecture** implemented entirely in SQL Server
 
 | Layer      | Description |
 |------------|-------------|
@@ -102,8 +102,8 @@ The project adopts a **three-layer (Medallion) architecture** implemented entire
 ## 🚀 Getting Started
 
 ### Prerequisites
-- 
-- 
+- SSMS
+- SSIS
 - Git
 
 ### Steps
