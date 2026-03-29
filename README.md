@@ -171,47 +171,226 @@ Dưới đây là các quan hệ khóa ngoại chính:
 
 ```mermaid
 erDiagram
-    dim_date { INT date_key PK }
-    dim_geolocation { INT geo_key PK }
-    dim_customer { INT customer_key PK INT geo_key FK }
-    dim_seller { INT seller_key PK INT geo_key FK }
-    dim_product_category { INT category_key PK }
-    dim_product { INT product_key PK INT category_key FK }
-    dim_order_status { VARCHAR order_status PK }
-    dim_payment_method { VARCHAR payment_type PK }
-    fact_orders { INT customer_key FK INT seller_key FK INT product_key FK INT order_date_key FK ... }
-    fact_sales { INT seller_key FK INT category_key FK INT date_key FK }
-    fact_delivery { INT seller_key FK INT date_key FK }
-    fact_payment_trends { VARCHAR payment_type FK INT date_key FK }
-    fact_customer_orders { INT customer_key FK VARCHAR order_status FK INT date_key FK }
-    fact_sales_year { INT seller_key FK INT category_key FK }
-    fact_delivery_year { INT seller_key FK }
-    fact_payment_trends_year { VARCHAR payment_type FK }
-    fact_customer_orders_year { INT customer_key FK VARCHAR order_status FK }
-    fact_order_lifecycle { INT customer_key FK INT seller_key FK }
+    %% Dimension tables
+    dim_date {
+        INT date_key PK
+        DATE full_date
+        SMALLINT year
+        SMALLINT quarter
+        SMALLINT month
+        VARCHAR month_name
+        BOOLEAN is_weekend
+        BOOLEAN is_holiday_brazil
+        VARCHAR season_brazil
+    }
 
+    dim_geolocation {
+        INT geo_key PK
+        VARCHAR zip_code_prefix
+        VARCHAR city
+        VARCHAR state
+        VARCHAR region
+        DECIMAL latitude
+        DECIMAL longitude
+    }
+
+    dim_customer {
+        INT customer_key PK
+        VARCHAR customer_id UK
+        VARCHAR customer_unique_id
+        VARCHAR city
+        CHAR state
+        INT geo_key FK
+    }
+
+    dim_seller {
+        INT seller_key PK
+        VARCHAR seller_id UK
+        VARCHAR city
+        CHAR state
+        INT geo_key FK
+        VARCHAR seller_region
+    }
+
+    dim_product_category {
+        INT category_key PK
+        VARCHAR category_name_english
+        VARCHAR category_name_portuguese
+    }
+
+    dim_product {
+        INT product_key PK
+        VARCHAR product_id UK
+        INT category_key FK
+        INT product_name_length
+        INT product_description_length
+        INT product_photos_qty
+        INT product_weight_g
+        INT product_length_cm
+        INT product_height_cm
+        INT product_width_cm
+    }
+
+    dim_order_status {
+        VARCHAR order_status PK
+        VARCHAR description
+    }
+
+    dim_payment_method {
+        VARCHAR payment_type PK
+        VARCHAR description
+    }
+
+    %% Fact tables
+    fact_orders {
+        BIGINT fact_order_item_id PK
+        VARCHAR order_id
+        INT order_item_id
+        INT customer_key FK
+        INT seller_key FK
+        INT product_key FK
+        INT order_date_key FK
+        INT approved_date_key FK
+        INT delivered_date_key FK
+        INT estimated_delivery_date_key FK
+        DECIMAL price
+        DECIMAL freight_value
+        INT quantity
+        TINYINT review_score
+        VARCHAR order_status
+    }
+
+    fact_sales {
+        BIGINT fact_sales_id PK
+        INT seller_key FK
+        INT category_key FK
+        INT date_key FK
+        DECIMAL total_revenue
+        INT total_items_sold
+        INT total_orders
+        DECIMAL avg_review_score
+    }
+
+    fact_delivery {
+        BIGINT fact_delivery_id PK
+        INT seller_key FK
+        INT date_key FK
+        INT total_orders_delivered
+        INT on_time_orders
+        DECIMAL on_time_rate
+    }
+
+    fact_payment_trends {
+        BIGINT fact_payment_id PK
+        VARCHAR payment_type FK
+        INT date_key FK
+        DECIMAL total_payment_value
+        INT transaction_count
+        INT order_count
+    }
+
+    fact_customer_orders {
+        BIGINT fact_customer_id PK
+        INT customer_key FK
+        VARCHAR order_status FK
+        INT date_key FK
+        INT total_orders
+        INT total_items
+        DECIMAL total_spent
+        DECIMAL avg_review_score
+    }
+
+    fact_sales_year {
+        BIGINT fact_sales_year_id PK
+        INT seller_key FK
+        INT category_key FK
+        INT year
+        DECIMAL total_revenue
+        INT total_items_sold
+        INT total_orders
+        DECIMAL avg_review_score
+    }
+
+    fact_delivery_year {
+        BIGINT fact_delivery_year_id PK
+        INT seller_key FK
+        INT year
+        INT total_orders_delivered
+        INT on_time_orders
+        DECIMAL on_time_rate
+    }
+
+    fact_payment_trends_year {
+        BIGINT fact_payment_year_id PK
+        VARCHAR payment_type FK
+        INT year
+        DECIMAL total_payment_value
+        INT transaction_count
+        INT order_count
+    }
+
+    fact_customer_orders_year {
+        BIGINT fact_customer_year_id PK
+        INT customer_key FK
+        VARCHAR order_status FK
+        INT year
+        INT total_orders
+        INT total_items
+        DECIMAL total_spent
+        DECIMAL avg_review_score
+    }
+
+    fact_order_lifecycle {
+        BIGINT fact_lifecycle_id PK
+        VARCHAR order_id
+        INT customer_key FK
+        INT seller_key FK
+        DATE order_date
+        DATE approved_date
+        DATE delivered_date
+        DATE estimated_delivery_date
+        INT days_to_approve
+        INT days_to_delivery
+        BOOLEAN is_delayed
+        VARCHAR order_status
+    }
+
+    %% Relationships (solid lines, no labels)
     dim_customer ||--|| dim_geolocation : geo_key
     dim_seller ||--|| dim_geolocation : geo_key
     dim_product ||--|| dim_product_category : category_key
+
     fact_orders ||--|| dim_customer : customer_key
     fact_orders ||--|| dim_seller : seller_key
     fact_orders ||--|| dim_product : product_key
     fact_orders ||--|| dim_date : order_date_key
+    fact_orders ||--|| dim_date : approved_date_key
+    fact_orders ||--|| dim_date : delivered_date_key
+    fact_orders ||--|| dim_date : estimated_delivery_date_key
+
     fact_sales ||--|| dim_seller : seller_key
     fact_sales ||--|| dim_product_category : category_key
     fact_sales ||--|| dim_date : date_key
+
     fact_delivery ||--|| dim_seller : seller_key
     fact_delivery ||--|| dim_date : date_key
+
     fact_payment_trends ||--|| dim_payment_method : payment_type
     fact_payment_trends ||--|| dim_date : date_key
+
     fact_customer_orders ||--|| dim_customer : customer_key
     fact_customer_orders ||--|| dim_order_status : order_status
     fact_customer_orders ||--|| dim_date : date_key
+
     fact_sales_year ||--|| dim_seller : seller_key
     fact_sales_year ||--|| dim_product_category : category_key
+
     fact_delivery_year ||--|| dim_seller : seller_key
+
     fact_payment_trends_year ||--|| dim_payment_method : payment_type
+
     fact_customer_orders_year ||--|| dim_customer : customer_key
     fact_customer_orders_year ||--|| dim_order_status : order_status
+
     fact_order_lifecycle ||--|| dim_customer : customer_key
     fact_order_lifecycle ||--|| dim_seller : seller_key
