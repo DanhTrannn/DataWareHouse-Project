@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{ACC6BECD-F504-4E63-AE34-57C7E693FC4C}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{B07E306C-8B52-4829-9380-5C4EC0ADD91C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -322,39 +322,27 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="207,42"
+          Id="Package\Load fact_customer_orders"
+          TopLeft="398,234" />
+        <NodeLayout
           Size="261,42"
           Id="Package\Truncate fact_customer_orders"
           TopLeft="371,137" />
-        <NodeLayout
-          Size="207,42"
-          Id="Package\Load fact_customer_orders"
-          TopLeft="382,234" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="501.5,179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-16,55"
+              EndConnector="0,55"
               Start="0,0"
-              End="-16,47.5">
+              End="0,47.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.5"
-                    Point2="0,27.5"
-                    Point3="-4,27.5" />
-                  <mssgle:LineSegment
-                    End="-12,27.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-12,27.5"
-                    Point2="-16,27.5"
-                    Point3="-16,31.5" />
-                  <mssgle:LineSegment
-                    End="-16,47.5" />
+                    End="0,47.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

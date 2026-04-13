@@ -1,3 +1,7 @@
+CREATE DATABASE OlistDW;
+USE OlistDW;
+GO
+
 CREATE SCHEMA staging;
 GO
 CREATE SCHEMA gold;
@@ -172,3 +176,152 @@ GO
 SELECT COUNT(*) AS cnt FROM staging.stg_customers;       -- Expected: ~99,441
 SELECT COUNT(*) AS cnt FROM staging.stg_geolocation;     -- Expected: ~19,015 (sau dedup)
 SELECT COUNT(*) AS cnt FROM staging.stg_order_reviews;   -- Expected: ~99,224
+
+
+
+-- TV3
+-- staging.stg_sellers
+IF OBJECT_ID('staging.stg_sellers', 'U') IS NOT NULL
+    DROP TABLE staging.stg_sellers;
+GO
+
+CREATE TABLE staging.stg_sellers (
+    seller_id               VARCHAR(50)   NOT NULL,
+    seller_zip_code_prefix  VARCHAR(10)   NULL,
+    seller_city             NVARCHAR(100) NULL,
+    seller_state            VARCHAR(5)    NULL
+);
+GO
+
+-- staging.stg_orders
+IF OBJECT_ID('staging.stg_orders', 'U') IS NOT NULL
+    DROP TABLE staging.stg_orders;
+GO
+
+CREATE TABLE staging.stg_orders (
+    order_id                       VARCHAR(50)  NOT NULL,
+    customer_id                    VARCHAR(50)  NOT NULL,
+    order_status                   VARCHAR(30)  NULL,
+    order_purchase_timestamp       DATETIME     NULL,
+    order_approved_at              DATETIME     NULL,
+    order_delivered_carrier_date   DATETIME     NULL,
+    order_delivered_customer_date  DATETIME     NULL,
+    order_estimated_delivery_date  DATETIME     NULL
+);
+GO
+
+-- staging.stg_order_payments
+IF OBJECT_ID('staging.stg_order_payments', 'U') IS NOT NULL
+    DROP TABLE staging.stg_order_payments;
+GO
+
+CREATE TABLE staging.stg_order_payments (
+    order_id              VARCHAR(50)   NOT NULL,
+    payment_sequential    INT           NOT NULL,
+    payment_type          VARCHAR(30)   NOT NULL,
+    payment_installments  INT           NULL,
+    payment_value         DECIMAL(10,2) NOT NULL
+);
+GO
+
+--  gold.dim_seller (SCD Type 2)
+IF OBJECT_ID('gold.dim_seller', 'U') IS NOT NULL
+    DROP TABLE gold.dim_seller;
+GO
+
+CREATE TABLE gold.dim_seller (
+    seller_key       INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    seller_id        VARCHAR(50)       NOT NULL,
+    city             NVARCHAR(100)     NULL,
+    state            VARCHAR(5)        NULL,
+    geo_key          INT               NULL,
+    seller_region    VARCHAR(20)       NULL,
+    -- SCD Type 2 columns
+    effective_from   DATE              NOT NULL DEFAULT '1900-01-01',
+    effective_to     DATE              NOT NULL DEFAULT '9999-12-31',
+    is_current       BIT               NOT NULL DEFAULT 1,
+    CONSTRAINT FK_dim_seller_geo FOREIGN KEY (geo_key)
+        REFERENCES gold.dim_geolocation(geo_key)
+);
+GO
+
+CREATE INDEX IX_dim_seller_id ON gold.dim_seller(seller_id, is_current);
+GO
+
+-- gold.fact_order_lifecycle (Accumulating Snapshot)
+IF OBJECT_ID('gold.fact_order_lifecycle', 'U') IS NOT NULL
+    DROP TABLE gold.fact_order_lifecycle;
+GO
+
+CREATE TABLE gold.fact_order_lifecycle (
+    fact_lifecycle_id   INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    order_id            VARCHAR(50)        NOT NULL,
+    customer_key        INT                NULL,
+    seller_key          INT                NULL,
+    order_date          DATE               NULL,
+    approved_date       DATE               NULL,
+    delivered_date      DATE               NULL,
+    estimated_delivery_date DATE           NULL,
+    days_to_approve     INT                NULL,
+    days_to_delivery    INT                NULL,
+    is_delayed          BIT                NULL,
+    order_status        VARCHAR(30)        NULL,
+    CONSTRAINT FK_fl_customer FOREIGN KEY (customer_key)
+        REFERENCES gold.dim_customer(customer_key),
+    CONSTRAINT FK_fl_seller FOREIGN KEY (seller_key)
+        REFERENCES gold.dim_seller(seller_key)
+);
+GO
+
+CREATE UNIQUE INDEX UX_fact_lifecycle_order ON gold.fact_order_lifecycle(order_id);
+GO
+
+-- gold.fact_order_lifecycle (Accumulating Snapshot)
+IF OBJECT_ID('gold.fact_delivery', 'U') IS NOT NULL
+    DROP TABLE gold.fact_delivery;
+GO
+
+CREATE TABLE gold.fact_delivery (
+    seller_key             INT           NOT NULL,
+    date_key               INT           NOT NULL,  -- YYYYMM01
+    total_orders_delivered  INT           NOT NULL DEFAULT 0,
+    on_time_orders         INT           NOT NULL DEFAULT 0,
+    on_time_rate           DECIMAL(5,4)  NULL,
+    CONSTRAINT PK_fact_delivery PRIMARY KEY (seller_key, date_key),
+    CONSTRAINT FK_fd_seller FOREIGN KEY (seller_key)
+        REFERENCES gold.dim_seller(seller_key),
+    CONSTRAINT FK_fd_date FOREIGN KEY (date_key)
+        REFERENCES gold.dim_date(date_key)
+);
+GO
+
+-- gold.fact_delivery_year
+IF OBJECT_ID('gold.fact_delivery_year', 'U') IS NOT NULL
+    DROP TABLE gold.fact_delivery_year;
+GO
+
+CREATE TABLE gold.fact_delivery_year (
+    seller_key             INT           NOT NULL,
+    year_key               INT           NOT NULL,  -- YYYY0101
+    total_orders_delivered  INT           NOT NULL DEFAULT 0,
+    on_time_orders         INT           NOT NULL DEFAULT 0,
+    on_time_rate           DECIMAL(5,4)  NULL,
+    CONSTRAINT PK_fact_delivery_year PRIMARY KEY (seller_key, year_key)
+);
+GO
+
+-- gold.fact_payment_trends_year
+IF OBJECT_ID('gold.fact_payment_trends_year', 'U') IS NOT NULL
+    DROP TABLE gold.fact_payment_trends_year;
+GO
+
+CREATE TABLE gold.fact_payment_trends_year (
+    payment_type        VARCHAR(30)    NOT NULL,
+    year_key            INT            NOT NULL,  -- YYYY0101
+    total_payment_value DECIMAL(14,2)  NOT NULL DEFAULT 0,
+    transaction_count   INT            NOT NULL DEFAULT 0,
+    order_count         INT            NOT NULL DEFAULT 0,
+    CONSTRAINT PK_fact_payment_trends_year PRIMARY KEY (payment_type, year_key)
+);
+GO
+

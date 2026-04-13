@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Extract_Customer_Geo"
   DTS:PackageType="5"
-  DTS:VersionBuild="49"
-  DTS:VersionGUID="{724D2B79-3E4F-4886-9660-AB85E5FD31FA}">
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{ED12BE6D-44AA-42C0-ADA3-7DB46BB1A0B5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2675,7 +2675,7 @@
         <NodeLayout
           Size="153,42"
           Id="Package\DFT - Load Geolocations\Stg Geolocation"
-          TopLeft="346,353" />
+          TopLeft="364,354" />
         <NodeLayout
           Size="151,42"
           Id="Package\DFT - Load Geolocations\FF_Geolocation"
@@ -2683,37 +2683,37 @@
         <NodeLayout
           Size="127,42"
           Id="Package\DFT - Load Geolocations\Aggregate"
-          TopLeft="356,263" />
+          TopLeft="380,265" />
         <NodeLayout
           Size="156,42"
           Id="Package\DFT - Load Geolocations\Data Conversion"
-          TopLeft="276,173" />
+          TopLeft="355,174" />
         <EdgeLayout
           Id="Package\DFT - Load Geolocations.Paths[Data Conversion Output]"
-          TopLeft="354,215">
+          TopLeft="433,216">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="65.5,48"
+              EndConnector="10.5,49"
               Start="0,0"
-              End="65.5,40.5">
+              End="10.5,41.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20" />
+                    End="0,20.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20"
-                    Point2="0,24"
-                    Point3="4,24" />
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="4,24.5" />
                   <mssgle:LineSegment
-                    End="61.5,24" />
+                    End="6.5,24.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="61.5,24"
-                    Point2="65.5,24"
-                    Point3="65.5,28" />
+                    Point1="6.5,24.5"
+                    Point2="10.5,24.5"
+                    Point3="10.5,28.5" />
                   <mssgle:LineSegment
-                    End="65.5,40.5" />
+                    End="10.5,41.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2724,18 +2724,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load Geolocations.Paths[Aggregate Output 1]"
-          TopLeft="421,305">
+          TopLeft="442,307">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,48"
+              EndConnector="0,47"
               Start="0,0"
-              End="0,40.5">
+              End="0,39.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,40.5" />
+                    End="0,39.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2746,30 +2746,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load Geolocations.Paths[Flat File Source Output]"
-          TopLeft="431.5,133">
+          TopLeft="432.25,133">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-77.5,40"
+              EndConnector="0,41"
               Start="0,0"
-              End="-77.5,32.5">
+              End="0,33.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16"
-                    Point2="0,20"
-                    Point3="-4,20" />
-                  <mssgle:LineSegment
-                    End="-73.5,20" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-73.5,20"
-                    Point2="-77.5,20"
-                    Point3="-77.5,24" />
-                  <mssgle:LineSegment
-                    End="-77.5,32.5" />
+                    End="0,33.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2798,7 +2786,7 @@
     design-time-name="Package\DFT - Load Reviews">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="136,42"
           Id="Package\DFT - Load Reviews\Stg Reviews"
@@ -2842,7 +2830,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2876,7 +2866,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

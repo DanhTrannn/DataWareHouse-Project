@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{7CCE44B8-19F5-4B31-BEE5-57AEB60191EF}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{9ADF8F23-A88D-421F-BA12-D8AA96949C7F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2593,43 +2593,35 @@ FROM staging.stg_geolocation;</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="238,42"
+          Id="Package\Load dim_customer (SCD Type 2)"
+          TopLeft="319,356" />
+        <NodeLayout
           Size="248,42"
           Id="Package\Load dim_geolocation (SCD Type 1)"
-          TopLeft="302,266" />
+          TopLeft="318,263" />
         <NodeLayout
           Size="167,42"
           Id="Package\Populate dim_date"
-          TopLeft="332,96" />
+          TopLeft="358,70" />
         <NodeLayout
           Size="205,42"
           Id="Package\Populate dim_order_status"
-          TopLeft="330,185" />
+          TopLeft="338,165" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="415.5,138">
+          TopLeft="441,112">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="17,47"
+              EndConnector="0,53"
               Start="0,0"
-              End="17,39.5">
+              End="0,45.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.5"
-                    Point2="0,23.5"
-                    Point3="4,23.5" />
-                  <mssgle:LineSegment
-                    End="13,23.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="13,23.5"
-                    Point2="17,23.5"
-                    Point3="17,27.5" />
-                  <mssgle:LineSegment
-                    End="17,39.5" />
+                    End="0,45.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2640,18 +2632,18 @@ FROM staging.stg_geolocation;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="429.25,227">
+          TopLeft="441.25,207">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39"
+              EndConnector="0,56"
               Start="0,0"
-              End="0,31.5">
+              End="0,48.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.5" />
+                    End="0,48.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2660,13 +2652,479 @@ FROM staging.stg_geolocation;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="238,42"
-          Id="Package\Load dim_customer (SCD Type 2)"
-          TopLeft="310,346" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="427.5,308">
+          TopLeft="440,305">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load dim_customer (SCD Type 2)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load dim_customer (SCD Type 2)\Derived Column 1"
+          TopLeft="268,521" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load dim_customer (SCD Type 2)\OLE DB Destination"
+          TopLeft="266,595" />
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Load dim_customer (SCD Type 2)\Multicast"
+          TopLeft="161,410" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Load dim_customer (SCD Type 2)\OLE DB Command"
+          TopLeft="81,517" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Load dim_customer (SCD Type 2)\Lookup dim_customer"
+          TopLeft="383,284" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Load dim_customer (SCD Type 2)\Lookup dim_geolocation"
+          TopLeft="395,192" />
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Load dim_customer (SCD Type 2)\stg_customers"
+          TopLeft="379,88" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Load dim_customer (SCD Type 2)\Conditional Split"
+          TopLeft="138,344" />
+        <NodeLayout
+          Size="124,42"
+          Id="Package\Load dim_customer (SCD Type 2)\No Match"
+          TopLeft="423,444" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Load dim_customer (SCD Type 2)\Derived Column"
+          TopLeft="409,361" />
+        <EdgeLayout
+          Id="Package\Load dim_customer (SCD Type 2).Paths[Multicast Output 2]"
+          TopLeft="239.666666666667,452">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="109.833333333333,69"
+              Start="0,0"
+              End="109.833333333333,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.1447368421053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.1447368421053"
+                    Point2="0,28.1447368421053"
+                    Point3="4,28.1447368421053" />
+                  <mssgle:LineSegment
+                    End="105.833333333333,28.1447368421053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="105.833333333333,28.1447368421053"
+                    Point2="109.833333333333,28.1447368421053"
+                    Point3="109.833333333333,32.1447368421053" />
+                  <mssgle:LineSegment
+                    End="109.833333333333,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_customer (SCD Type 2).Paths[Multicast Output 1]"
+          TopLeft="221,452">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-57,65"
+              Start="0,0"
+              End="-57,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.5"
+                    Point2="0,32.5"
+                    Point3="-4,32.5" />
+                  <mssgle:LineSegment
+                    End="-53,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-53,32.5"
+                    Point2="-57,32.5"
+                    Point3="-57,36.5" />
+                  <mssgle:LineSegment
+                    End="-57,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_customer (SCD Type 2).Paths[Lookup No Match Output]"
+          TopLeft="474.5,326">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.5,35"
+              Start="0,0"
+              End="11.5,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5"
+                    Point2="0,17.5"
+                    Point3="4,17.5" />
+                  <mssgle:LineSegment
+                    End="7.5,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.5,17.5"
+                    Point2="11.5,17.5"
+                    Point3="11.5,21.5" />
+                  <mssgle:LineSegment
+                    End="11.5,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-50.05638671875,22.5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_customer (SCD Type 2).Paths[Lookup Match Output1]"
+          TopLeft="383,305">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-90,60"
+              Start="0,0"
+              End="-82.5,60">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-41,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-41,0"
+                    Point2="-45,0"
+                    Point3="-45,4" />
+                  <mssgle:LineSegment
+                    End="-45,56" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-45,56"
+                    Point2="-45,60"
+                    Point3="-49,60" />
+                  <mssgle:LineSegment
+                    End="-82.5,60" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-93.19138671875,-17.609375,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_customer (SCD Type 2).Paths[Lookup Match Output]"
+          TopLeft="491.5,234">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-17,50"
+              Start="0,0"
+              End="-17,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21"
+                    Point2="0,25"
+                    Point3="-4,25" />
+                  <mssgle:LineSegment
+                    End="-13,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-13,25"
+                    Point2="-17,25"
+                    Point3="-17,29" />
+                  <mssgle:LineSegment
+                    End="-17,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-56.69138671875,30,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_customer (SCD Type 2).Paths[Is_Changed]"
+          TopLeft="218.25,386">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.63458984375,2.41845703125,53.2691796875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_customer (SCD Type 2).Paths[Derived Column Output1]"
+          TopLeft="350.5,563">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_customer (SCD Type 2).Paths[Derived Column Output]"
+          TopLeft="485.5,403">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_customer (SCD Type 2).Paths[OLE DB Source Output]"
+          TopLeft="452.5,130">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="39,62"
+              Start="0,0"
+              End="39,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27"
+                    Point2="0,31"
+                    Point3="4,31" />
+                  <mssgle:LineSegment
+                    End="35,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35,31"
+                    Point2="39,31"
+                    Point3="39,35" />
+                  <mssgle:LineSegment
+                    End="39,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load dim_customer (SCD Type 2)\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load dim_customer (SCD Type 2)\Lookup dim_customer">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load dim_customer (SCD Type 2)\Lookup dim_geolocation">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[gold].[dim_geolocation]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load dim_customer (SCD Type 2)\stg_customers">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load dim_customer (SCD Type 2)\No Match">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load dim_geolocation (SCD Type 1)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load dim_geolocation (SCD Type 1)\OLE DB Destination"
+          TopLeft="383,475" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Load dim_geolocation (SCD Type 1)\Lookup"
+          TopLeft="405,217" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Load dim_geolocation (SCD Type 1)\stg_geolocation"
+          TopLeft="382,56" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Load dim_geolocation (SCD Type 1)\OLE DB Command"
+          TopLeft="381,401" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Load dim_geolocation (SCD Type 1)\Conditional Split"
+          TopLeft="384,304" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Load dim_geolocation (SCD Type 1)\Derived Column"
+          TopLeft="379,136" />
+        <EdgeLayout
+          Id="Package\Load dim_geolocation (SCD Type 1).Paths[OLE DB Source Output]"
+          TopLeft="457.25,98">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2686,64 +3144,20 @@ FROM staging.stg_geolocation;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </Package>
-  <TaskHost
-    design-time-name="Package\Load dim_geolocation (SCD Type 1)">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Load dim_geolocation (SCD Type 1)\OLE DB Destination"
-          TopLeft="392,493" />
-        <NodeLayout
-          Size="113,42"
-          Id="Package\Load dim_geolocation (SCD Type 1)\Lookup"
-          TopLeft="388,250" />
-        <NodeLayout
-          Size="153,42"
-          Id="Package\Load dim_geolocation (SCD Type 1)\stg_geolocation"
-          TopLeft="358,75" />
-        <NodeLayout
-          Size="166,42"
-          Id="Package\Load dim_geolocation (SCD Type 1)\OLE DB Command"
-          TopLeft="379,406" />
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Load dim_geolocation (SCD Type 1)\Conditional Split"
-          TopLeft="373,339" />
-        <NodeLayout
-          Size="154,42"
-          Id="Package\Load dim_geolocation (SCD Type 1)\Derived Column"
-          TopLeft="375,169" />
         <EdgeLayout
-          Id="Package\Load dim_geolocation (SCD Type 1).Paths[OLE DB Source Output]"
-          TopLeft="434.5,117">
+          Id="Package\Load dim_geolocation (SCD Type 1).Paths[OLE DB Command Output]"
+          TopLeft="466.25,443">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="17.5,52"
+              EndConnector="0,32"
               Start="0,0"
-              End="17.5,44.5">
+              End="0,24.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22"
-                    Point2="0,26"
-                    Point3="4,26" />
-                  <mssgle:LineSegment
-                    End="13.5,26" />
-                  <mssgle:CubicBezierSegment
-                    Point1="13.5,26"
-                    Point2="17.5,26"
-                    Point3="17.5,30" />
-                  <mssgle:LineSegment
-                    End="17.5,44.5" />
+                    End="0,24.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2754,67 +3168,55 @@ FROM staging.stg_geolocation;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load dim_geolocation (SCD Type 1).Paths[Lookup Match Output]"
-          TopLeft="447.5,292">
+          TopLeft="461.5,259">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,47"
+              EndConnector="0,45"
               Start="0,0"
-              End="0,39.5">
+              End="0,37.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.5" />
+                    End="0,37.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,13.9453125,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,12.9453125,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load dim_geolocation (SCD Type 1).Paths[Is_Changed]"
-          TopLeft="450.5,381">
+          TopLeft="462.75,346">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="11.5,25"
+              EndConnector="0,55"
               Start="0,0"
-              End="11.5,17.5">
+              End="0,47.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,8.5"
-                    Point2="0,12.5"
-                    Point3="4,12.5" />
-                  <mssgle:LineSegment
-                    End="7.5,12.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="7.5,12.5"
-                    Point2="11.5,12.5"
-                    Point3="11.5,16.5" />
-                  <mssgle:LineSegment
-                    End="11.5,17.5" />
+                    End="0,47.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-20.88458984375,17.5,53.2691796875,11.6630859375"
+              BoundingBox="-26.63458984375,17.91845703125,53.2691796875,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load dim_geolocation (SCD Type 1).Paths[Derived Column Output]"
-          TopLeft="448.25,211">
+          TopLeft="458.75,178">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2826,40 +3228,6 @@ FROM staging.stg_geolocation;</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,31.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load dim_geolocation (SCD Type 1).Paths[OLE DB Command Output]"
-          TopLeft="462,448">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="15.5,45"
-              Start="0,0"
-              End="15.5,37.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.5"
-                    Point2="0,22.5"
-                    Point3="4,22.5" />
-                  <mssgle:LineSegment
-                    End="11.5,22.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="11.5,22.5"
-                    Point2="15.5,22.5"
-                    Point3="15.5,26.5" />
-                  <mssgle:LineSegment
-                    End="15.5,37.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2912,412 +3280,6 @@ FROM staging.stg_geolocation;</property>
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Load dim_customer (SCD Type 2)">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="147,42"
-          Id="Package\Load dim_customer (SCD Type 2)\stg_customers"
-          TopLeft="379,88" />
-        <NodeLayout
-          Size="193,42"
-          Id="Package\Load dim_customer (SCD Type 2)\Lookup dim_geolocation"
-          TopLeft="395,192" />
-        <EdgeLayout
-          Id="Package\Load dim_customer (SCD Type 2).Paths[OLE DB Source Output]"
-          TopLeft="452.5,130">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="39,62"
-              Start="0,0"
-              End="39,54.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,27" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,27"
-                    Point2="0,31"
-                    Point3="4,31" />
-                  <mssgle:LineSegment
-                    End="35,31" />
-                  <mssgle:CubicBezierSegment
-                    Point1="35,31"
-                    Point2="39,31"
-                    Point3="39,35" />
-                  <mssgle:LineSegment
-                    End="39,54.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="183,42"
-          Id="Package\Load dim_customer (SCD Type 2)\Lookup dim_customer"
-          TopLeft="383,284" />
-        <EdgeLayout
-          Id="Package\Load dim_customer (SCD Type 2).Paths[Lookup Match Output]"
-          TopLeft="491.5,234">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-17,50"
-              Start="0,0"
-              End="-17,42.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,21"
-                    Point2="0,25"
-                    Point3="-4,25" />
-                  <mssgle:LineSegment
-                    End="-13,25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-13,25"
-                    Point2="-17,25"
-                    Point3="-17,29" />
-                  <mssgle:LineSegment
-                    End="-17,42.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-56.69138671875,30,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="124,42"
-          Id="Package\Load dim_customer (SCD Type 2)\No Match"
-          TopLeft="423,444" />
-        <NodeLayout
-          Size="154,42"
-          Id="Package\Load dim_customer (SCD Type 2)\Derived Column"
-          TopLeft="409,361" />
-        <EdgeLayout
-          Id="Package\Load dim_customer (SCD Type 2).Paths[Lookup No Match Output]"
-          TopLeft="474.5,326">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="11.5,35"
-              Start="0,0"
-              End="11.5,27.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,13.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.5"
-                    Point2="0,17.5"
-                    Point3="4,17.5" />
-                  <mssgle:LineSegment
-                    End="7.5,17.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="7.5,17.5"
-                    Point2="11.5,17.5"
-                    Point3="11.5,21.5" />
-                  <mssgle:LineSegment
-                    End="11.5,27.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-50.05638671875,22.5,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load dim_customer (SCD Type 2).Paths[Derived Column Output]"
-          TopLeft="485.5,403">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41"
-              Start="0,0"
-              End="0,33.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="155,42"
-          Id="Package\Load dim_customer (SCD Type 2)\Conditional Split"
-          TopLeft="138,344" />
-        <EdgeLayout
-          Id="Package\Load dim_customer (SCD Type 2).Paths[Lookup Match Output1]"
-          TopLeft="383,305">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-90,60"
-              Start="0,0"
-              End="-82.5,60">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-41,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-41,0"
-                    Point2="-45,0"
-                    Point3="-45,4" />
-                  <mssgle:LineSegment
-                    End="-45,56" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-45,56"
-                    Point2="-45,60"
-                    Point3="-49,60" />
-                  <mssgle:LineSegment
-                    End="-82.5,60" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-93.19138671875,-17.609375,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="166,42"
-          Id="Package\Load dim_customer (SCD Type 2)\OLE DB Command"
-          TopLeft="81,517" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Load dim_customer (SCD Type 2)\OLE DB Destination"
-          TopLeft="266,595" />
-        <NodeLayout
-          Size="120,42"
-          Id="Package\Load dim_customer (SCD Type 2)\Multicast"
-          TopLeft="161,410" />
-        <EdgeLayout
-          Id="Package\Load dim_customer (SCD Type 2).Paths[Is_Changed]"
-          TopLeft="218.25,386">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,24"
-              Start="0,0"
-              End="0,16.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-26.63458984375,2.41845703125,53.2691796875,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load dim_customer (SCD Type 2).Paths[Multicast Output 1]"
-          TopLeft="221,452">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-57,65"
-              Start="0,0"
-              End="-57,57.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,28.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,28.5"
-                    Point2="0,32.5"
-                    Point3="-4,32.5" />
-                  <mssgle:LineSegment
-                    End="-53,32.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-53,32.5"
-                    Point2="-57,32.5"
-                    Point3="-57,36.5" />
-                  <mssgle:LineSegment
-                    End="-57,57.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="163,42"
-          Id="Package\Load dim_customer (SCD Type 2)\Derived Column 1"
-          TopLeft="268,521" />
-        <EdgeLayout
-          Id="Package\Load dim_customer (SCD Type 2).Paths[Multicast Output 2]"
-          TopLeft="239.666666666667,452">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="109.833333333333,69"
-              Start="0,0"
-              End="109.833333333333,61.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24.1447368421053" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,24.1447368421053"
-                    Point2="0,28.1447368421053"
-                    Point3="4,28.1447368421053" />
-                  <mssgle:LineSegment
-                    End="105.833333333333,28.1447368421053" />
-                  <mssgle:CubicBezierSegment
-                    Point1="105.833333333333,28.1447368421053"
-                    Point2="109.833333333333,28.1447368421053"
-                    Point3="109.833333333333,32.1447368421053" />
-                  <mssgle:LineSegment
-                    End="109.833333333333,61.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load dim_customer (SCD Type 2).Paths[Derived Column Output1]"
-          TopLeft="350.5,563">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,32"
-              Start="0,0"
-              End="0,24.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load dim_customer (SCD Type 2)\stg_customers">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load dim_customer (SCD Type 2)\Lookup dim_geolocation">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[gold].[dim_geolocation]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load dim_customer (SCD Type 2)\Lookup dim_customer">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load dim_customer (SCD Type 2)\No Match">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load dim_customer (SCD Type 2)\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
