@@ -1,0 +1,76 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\OlistDW_ETL\\Extract_Customer_Geo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Extract_Customer_Geo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Customer_Orders.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Load_Fact_Customer_Orders.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\OlistDW_ETL\\Load_Dim_Date_Geo_Customer.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Load_Dim_Date_Geo_Customer.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{7cc9e714-2774-4fc6-8631-a07eee703286}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Load_Fact_Customer_Orders.dtsx [Design]",
+              "DocumentMoniker": "C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Customer_Orders.dtsx",
+              "RelativeDocumentMoniker": "OlistDW_ETL\\Load_Fact_Customer_Orders.dtsx",
+              "ToolTip": "C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Customer_Orders.dtsx [Design]",
+              "RelativeToolTip": "OlistDW_ETL\\Load_Fact_Customer_Orders.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFTSURBVDhPY2QAgqUbD/8H0bjAu49fGG7fvZ8\u002BqTFrFlQIAv7/h\u002BgDGfDv71\u002BcePKi7f9NPZP/59VPSwNrQAJMUJogaK0pZDh\u002B6uxMdEOINqC6pR9MgwwBM6CABUqDQcWCa1AWA0NHghac//k9G0NcZAiYvWj5GjANAxgu\u002BC2rAcYwAGJz6NkxZEe7QUVQAYYBrI9vgDEMwPhffkEFsAFCsfDp\u002B9//D98jYgOqDQwIBiLI5vc/GBjefP/PwMLGARVFABQDQIEGwyCArPnNdwaGf1iSG85ARNb8\u002BhsDwweQAb\u002BBAmgAZyAia371lYHh7MnrDI9/yzA4hhQwlM29/J/BeCbYPSjpABT3MJvf//jP8BZoK4j95TfE7SD5hy\u002B\u002BMFy5846hCyyCZMDUpbugLFxABq75zPU3UDGoAaDchp7C0AHI6TDNyAaAszNRAOpnFHA2nREAjMTvHMVXB8cAAAAASUVORK5CYII=",
+              "WhenOpened": "2026-04-13T04:58:07.784Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Extract_Customer_Geo.dtsx [Design]",
+              "DocumentMoniker": "C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\OlistDW_ETL\\Extract_Customer_Geo.dtsx",
+              "RelativeDocumentMoniker": "OlistDW_ETL\\Extract_Customer_Geo.dtsx",
+              "ToolTip": "C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\OlistDW_ETL\\Extract_Customer_Geo.dtsx [Design]",
+              "RelativeToolTip": "OlistDW_ETL\\Extract_Customer_Geo.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFTSURBVDhPY2QAgqUbD/8H0bjAu49fGG7fvZ8\u002BqTFrFlQIAv7/h\u002BgDGfDv71\u002BcePKi7f9NPZP/59VPSwNrQAJMUJogaK0pZDh\u002B6uxMdEOINqC6pR9MgwwBM6CABUqDQcWCa1AWA0NHghac//k9G0NcZAiYvWj5GjANAxgu\u002BC2rAcYwAGJz6NkxZEe7QUVQAYYBrI9vgDEMwPhffkEFsAFCsfDp\u002B9//D98jYgOqDQwIBiLI5vc/GBjefP/PwMLGARVFABQDQIEGwyCArPnNdwaGf1iSG85ARNb8\u002BhsDwweQAb\u002BBAmgAZyAia371lYHh7MnrDI9/yzA4hhQwlM29/J/BeCbYPSjpABT3MJvf//jP8BZoK4j95TfE7SD5hy\u002B\u002BMFy5846hCyyCZMDUpbugLFxABq75zPU3UDGoAaDchp7C0AHI6TDNyAaAszNRAOpnFHA2nREAjMTvHMVXB8cAAAAASUVORK5CYII=",
+              "WhenOpened": "2026-04-13T04:55:56.521Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Load_Dim_Date_Geo_Customer.dtsx [Design]",
+              "DocumentMoniker": "C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\OlistDW_ETL\\Load_Dim_Date_Geo_Customer.dtsx",
+              "RelativeDocumentMoniker": "OlistDW_ETL\\Load_Dim_Date_Geo_Customer.dtsx",
+              "ToolTip": "C:\\Users\\leekhoa\\source\\repos\\OlistDW_ETL\\OlistDW_ETL\\Load_Dim_Date_Geo_Customer.dtsx [Design]",
+              "RelativeToolTip": "OlistDW_ETL\\Load_Dim_Date_Geo_Customer.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFTSURBVDhPY2QAgqUbD/8H0bjAu49fGG7fvZ8\u002BqTFrFlQIAv7/h\u002BgDGfDv71\u002BcePKi7f9NPZP/59VPSwNrQAJMUJogaK0pZDh\u002B6uxMdEOINqC6pR9MgwwBM6CABUqDQcWCa1AWA0NHghac//k9G0NcZAiYvWj5GjANAxgu\u002BC2rAcYwAGJz6NkxZEe7QUVQAYYBrI9vgDEMwPhffkEFsAFCsfDp\u002B9//D98jYgOqDQwIBiLI5vc/GBjefP/PwMLGARVFABQDQIEGwyCArPnNdwaGf1iSG85ARNb8\u002BhsDwweQAb\u002BBAmgAZyAia371lYHh7MnrDI9/yzA4hhQwlM29/J/BeCbYPSjpABT3MJvf//jP8BZoK4j95TfE7SD5hy\u002B\u002BMFy5846hCyyCZMDUpbugLFxABq75zPU3UDGoAaDchp7C0AHI6TDNyAaAszNRAOpnFHA2nREAjMTvHMVXB8cAAAAASUVORK5CYII=",
+              "WhenOpened": "2026-04-13T04:55:37.849Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
