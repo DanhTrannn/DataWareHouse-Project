@@ -5,21 +5,21 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="DESKTOP-THCD634"
   DTS:CreatorName="DESKTOP-THCD634\leekhoa"
-  DTS:DTSID="{CF9DF1A9-A840-4AA1-9AD7-0BEA48B2C1DB}"
+  DTS:DTSID="{5D63AD31-337B-4EB5-AC7E-4AF82AED9037}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="17.0.1010.2"
   DTS:LocaleID="1033"
   DTS:ObjectName="Extract_Customer_Geo"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{86558229-096A-461E-A670-2C069C171998}">
+  DTS:VersionBuild="49"
+  DTS:VersionGUID="{724D2B79-3E4F-4886-9660-AB85E5FD31FA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[FF Customer Connection Manager]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{1286E890-DF25-4DE9-A633-02438136E9A5}"
+      DTS:DTSID="{AC1FB2FF-92AC-4249-8983-56A595C67BB4}"
       DTS:ObjectName="FF Customer Connection Manager">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -30,7 +30,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="C:\data\olist_customers_dataset.csv">
+          DTS:ConnectionString="C:\DataWareHouse-Project\OlistDW_ETL\data\olist_customers_dataset.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;customer_id&quot;"
-              DTS:DTSID="{36A7FD39-6228-407C-A06E-B1EBF6CF3FBD}"
+              DTS:DTSID="{99FEFC32-87B2-4A78-B854-314C7C313BD8}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;customer_unique_id&quot;"
-              DTS:DTSID="{60BB453B-59E5-4769-8110-16D4EF9D8D2B}"
+              DTS:DTSID="{DDB1FCD8-DB7F-4B8F-9E34-0029AE40AAB7}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;customer_zip_code_prefix&quot;"
-              DTS:DTSID="{6B5C7D89-8CF1-40EB-948C-3DA6347320B9}"
+              DTS:DTSID="{348C79B6-92F8-497B-ABA6-C758447C21A2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -66,7 +66,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;customer_city&quot;"
-              DTS:DTSID="{67B9193E-DADC-451B-AC8F-449AE546E53F}"
+              DTS:DTSID="{42D57DCF-297A-42DD-A86E-44DF8F532BB9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -75,7 +75,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;customer_state&quot;"
-              DTS:DTSID="{9E56B64B-7476-4BDF-8E3D-378F62933143}"
+              DTS:DTSID="{D004027A-E510-4807-8100-D507C16FB592}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -84,7 +84,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[FF Geolocation Connection Manager]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{3E601FBF-338E-4B47-BDD8-3D3624A3FD21}"
+      DTS:DTSID="{4C99B2DC-0710-4DCE-A2A8-F5360E5743CD}"
       DTS:ObjectName="FF Geolocation Connection Manager">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -95,7 +95,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="C:\data\olist_geolocation_dataset.csv">
+          DTS:ConnectionString="C:\DataWareHouse-Project\OlistDW_ETL\data\olist_geolocation_dataset.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -104,7 +104,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;geolocation_zip_code_prefix&quot;"
-              DTS:DTSID="{8CC72166-C7D8-4685-A519-0A386E2E2206}"
+              DTS:DTSID="{A3D50577-7A85-4B15-865E-51AFD2EEFE16}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -113,7 +113,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;geolocation_lat&quot;"
-              DTS:DTSID="{D701EB81-D67C-435C-BC5B-2A73332652B4}"
+              DTS:DTSID="{D28666D6-5881-466C-8475-75FD31F96162}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -122,7 +122,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;geolocation_lng&quot;"
-              DTS:DTSID="{6C0FA4DD-3CE9-438A-A890-F2CF5B9B7918}"
+              DTS:DTSID="{2485DB63-4069-4911-A459-22AE4E90D33C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -131,7 +131,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;geolocation_city&quot;"
-              DTS:DTSID="{D70602CF-B4F6-4B7F-B9EA-D0426D38396E}"
+              DTS:DTSID="{AEB85C69-3128-46D1-806B-1356591C225C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -140,7 +140,90 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;geolocation_state&quot;"
-              DTS:DTSID="{B9B564A6-0568-4676-8002-3FB01D16F854}"
+              DTS:DTSID="{482A1836-722B-489E-AC03-B37E7BDDAC6E}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FF Review Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{8497A54D-ADDF-4865-BA15-59CBD7FC34BE}"
+      DTS:ObjectName="FF Review Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\DataWareHouse-Project\OlistDW_ETL\data\olist_order_reviews_dataset.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;review_id&quot;"
+              DTS:DTSID="{2E35F84D-DFDB-46C3-8621-20B712BEB71F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;order_id&quot;"
+              DTS:DTSID="{25EF263C-9B3C-4359-BBFE-9C41DC2A775C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;review_score&quot;"
+              DTS:DTSID="{D3C81B4F-A807-47F5-8B61-7BFD41D0535E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;review_comment_title&quot;"
+              DTS:DTSID="{39097B0D-8CB8-4B8B-9843-2AE2CEB1BFFA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;review_comment_message&quot;"
+              DTS:DTSID="{D57EAB19-5BDC-4D37-81C1-F25287CA65CC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;review_creation_date&quot;"
+              DTS:DTSID="{53B5BC39-A59A-48D8-B496-4A8C041FA814}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;review_answer_timestamp&quot;"
+              DTS:DTSID="{05DE7D4B-D967-46C2-A79E-BFD00E15B6BA}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -149,13 +232,13 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[OlistDW_OLEDB]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{43BB1BEA-17BC-4F94-9110-53198C8621E6}"
+      DTS:DTSID="{BE05C2F9-8EFC-46F7-99E3-0B5F3A95B970}"
       DTS:ObjectName="OlistDW_OLEDB">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Extract_Customer_Geo-{43BB1BEA-17BC-4F94-9110-53198C8621E6}localhost.OlistDW;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Extract_Customer_Geo-{BE05C2F9-8EFC-46F7-99E3-0B5F3A95B970}localhost.OlistDW;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -165,7 +248,7 @@
       DTS:refId="Package\DFT - Load Customers"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{1FF27797-019C-4A7A-8FF1-D1370FFE7598}"
+      DTS:DTSID="{D212640C-0E6D-423A-A01F-9B7D81559C50}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DFT - Load Customers"
@@ -575,11 +658,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\DFT - Load Customers\OLE DB Destination"
+              refId="Package\DFT - Load Customers\Stg Customer"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="OLE DB Destination"
+              name="Stg Customer"
               usesDispositions="true"
               version="4">
               <properties>
@@ -632,7 +715,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT - Load Customers\OLE DB Destination.Connections[OleDbConnection]"
+                  refId="Package\DFT - Load Customers\Stg Customer.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
                   connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
@@ -640,79 +723,79 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cv_customer_id]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].Columns[cv_customer_id]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="cv_customer_id"
-                      externalMetadataColumnId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      externalMetadataColumnId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
                       lineageId="Package\DFT - Load Customers\Data Conversion.Outputs[Data Conversion Output].Columns[cv_customer_id]" />
                     <inputColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cv_customer_unique_id]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].Columns[cv_customer_unique_id]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="cv_customer_unique_id"
-                      externalMetadataColumnId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_unique_id]"
+                      externalMetadataColumnId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_unique_id]"
                       lineageId="Package\DFT - Load Customers\Data Conversion.Outputs[Data Conversion Output].Columns[cv_customer_unique_id]" />
                     <inputColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cv_zip_code_prefix]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].Columns[cv_zip_code_prefix]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="10"
                       cachedName="cv_zip_code_prefix"
-                      externalMetadataColumnId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_zip_code_prefix]"
+                      externalMetadataColumnId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_zip_code_prefix]"
                       lineageId="Package\DFT - Load Customers\Data Conversion.Outputs[Data Conversion Output].Columns[cv_zip_code_prefix]" />
                     <inputColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cv_customer_city]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].Columns[cv_customer_city]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="cv_customer_city"
-                      externalMetadataColumnId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_city]"
+                      externalMetadataColumnId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_city]"
                       lineageId="Package\DFT - Load Customers\Data Conversion.Outputs[Data Conversion Output].Columns[cv_customer_city]" />
                     <inputColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cv_customer_state]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].Columns[cv_customer_state]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="5"
                       cachedName="cv_customer_state"
-                      externalMetadataColumnId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_state]"
+                      externalMetadataColumnId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_state]"
                       lineageId="Package\DFT - Load Customers\Data Conversion.Outputs[Data Conversion Output].Columns[cv_customer_state]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="customer_id" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_unique_id]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_unique_id]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="customer_unique_id" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_zip_code_prefix]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_zip_code_prefix]"
                       codePage="1252"
                       dataType="str"
                       length="10"
                       name="customer_zip_code_prefix" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_city]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_city]"
                       dataType="wstr"
                       length="100"
                       name="customer_city" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_state]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input].ExternalColumns[customer_state]"
                       codePage="1252"
                       dataType="str"
                       length="5"
@@ -722,22 +805,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT - Load Customers\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\DFT - Load Customers\Stg Customer.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT - Load Customers\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT - Load Customers\Stg Customer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT - Load Customers\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT - Load Customers\Stg Customer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT - Load Customers\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT - Load Customers\Stg Customer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -749,7 +832,7 @@
           <paths>
             <path
               refId="Package\DFT - Load Customers.Paths[Data Conversion Output]"
-              endId="Package\DFT - Load Customers\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              endId="Package\DFT - Load Customers\Stg Customer.Inputs[OLE DB Destination Input]"
               name="Data Conversion Output"
               startId="Package\DFT - Load Customers\Data Conversion.Outputs[Data Conversion Output]" />
             <path
@@ -765,7 +848,7 @@
       DTS:refId="Package\DFT - Load Geolocations"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{A56A43E1-4847-4414-8646-C5411B3F262B}"
+      DTS:DTSID="{30BB6CC7-D0ED-407B-A41E-3B8AF9FAEF98}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DFT - Load Geolocations"
@@ -815,7 +898,7 @@
                       refId="Package\DFT - Load Geolocations\Aggregate.Inputs[Aggregate Input 1].Columns[cv_zip]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="10"
+                      cachedLength="100"
                       cachedName="cv_zip"
                       lineageId="Package\DFT - Load Geolocations\Data Conversion.Outputs[Data Conversion Output].Columns[cv_zip]" />
                     <inputColumn
@@ -842,7 +925,7 @@
                       refId="Package\DFT - Load Geolocations\Aggregate.Inputs[Aggregate Input 1].Columns[cv_state]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="5"
+                      cachedLength="100"
                       cachedName="cv_state"
                       lineageId="Package\DFT - Load Geolocations\Data Conversion.Outputs[Data Conversion Output].Columns[cv_state]" />
                   </inputColumns>
@@ -1073,7 +1156,7 @@
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      length="10"
+                      length="100"
                       lineageId="Package\DFT - Load Geolocations\Data Conversion.Outputs[Data Conversion Output].Columns[cv_zip]"
                       name="cv_zip"
                       truncationRowDisposition="FailComponent">
@@ -1160,7 +1243,7 @@
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      length="5"
+                      length="100"
                       lineageId="Package\DFT - Load Geolocations\Data Conversion.Outputs[Data Conversion Output].Columns[cv_state]"
                       name="cv_state"
                       truncationRowDisposition="FailComponent">
@@ -1409,11 +1492,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\DFT - Load Geolocations\OLE DB Destination 1"
+              refId="Package\DFT - Load Geolocations\Stg Geolocation"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="OLE DB Destination 1"
+              name="Stg Geolocation"
               usesDispositions="true"
               version="4">
               <properties>
@@ -1466,7 +1549,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Connections[OleDbConnection]"
+                  refId="Package\DFT - Load Geolocations\Stg Geolocation.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
                   connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
@@ -1474,79 +1557,79 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                  refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[agg_zip]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].Columns[agg_zip]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="10"
                       cachedName="agg_zip"
-                      externalMetadataColumnId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_zip_code_prefix]"
+                      externalMetadataColumnId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_zip_code_prefix]"
                       lineageId="Package\DFT - Load Geolocations\Aggregate.Outputs[Aggregate Output 1].Columns[agg_zip]" />
                     <inputColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[agg_lat]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].Columns[agg_lat]"
                       cachedDataType="numeric"
                       cachedName="agg_lat"
                       cachedPrecision="10"
                       cachedScale="6"
-                      externalMetadataColumnId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_lat]"
+                      externalMetadataColumnId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_lat]"
                       lineageId="Package\DFT - Load Geolocations\Aggregate.Outputs[Aggregate Output 1].Columns[agg_lat]" />
                     <inputColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[agg_lng]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].Columns[agg_lng]"
                       cachedDataType="numeric"
                       cachedName="agg_lng"
                       cachedPrecision="10"
                       cachedScale="6"
-                      externalMetadataColumnId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_lng]"
+                      externalMetadataColumnId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_lng]"
                       lineageId="Package\DFT - Load Geolocations\Aggregate.Outputs[Aggregate Output 1].Columns[agg_lng]" />
                     <inputColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[agg_city]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].Columns[agg_city]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="agg_city"
-                      externalMetadataColumnId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_city]"
+                      externalMetadataColumnId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_city]"
                       lineageId="Package\DFT - Load Geolocations\Aggregate.Outputs[Aggregate Output 1].Columns[agg_city]" />
                     <inputColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[agg_state]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].Columns[agg_state]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="5"
                       cachedName="agg_state"
-                      externalMetadataColumnId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_state]"
+                      externalMetadataColumnId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_state]"
                       lineageId="Package\DFT - Load Geolocations\Aggregate.Outputs[Aggregate Output 1].Columns[agg_state]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_zip_code_prefix]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_zip_code_prefix]"
                       codePage="1252"
                       dataType="str"
                       length="10"
                       name="geolocation_zip_code_prefix" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_lat]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_lat]"
                       dataType="numeric"
                       name="geolocation_lat"
                       precision="10"
                       scale="6" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_lng]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_lng]"
                       dataType="numeric"
                       name="geolocation_lng"
                       precision="10"
                       scale="6" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_city]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_city]"
                       dataType="wstr"
                       length="100"
                       name="geolocation_city" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_state]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input].ExternalColumns[geolocation_state]"
                       codePage="1252"
                       dataType="str"
                       length="5"
@@ -1556,22 +1639,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\DFT - Load Geolocations\Stg Geolocation.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT - Load Geolocations\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT - Load Geolocations\Stg Geolocation.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT - Load Geolocations\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT - Load Geolocations\Stg Geolocation.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT - Load Geolocations\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT - Load Geolocations\Stg Geolocation.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1583,7 +1666,7 @@
           <paths>
             <path
               refId="Package\DFT - Load Geolocations.Paths[Aggregate Output 1]"
-              endId="Package\DFT - Load Geolocations\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+              endId="Package\DFT - Load Geolocations\Stg Geolocation.Inputs[OLE DB Destination Input]"
               name="Aggregate Output 1"
               startId="Package\DFT - Load Geolocations\Aggregate.Outputs[Aggregate Output 1]" />
             <path
@@ -1604,7 +1687,7 @@
       DTS:refId="Package\DFT - Load Reviews"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{FD8C6165-5945-4306-BA27-2C78D8C9859D}"
+      DTS:DTSID="{49ADAA05-625F-40BC-8814-A1FAB3814F1D}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="DFT - Load Reviews"
@@ -1615,11 +1698,256 @@
           version="1">
           <components>
             <component
-              refId="Package\DFT - Load Reviews\FF - Reviews"
+              refId="Package\DFT - Load Reviews\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input].Columns[&quot;review_id&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="&quot;review_id&quot;"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_id&quot;]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input].Columns[&quot;order_id&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="&quot;order_id&quot;"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;order_id&quot;]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input].Columns[&quot;review_score&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;review_score&quot;"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_score&quot;]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input].Columns[&quot;review_comment_title&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="&quot;review_comment_title&quot;"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_comment_title&quot;]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input].Columns[&quot;review_comment_message&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="&quot;review_comment_message&quot;"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_comment_message&quot;]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input].Columns[&quot;review_creation_date&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="&quot;review_creation_date&quot;"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_creation_date&quot;]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input].Columns[&quot;review_answer_timestamp&quot;]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="&quot;review_answer_timestamp&quot;"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_answer_timestamp&quot;]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_id]"
+                      name="cv_review_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns["review_id"]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_order_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_order_id]"
+                      name="cv_order_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns["order_id"]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_score]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_score]"
+                      name="cv_review_score"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns["review_score"]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_comment_title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_comment_title]"
+                      name="cv_review_comment_title"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns["review_comment_title"]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_comment_message]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4000"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_comment_message]"
+                      name="cv_review_comment_message"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns["review_comment_message"]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_creation_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_creation_date]"
+                      name="cv_review_creation_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns["review_creation_date"]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_answer_timestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_answer_timestamp]"
+                      name="cv_review_answer_timestamp"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns["review_answer_timestamp"]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load Reviews\FF_Reviews"
               componentClassID="Microsoft.FlatFileSource"
               contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Flat File Source"
-              name="FF - Reviews"
+              localeId="1033"
+              name="FF_Reviews"
               usesDispositions="true"
               version="1">
               <properties>
@@ -1634,31 +1962,422 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT - Load Reviews\FF - Reviews.Connections[FlatFileConnection]"
+                  refId="Package\DFT - Load Reviews\FF_Reviews.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[FF Review Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[FF Review Connection Manager]"
                   name="FlatFileConnection" />
               </connections>
               <outputs>
                 <output
-                  refId="Package\DFT - Load Reviews\FF - Reviews.Outputs[Flat File Source Output]"
+                  refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output]"
                   name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_id&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_id&quot;]"
+                      length="100"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_id&quot;]"
+                      name="&quot;review_id&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;order_id&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;order_id&quot;]"
+                      length="100"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;order_id&quot;]"
+                      name="&quot;order_id&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_score&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_score&quot;]"
+                      length="50"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_score&quot;]"
+                      name="&quot;review_score&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_comment_title&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_comment_title&quot;]"
+                      length="100"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_comment_title&quot;]"
+                      name="&quot;review_comment_title&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_comment_message&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_comment_message&quot;]"
+                      length="1000"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_comment_message&quot;]"
+                      name="&quot;review_comment_message&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_creation_date&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_creation_date&quot;]"
+                      length="100"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_creation_date&quot;]"
+                      name="&quot;review_creation_date&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_answer_timestamp&quot;]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_answer_timestamp&quot;]"
+                      length="100"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].Columns[&quot;review_answer_timestamp&quot;]"
+                      name="&quot;review_answer_timestamp&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
                   <externalMetadataColumns
-                    isUsed="True" />
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_id&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="&quot;review_id&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;order_id&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="&quot;order_id&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_score&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;review_score&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_comment_title&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="&quot;review_comment_title&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_comment_message&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="&quot;review_comment_message&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_creation_date&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="&quot;review_creation_date&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output].ExternalColumns[&quot;review_answer_timestamp&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="&quot;review_answer_timestamp&quot;" />
+                  </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\DFT - Load Reviews\FF - Reviews.Outputs[Flat File Source Error Output]"
+                  refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Error Output]"
                   isErrorOut="true"
                   name="Flat File Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT - Load Reviews\FF - Reviews.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT - Load Reviews\FF - Reviews.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT - Load Reviews\FF - Reviews.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT - Load Reviews\FF - Reviews.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load Reviews\Stg Reviews"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Stg Reviews"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[stg_order_reviews]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load Reviews\Stg Reviews.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].Columns[cv_review_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="cv_review_id"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_id]"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].Columns[cv_order_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="cv_order_id"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_order_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].Columns[cv_review_score]"
+                      cachedDataType="i4"
+                      cachedName="cv_review_score"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_score]"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_score]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].Columns[cv_review_comment_message]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="cv_review_comment_message"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_comment_message]"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_comment_message]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].Columns[cv_review_creation_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="cv_review_creation_date"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_creation_date]"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_creation_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].Columns[cv_review_answer_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="cv_review_answer_timestamp"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_answer_timestamp]"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_answer_timestamp]" />
+                    <inputColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].Columns[cv_review_comment_title]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="cv_review_comment_title"
+                      externalMetadataColumnId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_comment_title]"
+                      lineageId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output].Columns[cv_review_comment_title]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="review_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_score]"
+                      dataType="i4"
+                      name="review_score" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_comment_title]"
+                      dataType="wstr"
+                      length="200"
+                      name="review_comment_title" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_comment_message]"
+                      dataType="nText"
+                      name="review_comment_message" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_creation_date]"
+                      dataType="dbTimeStamp"
+                      name="review_creation_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input].ExternalColumns[review_answer_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="review_answer_timestamp" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load Reviews\Stg Reviews.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load Reviews\Stg Reviews.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load Reviews\Stg Reviews.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load Reviews\Stg Reviews.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1667,6 +2386,18 @@
               </outputs>
             </component>
           </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load Reviews.Paths[Data Conversion Output]"
+              endId="Package\DFT - Load Reviews\Stg Reviews.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\DFT - Load Reviews\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DFT - Load Reviews.Paths[Flat File Source Output]"
+              endId="Package\DFT - Load Reviews\Data Conversion.Inputs[Data Conversion Input]"
+              name="Flat File Source Output"
+              startId="Package\DFT - Load Reviews\FF_Reviews.Outputs[Flat File Source Output]" />
+          </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -1674,7 +2405,7 @@
       DTS:refId="Package\Truncate Staging Tables"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Truncate Staging Tables"
-      DTS:DTSID="{6E605831-BE76-44D2-B7BC-349A2F6F8469}"
+      DTS:DTSID="{7707217B-D15D-4F31-B3BF-DE8D8A653652}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Truncate Staging Tables"
@@ -1683,7 +2414,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{43BB1BEA-17BC-4F94-9110-53198C8621E6}"
+          SQLTask:Connection="{BE05C2F9-8EFC-46F7-99E3-0B5F3A95B970}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE staging.stg_customers;&#xA;TRUNCATE TABLE staging.stg_geolocation;&#xA;TRUNCATE TABLE staging.stg_order_reviews;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -1692,7 +2423,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{46742B54-F7BE-420F-A1A0-D1ABB4398482}"
+      DTS:DTSID="{CCF895A9-B14A-4CEE-A975-11CFFD1E8151}"
       DTS:From="Package\Truncate Staging Tables"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -1700,11 +2431,19 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{FBF01C76-4F9A-418A-898D-BC1148530242}"
+      DTS:DTSID="{8F571278-0ADA-4F73-B9BF-0D4FDB7B9E4F}"
       DTS:From="Package\Truncate Staging Tables"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\DFT - Load Geolocations" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{B021B655-6DFD-4706-BB54-5A22A4BDE418}"
+      DTS:From="Package\Truncate Staging Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\DFT - Load Reviews" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1719,77 +2458,47 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="193,42"
-          Id="Package\Truncate Staging Tables"
-          TopLeft="405,158" />
-        <NodeLayout
           Size="184,42"
           Id="Package\DFT - Load Customers"
-          TopLeft="289.5,248.5" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="501.5,200">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-120,48.5"
-              Start="0,0"
-              End="-120,41">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.25"
-                    Point2="0,24.25"
-                    Point3="-4,24.25" />
-                  <mssgle:LineSegment
-                    End="-116,24.25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-116,24.25"
-                    Point2="-120,24.25"
-                    Point3="-120,28.25" />
-                  <mssgle:LineSegment
-                    End="-120,41" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="261.5,255.5" />
         <NodeLayout
           Size="194,42"
           Id="Package\DFT - Load Geolocations"
           TopLeft="580,264" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\DFT - Load Reviews"
+          TopLeft="407,339" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Truncate Staging Tables"
+          TopLeft="403,159" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="532.333333333333,200">
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="453.25,201">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="144.666666666667,64"
+              EndConnector="-99.75,54.5"
               Start="0,0"
-              End="144.666666666667,56.5">
+              End="-99.75,47">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.9157245632066" />
+                    End="0,14.6618398637138" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,21.9157245632066"
-                    Point2="0,25.9157245632066"
-                    Point3="4,25.9157245632066" />
+                    Point1="0,14.6618398637138"
+                    Point2="0,18.6618398637138"
+                    Point3="-4,18.6618398637138" />
                   <mssgle:LineSegment
-                    End="140.666666666667,25.9157245632066" />
+                    End="-95.75,18.6618398637138" />
                   <mssgle:CubicBezierSegment
-                    Point1="140.666666666667,25.9157245632066"
-                    Point2="144.666666666667,25.9157245632066"
-                    Point3="144.666666666667,29.9157245632066" />
+                    Point1="-95.75,18.6618398637138"
+                    Point2="-99.75,18.6618398637138"
+                    Point3="-99.75,22.6618398637138" />
                   <mssgle:LineSegment
-                    End="144.666666666667,56.5" />
+                    End="-99.75,47" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1798,10 +2507,62 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="173,42"
-          Id="Package\DFT - Load Reviews"
-          TopLeft="407,339" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="545.75,201">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131.25,63"
+              Start="0,0"
+              End="131.25,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.572402044293" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.572402044293"
+                    Point2="0,21.572402044293"
+                    Point3="4,21.572402044293" />
+                  <mssgle:LineSegment
+                    End="127.25,21.572402044293" />
+                  <mssgle:CubicBezierSegment
+                    Point1="127.25,21.572402044293"
+                    Point2="131.25,21.572402044293"
+                    Point3="131.25,25.572402044293" />
+                  <mssgle:LineSegment
+                    End="131.25,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="496.5,201">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,138"
+              Start="0,0"
+              End="0,130.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,130.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1811,13 +2572,17 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="146,42"
-          Id="Package\DFT - Load Customers\FF_Customers"
-          TopLeft="323,133" />
-        <NodeLayout
           Size="156,42"
           Id="Package\DFT - Load Customers\Data Conversion"
           TopLeft="241,208" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\DFT - Load Customers\Stg Customer"
+          TopLeft="358,302" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\DFT - Load Customers\FF_Customers"
+          TopLeft="323,133" />
         <EdgeLayout
           Id="Package\DFT - Load Customers.Paths[Flat File Source Output]"
           TopLeft="396,175">
@@ -1852,19 +2617,15 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="171,42"
-          Id="Package\DFT - Load Customers\OLE DB Destination"
-          TopLeft="358,302" />
         <EdgeLayout
           Id="Package\DFT - Load Customers.Paths[Data Conversion Output]"
           TopLeft="319,250">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="124.5,52"
+              EndConnector="110.5,52"
               Start="0,0"
-              End="124.5,44.5">
+              End="110.5,44.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -1875,13 +2636,13 @@
                     Point2="0,26"
                     Point3="4,26" />
                   <mssgle:LineSegment
-                    End="120.5,26" />
+                    End="106.5,26" />
                   <mssgle:CubicBezierSegment
-                    Point1="120.5,26"
-                    Point2="124.5,26"
-                    Point3="124.5,30" />
+                    Point1="106.5,26"
+                    Point2="110.5,26"
+                    Point3="110.5,30" />
                   <mssgle:LineSegment
-                    End="124.5,44.5" />
+                    End="110.5,44.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1894,7 +2655,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load Customers\OLE DB Destination">
+    design-time-name="Package\DFT - Load Customers\Stg Customer">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1912,51 +2673,21 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="153,42"
+          Id="Package\DFT - Load Geolocations\Stg Geolocation"
+          TopLeft="346,353" />
+        <NodeLayout
           Size="151,42"
           Id="Package\DFT - Load Geolocations\FF_Geolocation"
           TopLeft="356,91" />
         <NodeLayout
-          Size="156,42"
-          Id="Package\DFT - Load Geolocations\Data Conversion"
-          TopLeft="276,173" />
-        <EdgeLayout
-          Id="Package\DFT - Load Geolocations.Paths[Flat File Source Output]"
-          TopLeft="431.5,133">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-77.5,40"
-              Start="0,0"
-              End="-77.5,32.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16"
-                    Point2="0,20"
-                    Point3="-4,20" />
-                  <mssgle:LineSegment
-                    End="-73.5,20" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-73.5,20"
-                    Point2="-77.5,20"
-                    Point3="-77.5,24" />
-                  <mssgle:LineSegment
-                    End="-77.5,32.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
           Size="127,42"
           Id="Package\DFT - Load Geolocations\Aggregate"
           TopLeft="356,263" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\DFT - Load Geolocations\Data Conversion"
+          TopLeft="276,173" />
         <EdgeLayout
           Id="Package\DFT - Load Geolocations.Paths[Data Conversion Output]"
           TopLeft="354,215">
@@ -1991,36 +2722,54 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="180,42"
-          Id="Package\DFT - Load Geolocations\OLE DB Destination 1"
-          TopLeft="346,353" />
         <EdgeLayout
           Id="Package\DFT - Load Geolocations.Paths[Aggregate Output 1]"
-          TopLeft="419.5,305">
+          TopLeft="421,305">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="16.5,48"
+              EndConnector="0,48"
               Start="0,0"
-              End="16.5,40.5">
+              End="0,40.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20"
-                    Point2="0,24"
-                    Point3="4,24" />
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load Geolocations.Paths[Flat File Source Output]"
+          TopLeft="431.5,133">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-77.5,40"
+              Start="0,0"
+              End="-77.5,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="12.5,24" />
+                    End="0,16" />
                   <mssgle:CubicBezierSegment
-                    Point1="12.5,24"
-                    Point2="16.5,24"
-                    Point3="16.5,28" />
+                    Point1="0,16"
+                    Point2="0,20"
+                    Point3="-4,20" />
                   <mssgle:LineSegment
-                    End="16.5,40.5" />
+                    End="-73.5,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-73.5,20"
+                    Point2="-77.5,20"
+                    Point3="-77.5,24" />
+                  <mssgle:LineSegment
+                    End="-77.5,32.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2033,7 +2782,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load Geolocations\OLE DB Destination 1">
+    design-time-name="Package\DFT - Load Geolocations\Stg Geolocation">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2049,13 +2798,102 @@
     design-time-name="Package\DFT - Load Reviews">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="139,42"
-          Id="Package\DFT - Load Reviews\FF - Reviews"
+          Size="136,42"
+          Id="Package\DFT - Load Reviews\Stg Reviews"
+          TopLeft="363,293" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\DFT - Load Reviews\Data Conversion"
+          TopLeft="311,190" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\DFT - Load Reviews\FF_Reviews"
           TopLeft="405,107" />
+        <EdgeLayout
+          Id="Package\DFT - Load Reviews.Paths[Data Conversion Output]"
+          TopLeft="389,232">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="42,61"
+              Start="0,0"
+              End="42,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.5"
+                    Point2="0,30.5"
+                    Point3="4,30.5" />
+                  <mssgle:LineSegment
+                    End="38,30.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="38,30.5"
+                    Point2="42,30.5"
+                    Point3="42,34.5" />
+                  <mssgle:LineSegment
+                    End="42,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load Reviews.Paths[Flat File Source Output]"
+          TopLeft="472,149">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-83,41"
+              Start="0,0"
+              End="-83,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="-4,20.5" />
+                  <mssgle:LineSegment
+                    End="-79,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-79,20.5"
+                    Point2="-83,20.5"
+                    Point3="-83,24.5" />
+                  <mssgle:LineSegment
+                    End="-83,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load Reviews\Stg Reviews">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
