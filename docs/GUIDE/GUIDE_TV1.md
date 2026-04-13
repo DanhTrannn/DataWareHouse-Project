@@ -4,78 +4,150 @@
 
 **Phụ trách:**
 - Staging: `stg_customers`, `stg_geolocation`, `stg_order_reviews`
-- Dimensions: `dim_date`, `dim_geolocation` (SCD Type 1), `dim_customer` (SCD Type 2), `dim_order_status`
-- Facts: `fact_customer_orders`, `fact_customer_orders_year`
+- Dimensions: `dim_date` (Pre-populate), `dim_geolocation` (SCD Type 1), `dim_customer` (SCD Type 2), `dim_order_status` (Pre-populate)
+- Facts: `fact_customer_orders` (month + year)
 - SSIS Packages: 3 packages
+- **Công việc chung:** Tạo Database + Schemas cho toàn team
+
+---
+---
+
+# PHẦN A – CHUẨN BỊ (TV1 LÀ NGƯỜI KHỞI TẠO PROJECT)
 
 ---
 
-## BƯỚC 0: Chuẩn bị môi trường (Công việc chung – TV1 chịu trách nhiệm chính)
+## BƯỚC 0: Tạo môi trường cho toàn team
 
-### 0.1. Tạo Database
+### 0.1. Tạo Database trong SQL Server
 
-Mở SSMS → New Query → chạy:
+1. Mở **SQL Server Management Studio (SSMS)**
+2. Kết nối tới SQL Server instance (vd: `localhost`, `.\SQLEXPRESS`, hoặc `DESKTOP-XXXX\SQLEXPRESS`)
+3. Click **New Query** → paste và chạy:
 
 ```sql
+-- Tạo database chính cho Data Warehouse
 CREATE DATABASE OlistDW;
 GO
+
+-- Chuyển sang database vừa tạo
 USE OlistDW;
 GO
 ```
 
+4. Verify: trong Object Explorer bên trái → Refresh → thấy `OlistDW` trong danh sách Databases.
+
 ### 0.2. Tạo Schemas
 
+Vẫn trong cửa sổ query, chạy tiếp:
+
 ```sql
+USE OlistDW;
+GO
+
+-- Schema cho vùng đệm staging (truncate-reload)
 CREATE SCHEMA staging;
 GO
+
+-- Schema cho Gold layer (star schema)
 CREATE SCHEMA gold;
 GO
 ```
 
-### 0.3. Tạo SSIS Project
+Verify:
+```sql
+SELECT name FROM sys.schemas WHERE name IN ('staging', 'gold');
+-- Phải trả về 2 dòng
+```
 
-1. Mở Visual Studio → File → New → Project
-2. Chọn **Integration Services Project**
-3. Đặt tên: `OlistDW_ETL`
-4. Trong Solution Explorer, tạo 3 package files:
-   - `Extract_Customer_Geo.dtsx`
+> **Thông báo cho TV2 và TV3:** Sau khi tạo xong, gửi thông tin kết nối cho team:
+> - Server name: `...`
+> - Database: `OlistDW`
+> - Authentication: Windows / SQL Server
+
+### 0.3. Chuẩn bị file CSV
+
+Tải dataset từ Kaggle về, đặt tất cả file vào **cùng 1 thư mục** (ví dụ `D:\OlistData\`). TV1 cần 3 file:
+
+| File | Tên đầy đủ |
+|---|---|
+| Customers | `olist_customers_dataset.csv` |
+| Geolocation | `olist_geolocation_dataset.csv` |
+| Reviews | `olist_order_reviews_dataset.csv` |
+
+### 0.4. Tạo SSIS Project
+
+1. Mở **Visual Studio** (hoặc SQL Server Data Tools – SSDT)
+2. File → New → Project
+3. Trong dialog New Project:
+   - Template: tìm **Integration Services Project** (nếu không thấy → cần cài SQL Server Data Tools extension)
+   - Name: `OlistDW_ETL`
+   - Location: chọn thư mục làm việc
+   - Solution name: `OlistDW_ETL`
+4. Click **Create** (hoặc **OK**)
+5. Visual Studio tạo project với 1 package mặc định `Package.dtsx`
+
+### 0.5. Tạo 3 SSIS Packages
+
+Trong **Solution Explorer** (panel bên phải):
+1. Chuột phải vào `Package.dtsx` → Rename → đổi tên thành `Extract_Customer_Geo.dtsx`
+2. Chuột phải thư mục **SSIS Packages** → **New SSIS Package** → đổi tên:
    - `Load_Dim_Date_Geo_Customer.dtsx`
+3. Lặp lại:
    - `Load_Fact_Customer_Orders.dtsx`
 
-### 0.4. Tạo Connection Managers
+### 0.6. Tạo OLE DB Connection Manager (dùng chung cho tất cả packages)
 
-Trong SSIS Project, tạo 2 Connection Managers dùng chung:
+1. Double-click vào bất kỳ package nào để mở
+2. Ở panel dưới cùng, vùng **Connection Managers**
+3. Chuột phải vùng trống → **New OLE DB Connection...**
+4. Trong dialog **Configure OLE DB Connection Manager** → click **New...**
+5. Cấu hình:
 
-**OLE DB Connection (SQL Server):**
-1. Chuột phải Connection Managers → New OLE DB Connection
-2. Server name: `localhost` (hoặc tên server)
-3. Database: `OlistDW`
-4. Đặt tên: `OlistDW_OLEDB`
+| Thuộc tính | Giá trị |
+|---|---|
+| Server name | `localhost` hoặc `.\SQLEXPRESS` (tùy cấu hình) |
+| Authentication | **Windows Authentication** |
+| Select or enter a database name | Chọn **OlistDW** từ dropdown |
 
-**Flat File Connections (tạo sau ở từng Data Flow):**
-- Sẽ tạo riêng cho mỗi CSV file
+6. Click **Test Connection** → phải hiện "Test connection succeeded"
+7. Click **OK** → Click **OK**
+8. Connection xuất hiện ở panel dưới → chuột phải → **Rename** → `OlistDW_OLEDB`
+9. **Quan trọng:** Chuột phải connection → **Convert to Project Connection** → connection sẽ dùng chung cho TẤT CẢ packages trong project (TV2, TV3 cũng dùng được)
+
+---
+---
+
+# PHẦN B – TẠO BẢNG TRONG SQL SERVER
 
 ---
 
-## BƯỚC 1: Tạo Staging Tables (DDL)
+## BƯỚC 1: Tạo Staging Tables
 
-Chạy các script SQL sau trong SSMS:
+Mở SSMS → New Query → đảm bảo kết nối database `OlistDW`:
 
 ### 1.1. staging.stg_customers
 
 ```sql
+USE OlistDW;
+GO
+
 IF OBJECT_ID('staging.stg_customers', 'U') IS NOT NULL
     DROP TABLE staging.stg_customers;
 GO
 
 CREATE TABLE staging.stg_customers (
-    customer_id             VARCHAR(50)   NOT NULL,
-    customer_unique_id      VARCHAR(50)   NOT NULL,
-    customer_zip_code_prefix VARCHAR(10)  NULL,
-    customer_city           NVARCHAR(100) NULL,
-    customer_state          VARCHAR(5)    NULL
+    customer_id              VARCHAR(50)   NOT NULL,
+    customer_unique_id       VARCHAR(50)   NOT NULL,
+    customer_zip_code_prefix VARCHAR(10)   NULL,
+    customer_city            NVARCHAR(100) NULL,
+    customer_state           VARCHAR(5)    NULL
 );
 GO
+
+-- Verify
+SELECT TABLE_SCHEMA, TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'stg_customers';
 ```
 
 ### 1.2. staging.stg_geolocation
@@ -116,7 +188,7 @@ GO
 
 ---
 
-## BƯỚC 2: Tạo Dimension Tables (DDL)
+## BƯỚC 2: Tạo Dimension Tables
 
 ### 2.1. gold.dim_date
 
@@ -126,7 +198,7 @@ IF OBJECT_ID('gold.dim_date', 'U') IS NOT NULL
 GO
 
 CREATE TABLE gold.dim_date (
-    date_key          INT          NOT NULL PRIMARY KEY,  -- format: YYYYMMDD
+    date_key          INT          NOT NULL PRIMARY KEY,  -- format YYYYMMDD
     full_date         DATE         NOT NULL,
     year              INT          NOT NULL,
     quarter           INT          NOT NULL,
@@ -178,7 +250,7 @@ CREATE TABLE gold.dim_customer (
     city               NVARCHAR(100)     NULL,
     state              VARCHAR(5)        NULL,
     geo_key            INT               NULL,
-    -- SCD Type 2 columns
+    -- SCD Type 2: theo dõi lịch sử thay đổi city/state
     effective_from     DATE              NOT NULL DEFAULT '1900-01-01',
     effective_to       DATE              NOT NULL DEFAULT '9999-12-31',
     is_current         BIT               NOT NULL DEFAULT 1,
@@ -199,7 +271,7 @@ IF OBJECT_ID('gold.dim_order_status', 'U') IS NOT NULL
 GO
 
 CREATE TABLE gold.dim_order_status (
-    order_status  VARCHAR(30)  NOT NULL PRIMARY KEY,
+    order_status  VARCHAR(30)   NOT NULL PRIMARY KEY,
     description   NVARCHAR(100) NULL
 );
 GO
@@ -207,9 +279,9 @@ GO
 
 ---
 
-## BƯỚC 3: Tạo Fact Tables (DDL)
+## BƯỚC 3: Tạo Fact Tables
 
-### 3.1. gold.fact_customer_orders
+### 3.1. gold.fact_customer_orders (monthly)
 
 ```sql
 IF OBJECT_ID('gold.fact_customer_orders', 'U') IS NOT NULL
@@ -219,7 +291,7 @@ GO
 CREATE TABLE gold.fact_customer_orders (
     customer_key     INT            NOT NULL,
     order_status     VARCHAR(30)    NOT NULL,
-    date_key         INT            NOT NULL,  -- first day of month: YYYYMM01
+    date_key         INT            NOT NULL,
     total_orders     INT            NOT NULL DEFAULT 0,
     total_items      INT            NOT NULL DEFAULT 0,
     total_spent      DECIMAL(12,2)  NOT NULL DEFAULT 0,
@@ -246,7 +318,7 @@ GO
 CREATE TABLE gold.fact_customer_orders_year (
     customer_key     INT            NOT NULL,
     order_status     VARCHAR(30)    NOT NULL,
-    year_key         INT            NOT NULL,  -- YYYY0101
+    year_key         INT            NOT NULL,
     total_orders     INT            NOT NULL DEFAULT 0,
     total_items      INT            NOT NULL DEFAULT 0,
     total_spent      DECIMAL(12,2)  NOT NULL DEFAULT 0,
@@ -257,208 +329,323 @@ CREATE TABLE gold.fact_customer_orders_year (
 GO
 ```
 
+**Kiểm tra tổng:**
+```sql
+SELECT TABLE_SCHEMA, TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA IN ('staging', 'gold')
+ORDER BY TABLE_SCHEMA, TABLE_NAME;
+```
+
+---
 ---
 
-## BƯỚC 4: SSIS Package 1 – `Extract_Customer_Geo.dtsx`
+# PHẦN C – SSIS PACKAGE 1: EXTRACT TO STAGING
 
-### 4.1. Thiết lập Control Flow
+---
 
-Mở package `Extract_Customer_Geo.dtsx` trong Visual Studio:
+## BƯỚC 4: Xây dựng `Extract_Customer_Geo.dtsx`
 
-```
-Control Flow Layout:
-┌─────────────────────────────────┐
-│  Execute SQL Task               │
-│  "Truncate Staging Tables"      │
-└──────────┬──────────────────────┘
-           │ (Success)
-     ┌─────┼──────────────┐
-     ▼     ▼              ▼
-┌────────┐ ┌────────────┐ ┌──────────────┐
-│DFT:    │ │DFT:        │ │DFT:          │
-│Load    │ │Load        │ │Load          │
-│Customer│ │Geolocation │ │Reviews       │
-└────────┘ └────────────┘ └──────────────┘
-```
+### 4.1. Mở Package
 
-**Execute SQL Task – Truncate Staging:**
-1. Kéo **Execute SQL Task** vào Control Flow
-2. Double-click → General tab:
-   - Name: `Truncate Staging Tables`
-   - Connection: `OlistDW_OLEDB`
-   - SQLStatement:
+Double-click `Extract_Customer_Geo.dtsx` trong Solution Explorer → mở tab **Control Flow**.
+
+### 4.2. Thêm Execute SQL Task – Truncate Staging
+
+1. Trong **SSIS Toolbox** (panel trái), kéo **Execute SQL Task** vào vùng Control Flow
+2. Click vào task → panel Properties bên phải → đổi **Name**: `EST - Truncate Staging Tables`
+3. Double-click task → mở editor:
+
+| Thuộc tính | Giá trị |
+|---|---|
+| Connection | Chọn `OlistDW_OLEDB` |
+| SQLSourceType | `Direct input` |
+| SQLStatement | Click `...` → paste SQL |
+
 ```sql
 TRUNCATE TABLE staging.stg_customers;
 TRUNCATE TABLE staging.stg_geolocation;
 TRUNCATE TABLE staging.stg_order_reviews;
 ```
 
-3. Click OK
+4. Click **OK**
 
-### 4.2. Data Flow Task – Load Customers
+---
 
-1. Kéo **Data Flow Task** vào Control Flow, đặt tên `DFT - Load Customers`
-2. Nối **Precedence Constraint** (mũi tên xanh) từ Truncate → DFT
-3. Double-click vào DFT để vào Data Flow tab
+### 4.3. Data Flow Task 1 – Load Customers
 
-**Trong Data Flow:**
+#### 4.3.1. Thêm Data Flow Task
 
-```
-Flat File Source (olist_customers_dataset.csv)
-        │
-        ▼
-Data Conversion
-        │
-        ▼
-OLE DB Destination (staging.stg_customers)
-```
+1. Kéo **Data Flow Task** từ Toolbox → đổi tên `DFT - Load Customers`
+2. **Nối Precedence Constraint:** Click vào `EST - Truncate Staging Tables` → kéo mũi tên xanh xuống `DFT - Load Customers`
+3. Double-click DFT → chuyển sang tab **Data Flow**
 
-**Bước 4.2.1 – Flat File Source:**
-1. Kéo **Flat File Source** vào canvas
-2. Double-click → New → Flat File Connection Manager:
-   - Name: `FF_Customers`
-   - File: chọn file `olist_customers_dataset.csv`
-   - Format: Delimited
-   - Header row delimiter: `{CR}{LF}`
-   - Check ✅ "Column names in the first data row"
-   - Tab Columns: verify 5 cột hiển thị đúng
-   - Tab Advanced: set tất cả OutputColumnWidth = 100 cho string columns
-3. Click OK
+#### 4.3.2. Flat File Source
 
-**Bước 4.2.2 – Data Conversion:**
-1. Kéo **Data Conversion** vào, nối từ Flat File Source
-2. Double-click, chọn chuyển đổi:
+1. Kéo **Flat File Source** từ Toolbox vào canvas
+2. Double-click → click **New...** để tạo Connection Manager
 
-| Input Column | Output Alias | Data Type | Length |
-|---|---|---|---|
-| customer_id | cv_customer_id | string [DT_STR] | 50 |
-| customer_unique_id | cv_customer_unique_id | string [DT_STR] | 50 |
-| customer_zip_code_prefix | cv_zip_code_prefix | string [DT_STR] | 10 |
-| customer_city | cv_customer_city | Unicode string [DT_WSTR] | 100 |
-| customer_state | cv_customer_state | string [DT_STR] | 5 |
+**Flat File Connection Manager Editor – Tab General:**
 
-**Bước 4.2.3 – OLE DB Destination:**
-1. Kéo **OLE DB Destination**, nối từ Data Conversion
+| Thuộc tính | Giá trị |
+|---|---|
+| Connection manager name | `FF_Customers` |
+| File name | Click Browse → `D:\OlistData\olist_customers_dataset.csv` |
+| Locale | `English (United States)` |
+| Code page | `65001 (UTF-8)` |
+| Format | `Delimited` |
+| Text qualifier | `"` |
+| Header row delimiter | `{CR}{LF}` |
+| ✅ Column names in the first data row | Check |
+
+**Tab Columns:**
+- Kiểm tra 5 cột: `customer_id`, `customer_unique_id`, `customer_zip_code_prefix`, `customer_city`, `customer_state`
+- Column delimiter: `Comma {,}`
+
+**Tab Advanced** – chỉnh DataType cho chính xác:
+
+| Column Name | DataType | OutputColumnWidth |
+|---|---|---|
+| customer_id | string [DT_STR] | 50 |
+| customer_unique_id | string [DT_STR] | 50 |
+| customer_zip_code_prefix | string [DT_STR] | 10 |
+| customer_city | Unicode string [DT_WSTR] | 100 |
+| customer_state | string [DT_STR] | 5 |
+
+> **Cách chỉnh:** Click tên cột ở panel trái → sửa DataType và OutputColumnWidth ở panel phải.
+
+3. Click **OK** → Click **OK**
+
+#### 4.3.3. OLE DB Destination
+
+1. Kéo **OLE DB Destination** → nối mũi tên xanh từ Flat File Source
 2. Double-click:
-   - Connection Manager: `OlistDW_OLEDB`
-   - Table: `staging.stg_customers`
-   - Tab Mappings: map các cột `cv_*` → cột đích tương ứng
 
-### 4.3. Data Flow Task – Load Geolocation (có Dedup)
+| Thuộc tính | Giá trị |
+|---|---|
+| OLE DB connection manager | `OlistDW_OLEDB` |
+| Data access mode | `Table or view - fast load` |
+| Name of the table or view | `[staging].[stg_customers]` |
+| Table lock | ✅ Checked |
 
-1. Thêm **Data Flow Task** mới: `DFT - Load Geolocation`
-2. Nối Precedence Constraint từ Truncate
+**Tab Mappings:** SSIS tự map nếu tên cột giống. Kiểm tra 5 cột map đúng.
 
-**Trong Data Flow:**
+3. Click **OK**
+
+> **Không cần Data Conversion** vì đã set đúng DataType ở Flat File Connection Manager.
+
+---
+
+### 4.4. Data Flow Task 2 – Load Geolocation (có Dedup)
+
+#### 4.4.1. Quay lại Control Flow → kéo Data Flow Task → đổi tên `DFT - Load Geolocation`
+
+#### 4.4.2. Nối từ Truncate task (chạy song song với Load Customers)
+
+#### 4.4.3. Vào Data Flow
+
+**Vấn đề:** File `olist_geolocation_dataset.csv` có ~1 triệu dòng với nhiều dòng trùng `zip_code_prefix`. Cần dedup trước khi load vào staging.
+
+**Layout:**
 
 ```
 Flat File Source (olist_geolocation_dataset.csv)
         │
         ▼
-Data Conversion
-        │
-        ▼
-Sort (zip_code_prefix ASC)
-        │
-        ▼
-Aggregate (GROUP BY zip_code_prefix, AVG lat, AVG lng, FIRST city, FIRST state)
+Sort (zip_code_prefix ASC, Remove duplicates ✅)
         │
         ▼
 OLE DB Destination (staging.stg_geolocation)
 ```
 
-**Bước 4.3.1 – Flat File Source:**
-- Tương tự customers, tạo Connection Manager cho `olist_geolocation_dataset.csv`
+**Flat File Source:**
+1. Tạo Connection Manager mới: `FF_Geolocation` → file `olist_geolocation_dataset.csv`
+2. Tab Advanced:
 
-**Bước 4.3.2 – Data Conversion:**
-
-| Input Column | Output Alias | Data Type | Length/Precision |
-|---|---|---|---|
-| geolocation_zip_code_prefix | cv_zip | string [DT_STR] | 10 |
-| geolocation_lat | cv_lat | numeric [DT_NUMERIC] | Precision 10, Scale 6 |
-| geolocation_lng | cv_lng | numeric [DT_NUMERIC] | Precision 10, Scale 6 |
-| geolocation_city | cv_city | Unicode string [DT_WSTR] | 100 |
-| geolocation_state | cv_state | string [DT_STR] | 5 |
-
-**Bước 4.3.3 – Sort:**
-1. Kéo **Sort** transformation
-2. Sort by: `cv_zip` ASC
-3. Check ✅ "Remove rows with duplicate sort values" → loại bỏ trùng cơ bản
-
-> **Lưu ý:** Dataset geolocation có nhiều dòng trùng zip_code_prefix. Sort + Remove duplicates giữ lại dòng đầu tiên mỗi zip. Nếu muốn lấy AVG lat/lng chính xác hơn, dùng Aggregate thay vì Sort dedup.
-
-**Phương án thay thế (chính xác hơn) – dùng Aggregate:**
-1. Bỏ Sort, kéo **Aggregate** transformation
-2. Cấu hình:
-
-| Input Column | Output Alias | Operation |
+| Column Name | DataType | OutputColumnWidth |
 |---|---|---|
-| cv_zip | agg_zip | Group By |
-| cv_lat | agg_lat | Average |
-| cv_lng | agg_lng | Average |
-| cv_city | agg_city | Group By |
-| cv_state | agg_state | Group By |
+| geolocation_zip_code_prefix | string [DT_STR] | 10 |
+| geolocation_lat | string [DT_STR] | 20 |
+| geolocation_lng | string [DT_STR] | 20 |
+| geolocation_city | Unicode string [DT_WSTR] | 100 |
+| geolocation_state | string [DT_STR] | 5 |
 
-**Bước 4.3.4 – OLE DB Destination:**
-- Table: `staging.stg_geolocation`
-- Map: `agg_zip` → `geolocation_zip_code_prefix`, v.v.
+> **Lưu ý:** Set lat/lng thành string trước, sẽ convert ở Derived Column.
 
-### 4.4. Data Flow Task – Load Reviews
+**Derived Column (convert lat/lng):**
+1. Kéo **Derived Column** → nối từ Flat File Source
+2. Thêm 2 cột:
 
-Tương tự pattern:
-1. Flat File Source → `olist_order_reviews_dataset.csv`
-2. Data Conversion (review_score → DT_I4, timestamps → DT_DBTIMESTAMP)
-3. OLE DB Destination → `staging.stg_order_reviews`
+| Name | Expression |
+|---|---|
+| `cv_lat` | `(DT_NUMERIC,10,6)geolocation_lat` |
+| `cv_lng` | `(DT_NUMERIC,10,6)geolocation_lng` |
 
-### 4.5. Test Package
+3. **OK**
 
-1. Chuột phải package → **Execute Package** (hoặc F5)
-2. Kiểm tra tất cả DFT chuyển xanh (success)
-3. Verify bằng SQL:
+**Sort (dedup):**
+1. Kéo **Sort** → nối từ Derived Column
+2. Double-click:
+   - Tick ✅ `geolocation_zip_code_prefix` → Sort Order: Ascending
+   - Check ✅ **"Remove rows with duplicate sort values"**
+3. **OK**
 
-```sql
-SELECT COUNT(*) AS cnt FROM staging.stg_customers;       -- Expected: ~99,441
-SELECT COUNT(*) AS cnt FROM staging.stg_geolocation;     -- Expected: ~19,015 (sau dedup)
-SELECT COUNT(*) AS cnt FROM staging.stg_order_reviews;   -- Expected: ~99,224
-```
+> Sort + Remove duplicates giữ lại **dòng đầu tiên** cho mỗi zip_code_prefix. Cách này đơn giản và phù hợp cho staging.
+
+**OLE DB Destination:**
+1. Kéo → nối từ Sort
+2. Table: `[staging].[stg_geolocation]`
+3. Mappings:
+
+| Input Column | Destination Column |
+|---|---|
+| geolocation_zip_code_prefix | geolocation_zip_code_prefix |
+| cv_lat | geolocation_lat |
+| cv_lng | geolocation_lng |
+| geolocation_city | geolocation_city |
+| geolocation_state | geolocation_state |
+
+4. **OK**
 
 ---
 
-## BƯỚC 5: SSIS Package 2 – `Load_Dim_Date_Geo_Customer.dtsx`
+### 4.5. Data Flow Task 3 – Load Reviews
 
-### 5.1. Control Flow Layout
+#### 4.5.1. Quay lại Control Flow → kéo Data Flow Task → đổi tên `DFT - Load Reviews`
+
+#### 4.5.2. Nối từ Truncate (chạy song song với 2 DFT kia)
+
+#### 4.5.3. Vào Data Flow
+
+**Flat File Source:**
+1. Tạo Connection Manager: `FF_Reviews` → file `olist_order_reviews_dataset.csv`
+2. Tab Advanced – set TẤT CẢ thành string (vì có cột timestamp có thể rỗng):
+
+| Column Name | DataType | OutputColumnWidth |
+|---|---|---|
+| review_id | string [DT_STR] | 50 |
+| order_id | string [DT_STR] | 50 |
+| review_score | string [DT_STR] | 10 |
+| review_comment_title | Unicode string [DT_WSTR] | 200 |
+| review_comment_message | Unicode string [DT_WSTR] | 4000 |
+| review_creation_date | string [DT_STR] | 30 |
+| review_answer_timestamp | string [DT_STR] | 30 |
+
+**Derived Column (convert an toàn):**
+1. Kéo **Derived Column** → nối từ Flat File Source
+2. Thêm 3 cột:
+
+| Name | Expression |
+|---|---|
+| `cv_score` | `LEN(TRIM(review_score)) == 0 ? NULL(DT_I4) : (DT_I4)review_score` |
+| `cv_creation` | `LEN(TRIM(review_creation_date)) > 0 ? (DT_DBTIMESTAMP)review_creation_date : NULL(DT_DBTIMESTAMP)` |
+| `cv_answer` | `LEN(TRIM(review_answer_timestamp)) > 0 ? (DT_DBTIMESTAMP)review_answer_timestamp : NULL(DT_DBTIMESTAMP)` |
+
+3. **OK**
+
+**OLE DB Destination:**
+1. Table: `[staging].[stg_order_reviews]`
+2. Mappings:
+
+| Input Column | Destination Column |
+|---|---|
+| review_id | review_id |
+| order_id | order_id |
+| cv_score | review_score |
+| review_comment_title | review_comment_title |
+| review_comment_message | review_comment_message |
+| cv_creation | review_creation_date |
+| cv_answer | review_answer_timestamp |
+
+---
+
+### 4.6. Kiểm tra Control Flow hoàn chỉnh
 
 ```
-┌──────────────────────┐
-│ Execute SQL Task     │
-│ "Populate dim_date"  │
-└──────────┬───────────┘
-           │
-┌──────────▼───────────┐
-│ Execute SQL Task     │
-│ "Populate dim_order  │
-│  _status"            │
-└──────────┬───────────┘
-           │
-┌──────────▼───────────┐
-│ DFT: Load            │
-│ dim_geolocation      │
-│ (SCD Type 1)         │
-└──────────┬───────────┘
-           │
-┌──────────▼───────────┐
-│ DFT: Load            │
-│ dim_customer         │
-│ (SCD Type 2)         │
-└──────────────────────┘
+         ┌──────────────────────────────────────┐
+         │  EST - Truncate Staging Tables        │
+         └──────┬──────────┬──────────┬──────────┘
+                │          │          │
+         (Success)   (Success)   (Success)
+                │          │          │
+                ▼          ▼          ▼
+         ┌──────────┐ ┌──────────┐ ┌──────────┐
+         │DFT - Load│ │DFT - Load│ │DFT - Load│
+         │Customers │ │Geoloc.   │ │Reviews   │
+         └──────────┘ └──────────┘ └──────────┘
 ```
 
-### 5.2. Execute SQL Task – Populate dim_date
+### 4.7. Chạy test Package
+
+1. Chuột phải `Extract_Customer_Geo.dtsx` → **Execute Package** (hoặc F5)
+2. Truncate → xanh; 3 DFTs → vàng (song song) → xanh
+3. Click **Stop Debugging**
+4. Verify:
 
 ```sql
--- Sinh calendar table từ 2016-01-01 đến 2019-12-31
--- Chỉ chạy nếu bảng trống
+SELECT 'stg_customers'    AS tbl, COUNT(*) AS rows_loaded FROM staging.stg_customers
+UNION ALL
+SELECT 'stg_geolocation',        COUNT(*) FROM staging.stg_geolocation
+UNION ALL
+SELECT 'stg_order_reviews',      COUNT(*) FROM staging.stg_order_reviews;
+```
 
+Kỳ vọng:
+
+| tbl | rows_loaded |
+|---|---|
+| stg_customers | ~99,441 |
+| stg_geolocation | ~19,015 (sau dedup) |
+| stg_order_reviews | ~99,224 |
+
+---
+---
+
+# PHẦN D – SSIS PACKAGE 2: LOAD DIMENSIONS
+
+---
+
+## BƯỚC 5: Xây dựng `Load_Dim_Date_Geo_Customer.dtsx`
+
+### 5.1. Mở Package → Control Flow
+
+Double-click `Load_Dim_Date_Geo_Customer.dtsx`.
+
+Layout tổng:
+
+```
+┌──────────────────────────────┐
+│ EST - Populate dim_date      │
+└──────────┬───────────────────┘
+           │
+┌──────────▼───────────────────┐
+│ EST - Populate dim_order_    │
+│ status                       │
+└──────────┬───────────────────┘
+           │
+┌──────────▼───────────────────┐
+│ DFT - Load dim_geolocation   │
+│ (SCD Type 1)                 │
+└──────────┬───────────────────┘
+           │
+┌──────────▼───────────────────┐
+│ DFT - Load dim_customer      │
+│ (SCD Type 2)                 │
+└──────────────────────────────┘
+```
+
+> Thứ tự tuần tự vì: dim_customer cần geo_key từ dim_geolocation.
+
+---
+
+### 5.2. Task 1 – Execute SQL: Populate dim_date
+
+1. Kéo **Execute SQL Task** → đổi tên `EST - Populate dim_date`
+2. Double-click:
+   - Connection: `OlistDW_OLEDB`
+   - SQLStatement:
+
+```sql
 IF NOT EXISTS (SELECT 1 FROM gold.dim_date)
 BEGIN
     DECLARE @start DATE = '2016-01-01';
@@ -471,7 +658,8 @@ BEGIN
     )
     INSERT INTO gold.dim_date (
         date_key, full_date, year, quarter, month, month_name,
-        day_of_month, day_of_week, day_name, is_weekend, is_holiday_brazil, season_brazil
+        day_of_month, day_of_week, day_name, is_weekend,
+        is_holiday_brazil, season_brazil
     )
     SELECT
         CONVERT(INT, FORMAT(dt, 'yyyyMMdd'))       AS date_key,
@@ -483,38 +671,41 @@ BEGIN
         DAY(dt)                                     AS day_of_month,
         DATEPART(WEEKDAY, dt)                       AS day_of_week,
         DATENAME(WEEKDAY, dt)                       AS day_name,
-        CASE WHEN DATEPART(WEEKDAY, dt) IN (1, 7) THEN 1 ELSE 0 END AS is_weekend,
-        -- Ngày lễ Brazil chính
+        CASE WHEN DATEPART(WEEKDAY, dt) IN (1, 7) THEN 1 ELSE 0 END,
         CASE
-            WHEN MONTH(dt) = 1  AND DAY(dt) = 1  THEN 1  -- Ano Novo
-            WHEN MONTH(dt) = 4  AND DAY(dt) = 21 THEN 1  -- Tiradentes
-            WHEN MONTH(dt) = 5  AND DAY(dt) = 1  THEN 1  -- Dia do Trabalho
-            WHEN MONTH(dt) = 9  AND DAY(dt) = 7  THEN 1  -- Independência
-            WHEN MONTH(dt) = 10 AND DAY(dt) = 12 THEN 1  -- Nossa Senhora Aparecida
-            WHEN MONTH(dt) = 11 AND DAY(dt) = 2  THEN 1  -- Finados
-            WHEN MONTH(dt) = 11 AND DAY(dt) = 15 THEN 1  -- Proclamação da República
-            WHEN MONTH(dt) = 12 AND DAY(dt) = 25 THEN 1  -- Natal
+            WHEN MONTH(dt) = 1  AND DAY(dt) = 1  THEN 1
+            WHEN MONTH(dt) = 4  AND DAY(dt) = 21 THEN 1
+            WHEN MONTH(dt) = 5  AND DAY(dt) = 1  THEN 1
+            WHEN MONTH(dt) = 9  AND DAY(dt) = 7  THEN 1
+            WHEN MONTH(dt) = 10 AND DAY(dt) = 12 THEN 1
+            WHEN MONTH(dt) = 11 AND DAY(dt) = 2  THEN 1
+            WHEN MONTH(dt) = 11 AND DAY(dt) = 15 THEN 1
+            WHEN MONTH(dt) = 12 AND DAY(dt) = 25 THEN 1
             ELSE 0
-        END AS is_holiday_brazil,
-        -- Mùa ở Brazil (Nam bán cầu)
+        END,
         CASE
             WHEN MONTH(dt) IN (12, 1, 2)  THEN 'Summer'
             WHEN MONTH(dt) IN (3, 4, 5)   THEN 'Autumn'
             WHEN MONTH(dt) IN (6, 7, 8)   THEN 'Winter'
             WHEN MONTH(dt) IN (9, 10, 11) THEN 'Spring'
-        END AS season_brazil
+        END
     FROM DateCTE
     OPTION (MAXRECURSION 1500);
 END
 ```
 
-**Cấu hình trong SSIS:**
-1. Kéo **Execute SQL Task**
-2. Name: `Populate dim_date`
-3. Connection: `OlistDW_OLEDB`
-4. Paste SQL ở trên vào SQLStatement
+3. Click **OK**
 
-### 5.3. Execute SQL Task – Populate dim_order_status
+> Script sinh 1461 dòng (2016-01-01 đến 2019-12-31). `IF NOT EXISTS` đảm bảo chỉ chạy 1 lần.
+
+---
+
+### 5.3. Task 2 – Execute SQL: Populate dim_order_status
+
+1. Kéo **Execute SQL Task** → đổi tên `EST - Populate dim_order_status`
+2. Nối: `EST - Populate dim_date` → task này
+3. Connection: `OlistDW_OLEDB`
+4. SQL:
 
 ```sql
 IF NOT EXISTS (SELECT 1 FROM gold.dim_order_status)
@@ -531,33 +722,47 @@ BEGIN
 END
 ```
 
-### 5.4. Data Flow Task – Load dim_geolocation (SCD Type 1)
+5. Click **OK**
+
+---
+
+### 5.4. Task 3 – Data Flow: Load dim_geolocation (SCD Type 1)
+
+#### 5.4.1. Thêm DFT → đổi tên `DFT - Load dim_geolocation`
+
+Nối: `EST - Populate dim_order_status` → DFT
+
+#### 5.4.2. Vào Data Flow – tổng quan:
 
 ```
-OLE DB Source (stg_geolocation)
+OLE DB Source (stg_geolocation – DISTINCT)
         │
         ▼
-Derived Column (thêm "region")
+Derived Column (thêm region)
         │
         ▼
-Lookup (dim_geolocation – match zip_code_prefix)
+Lookup dim_geolocation (match zip_code_prefix)
    ┌────┴────┐
    │         │
-Match    No Match
-   │         │
-   ▼         ▼
-Conditional  OLE DB Destination
-Split        (INSERT mới)
-(Changed?)
+Match    No Match ──→ OLE DB Destination (INSERT)
    │
    ▼
-OLE DB Command
-(UPDATE)
+Conditional Split (lat/lng thay đổi?)
+   ┌────┴────┐
+   │         │
+Changed   Unchanged (bỏ qua)
+   │
+   ▼
+OLE DB Command (UPDATE)
 ```
 
-**Bước 5.4.1 – OLE DB Source:**
-1. Connection: `OlistDW_OLEDB`
-2. SQL Command:
+#### 5.4.3. Component 1 – OLE DB Source
+
+1. Kéo **OLE DB Source** → double-click:
+   - Connection: `OlistDW_OLEDB`
+   - Data access mode: `SQL command`
+   - SQL:
+
 ```sql
 SELECT DISTINCT
     geolocation_zip_code_prefix,
@@ -568,91 +773,132 @@ SELECT DISTINCT
 FROM staging.stg_geolocation;
 ```
 
-**Bước 5.4.2 – Derived Column (thêm region):**
-1. Kéo **Derived Column** transformation
-2. Thêm cột mới `region` với Expression:
+2. Click **Preview** → verify → **OK**
+
+#### 5.4.4. Component 2 – Derived Column (thêm region)
+
+1. Kéo **Derived Column** → nối từ OLE DB Source
+2. Thêm cột mới `region`:
+
+| Name | Expression |
+|---|---|
+| `region` | *(copy expression bên dưới)* |
 
 ```
-(DT_STR, 20, 1252)(
-    geolocation_state == "SP" || geolocation_state == "RJ" ||
-    geolocation_state == "MG" || geolocation_state == "ES"
-        ? "Sudeste"
+(DT_STR,20,1252)(
+    geolocation_state == "SP" || geolocation_state == "RJ" || geolocation_state == "MG" || geolocation_state == "ES"
+    ? "Sudeste"
     : geolocation_state == "PR" || geolocation_state == "SC" || geolocation_state == "RS"
-        ? "Sul"
-    : geolocation_state == "BA" || geolocation_state == "PE" ||
-      geolocation_state == "CE" || geolocation_state == "MA" ||
-      geolocation_state == "PB" || geolocation_state == "RN" ||
-      geolocation_state == "AL" || geolocation_state == "PI" || geolocation_state == "SE"
-        ? "Nordeste"
-    : geolocation_state == "AM" || geolocation_state == "PA" ||
-      geolocation_state == "RO" || geolocation_state == "TO" ||
-      geolocation_state == "AC" || geolocation_state == "AP" || geolocation_state == "RR"
-        ? "Norte"
-    : geolocation_state == "GO" || geolocation_state == "MT" ||
-      geolocation_state == "MS" || geolocation_state == "DF"
-        ? "Centro-Oeste"
+    ? "Sul"
+    : geolocation_state == "BA" || geolocation_state == "PE" || geolocation_state == "CE" || geolocation_state == "MA" || geolocation_state == "PB" || geolocation_state == "RN" || geolocation_state == "AL" || geolocation_state == "PI" || geolocation_state == "SE"
+    ? "Nordeste"
+    : geolocation_state == "AM" || geolocation_state == "PA" || geolocation_state == "RO" || geolocation_state == "TO" || geolocation_state == "AC" || geolocation_state == "AP" || geolocation_state == "RR"
+    ? "Norte"
+    : geolocation_state == "GO" || geolocation_state == "MT" || geolocation_state == "MS" || geolocation_state == "DF"
+    ? "Centro-Oeste"
     : "Unknown"
 )
 ```
 
-**Bước 5.4.3 – Lookup (kiểm tra đã tồn tại):**
-1. Kéo **Lookup** transformation
-2. General tab: **Redirect rows to no match output** (không fail khi không tìm thấy)
-3. Connection tab:
-   - Table: `gold.dim_geolocation`
-4. Columns tab:
-   - Input: `geolocation_zip_code_prefix` → Lookup: `zip_code_prefix`
-   - Tick Output: `geo_key` (as `existing_geo_key`), `latitude` (as `existing_lat`), `longitude` (as `existing_lng`), `city` (as `existing_city`)
+3. **OK**
 
-**Bước 5.4.4 – No Match Output → OLE DB Destination (INSERT mới):**
-1. Kéo **OLE DB Destination** từ Lookup "No Match Output"
-2. Table: `gold.dim_geolocation`
-3. Mapping:
-   - `geolocation_zip_code_prefix` → `zip_code_prefix`
-   - `geolocation_city` → `city`
-   - `geolocation_state` → `state`
-   - `region` → `region`
-   - `geolocation_lat` → `latitude`
-   - `geolocation_lng` → `longitude`
+#### 5.4.5. Component 3 – Lookup dim_geolocation
 
-**Bước 5.4.5 – Match Output → Conditional Split → OLE DB Command (UPDATE):**
-1. Kéo **Conditional Split** từ Lookup "Match Output"
-2. Condition Name: `Is_Changed`
-3. Condition:
-```
-geolocation_lat != existing_lat || geolocation_lng != existing_lng
-```
-4. Default output: `Unchanged` (bỏ qua)
+1. Kéo **Lookup** → nối từ Derived Column
+2. Double-click:
 
-5. Kéo **OLE DB Command** từ output `Is_Changed`
-6. Connection: `OlistDW_OLEDB`
-7. SQL Command:
+**Tab General:** Redirect rows to no match output
+
+**Tab Connection:**
+- OLE DB connection: `OlistDW_OLEDB`
+- Use a table or view: `gold.dim_geolocation`
+
+**Tab Columns:**
+- Join: `geolocation_zip_code_prefix` → `zip_code_prefix`
+- Output:
+  - ✅ `geo_key` → Alias: `existing_geo_key`
+  - ✅ `latitude` → Alias: `existing_lat`
+  - ✅ `longitude` → Alias: `existing_lng`
+  - ✅ `city` → Alias: `existing_city`
+
+3. **OK**
+
+#### 5.4.6. No Match → OLE DB Destination (INSERT)
+
+1. Kéo **OLE DB Destination**
+2. Nối: Lookup → **Lookup No Match Output** → OLE DB Dest
+3. Table: `[gold].[dim_geolocation]`
+4. Mappings:
+
+| Input Column | Destination Column |
+|---|---|
+| geolocation_zip_code_prefix | zip_code_prefix |
+| geolocation_city | city |
+| geolocation_state | state |
+| region | region |
+| geolocation_lat | latitude |
+| geolocation_lng | longitude |
+
+> `geo_key` không map (IDENTITY).
+
+#### 5.4.7. Match → Conditional Split → OLE DB Command (UPDATE)
+
+**Conditional Split:**
+1. Kéo **Conditional Split** → nối từ Lookup **Match Output**
+2. Condition:
+
+| Output Name | Condition |
+|---|---|
+| `Is_Changed` | `geolocation_lat != existing_lat \|\| geolocation_lng != existing_lng` |
+| Default | `Unchanged` |
+
+**OLE DB Command:**
+1. Kéo **OLE DB Command** → nối từ output `Is_Changed`
+2. Connection: `OlistDW_OLEDB`
+3. SqlCommand:
+
 ```sql
 UPDATE gold.dim_geolocation
 SET latitude = ?, longitude = ?, city = ?
 WHERE geo_key = ?;
 ```
-8. Column Mappings:
-   - Param_0 ← `geolocation_lat`
-   - Param_1 ← `geolocation_lng`
-   - Param_2 ← `geolocation_city`
-   - Param_3 ← `existing_geo_key`
 
-### 5.5. Data Flow Task – Load dim_customer (SCD Type 2)
+4. Column Mappings:
 
-**Đây là phần phức tạp nhất – SCD Type 2:**
+| Input Column | Destination Column |
+|---|---|
+| geolocation_lat | Param_0 |
+| geolocation_lng | Param_1 |
+| geolocation_city | Param_2 |
+| existing_geo_key | Param_3 |
+
+---
+
+### 5.5. Task 4 – Data Flow: Load dim_customer ⭐ (SCD Type 2)
+
+**Đây là phần phức tạp nhất toàn bộ pipeline của TV1.**
+
+#### 5.5.1. Quay lại Control Flow → kéo DFT → đổi tên `DFT - Load dim_customer (SCD Type 2)`
+
+Nối: `DFT - Load dim_geolocation` → DFT mới
+
+#### 5.5.2. Vào Data Flow – tổng quan:
 
 ```
 OLE DB Source (stg_customers)
         │
         ▼
 Lookup dim_geolocation (lấy geo_key)
+   ├── No Match → DerCol(NULL) ──→ Union All ←── Match
         │
         ▼
 Lookup dim_customer (match customer_unique_id WHERE is_current=1)
    ┌────┴────┐
    │         │
-Match    No Match ──→ OLE DB Destination (INSERT mới, is_current=1)
+Match    No Match
+   │         │
+   │         ▼
+   │    Derived Column (SCD cols) → OLE DB Dest (INSERT NEW)
    │
    ▼
 Conditional Split
@@ -661,13 +907,17 @@ Conditional Split
 Changed   Unchanged (bỏ qua)
    │
    ▼
-OLE DB Command (UPDATE: set is_current=0, effective_to=GETDATE)
-   │
-   ▼
-OLE DB Destination (INSERT bản ghi mới, is_current=1)
+Multicast
+┌───┴───┐
+▼       ▼
+OLE DB  Derived Column (SCD cols)
+Command      │
+(EXPIRE)     ▼
+        OLE DB Dest (INSERT NEW VERSION)
 ```
 
-**Bước 5.5.1 – OLE DB Source:**
+#### 5.5.3. Component 1 – OLE DB Source
+
 ```sql
 SELECT
     customer_id,
@@ -678,163 +928,317 @@ SELECT
 FROM staging.stg_customers;
 ```
 
-**Bước 5.5.2 – Lookup dim_geolocation (lấy geo_key):**
-1. Kéo **Lookup**, set "Redirect rows to no match output"
-2. Table: `gold.dim_geolocation`
-3. Join: `customer_zip_code_prefix` → `zip_code_prefix`
-4. Output: `geo_key` (as `lkp_geo_key`)
+#### 5.5.4. Component 2 – Lookup dim_geolocation (lấy geo_key)
 
-> **Lưu ý:** Nếu zip không tìm thấy → No Match → vẫn INSERT customer nhưng geo_key = NULL. Dùng **Union All** để merge cả 2 output trước khi tiếp tục, set `lkp_geo_key = NULL` cho no-match.
+1. Kéo **Lookup** → nối từ OLE DB Source
+2. General: **Redirect rows to no match output**
+3. Connection – SQL:
 
-**Bước 5.5.3 – Lookup dim_customer (kiểm tra tồn tại):**
-1. Kéo **Lookup** thứ 2
-2. SQL Command (thay vì chọn table):
+```sql
+SELECT geo_key, zip_code_prefix
+FROM gold.dim_geolocation;
+```
+
+4. Columns: Join `customer_zip_code_prefix` → `zip_code_prefix`, Output: ✅ `geo_key` → `lkp_geo_key`
+
+**Xử lý No Match:**
+1. Kéo **Derived Column** → nối Lookup **No Match Output**
+2. Thêm: `lkp_geo_key` | `NULL(DT_I4)`
+3. Kéo **Union All** → nối Match + No Match
+4. Map `lkp_geo_key` từ cả 2
+
+#### 5.5.5. Component 3 – Lookup dim_customer (kiểm tra tồn tại)
+
+1. Kéo **Lookup** → nối từ Union All
+2. General: **Redirect rows to no match output**
+3. Connection – SQL:
+
 ```sql
 SELECT customer_key, customer_unique_id, city, state, geo_key
 FROM gold.dim_customer
 WHERE is_current = 1;
 ```
-3. Join: `customer_unique_id` → `customer_unique_id`
-4. Output: `customer_key` (as `existing_cust_key`), `city` (as `existing_city`), `state` (as `existing_state`)
 
-**Bước 5.5.4 – No Match → INSERT mới:**
-```
-OLE DB Destination → gold.dim_customer
-Mapping:
-  customer_id           → customer_id
-  customer_unique_id    → customer_unique_id
-  customer_city         → city
-  customer_state        → state
-  lkp_geo_key           → geo_key
-  (Default values)      → effective_from = GETDATE(), effective_to = '9999-12-31', is_current = 1
-```
+4. Columns:
+   - Join: `customer_unique_id` → `customer_unique_id`
+   - Output:
+     - ✅ `customer_key` → `existing_cust_key`
+     - ✅ `city` → `existing_city`
+     - ✅ `state` → `existing_state`
 
-> **Tip:** Dùng **Derived Column** trước OLE DB Destination để thêm:
-> - `effective_from` = `(DT_DBDATE)GETDATE()`
-> - `effective_to` = `(DT_DBDATE)"9999-12-31"`
-> - `is_current` = `(DT_BOOL)TRUE`
+#### 5.5.6. No Match → INSERT customer mới
 
-**Bước 5.5.5 – Match → Conditional Split:**
-- Condition `Is_Changed`:
-```
-customer_city != existing_city || customer_state != existing_state
-```
+**Derived Column (SCD cols):**
+1. Kéo **Derived Column** → nối Lookup **No Match Output**
+2. Thêm 3 cột:
 
-**Bước 5.5.6 – Changed → Expire bản ghi cũ:**
-1. **OLE DB Command:**
+| Name | Expression |
+|---|---|
+| `scd_effective_from` | `(DT_DBDATE)GETDATE()` |
+| `scd_effective_to` | `(DT_DBDATE)"9999-12-31"` |
+| `scd_is_current` | `(DT_BOOL)TRUE` |
+
+**OLE DB Destination:**
+1. Kéo → nối từ Derived Column
+2. Table: `[gold].[dim_customer]`
+3. Mappings:
+
+| Input Column | Destination Column |
+|---|---|
+| customer_id | customer_id |
+| customer_unique_id | customer_unique_id |
+| customer_city | city |
+| customer_state | state |
+| lkp_geo_key | geo_key |
+| scd_effective_from | effective_from |
+| scd_effective_to | effective_to |
+| scd_is_current | is_current |
+
+> `customer_key` không map (IDENTITY).
+
+#### 5.5.7. Match → Conditional Split
+
+1. Kéo **Conditional Split** → nối Lookup **Match Output**
+2. Condition:
+
+| Output Name | Condition |
+|---|---|
+| `Is_Changed` | `customer_city != existing_city \|\| customer_state != existing_state` |
+| Default | `Unchanged` |
+
+#### 5.5.8. Changed → Multicast → Expire + Insert
+
+**Tại sao cần Multicast?** SCD Type 2 yêu cầu 2 hành động cho mỗi dòng thay đổi:
+1. UPDATE bản ghi cũ: `is_current = 0`, `effective_to = today`
+2. INSERT bản ghi mới với dữ liệu mới, `is_current = 1`
+
+SSIS không cho 1 output nối tới 2 destinations → Multicast nhân đôi.
+
+**Multicast:**
+1. Kéo **Multicast** → nối từ Conditional Split output `Is_Changed`
+
+**Nhánh 1 – OLE DB Command (Expire bản ghi cũ):**
+1. Kéo **OLE DB Command** → nối từ Multicast (Output 0)
+2. Connection: `OlistDW_OLEDB`
+3. SqlCommand:
+
 ```sql
 UPDATE gold.dim_customer
 SET is_current = 0, effective_to = CAST(GETDATE() AS DATE)
 WHERE customer_key = ?;
 ```
-2. Param_0 ← `existing_cust_key`
 
-**Bước 5.5.7 – Changed → INSERT bản ghi mới:**
-Sau OLE DB Command, kéo thêm **OLE DB Destination** để INSERT dòng mới với `is_current = 1`, `effective_from = GETDATE()`.
+4. Column Mappings: `existing_cust_key` → `Param_0`
 
-> **Lưu ý quan trọng:** Trong SSIS, một output chỉ nối được 1 destination. Để vừa UPDATE vừa INSERT từ cùng 1 output `Is_Changed`, bạn cần dùng **Multicast** transformation để nhân đôi dòng, rồi 1 nhánh đi OLE DB Command (expire cũ), 1 nhánh đi OLE DB Destination (insert mới).
+**Nhánh 2 – INSERT bản ghi mới (new version):**
+1. Kéo **Derived Column** → nối từ Multicast (Output 1)
+2. Thêm 3 cột:
 
+| Name | Expression |
+|---|---|
+| `new_effective_from` | `(DT_DBDATE)GETDATE()` |
+| `new_effective_to` | `(DT_DBDATE)"9999-12-31"` |
+| `new_is_current` | `(DT_BOOL)TRUE` |
+
+3. Kéo **OLE DB Destination** → nối từ Derived Column
+4. Table: `[gold].[dim_customer]`
+5. Mappings: tương tự bước 5.5.6, dùng cột `new_*` cho SCD columns
+
+> **Đặt tên rõ:** Rename 2 OLE DB Destinations:
+> - `OLE DB Dest - INSERT New Customer`
+> - `OLE DB Dest - INSERT Changed Version`
+
+### 5.6. Chạy test
+
+```sql
+SELECT 'dim_date'         AS tbl, COUNT(*) AS cnt FROM gold.dim_date
+UNION ALL SELECT 'dim_order_status',  COUNT(*) FROM gold.dim_order_status
+UNION ALL SELECT 'dim_geolocation',   COUNT(*) FROM gold.dim_geolocation
+UNION ALL SELECT 'dim_customer',      COUNT(*) FROM gold.dim_customer;
 ```
-Conditional Split [Is_Changed]
-        │
-        ▼
-    Multicast
-   ┌────┴────┐
-   ▼         ▼
-OLE DB     Derived Column (thêm effective_from, is_current)
-Command          │
-(Expire)         ▼
-           OLE DB Destination (Insert new version)
+
+Kỳ vọng:
+
+| tbl | cnt |
+|---|---|
+| dim_date | 1461 |
+| dim_order_status | 8 |
+| dim_geolocation | ~19,015 |
+| dim_customer | ~99,441 |
+
+```sql
+-- Verify SCD Type 2: lần đầu tất cả is_current = 1
+SELECT is_current, COUNT(*) FROM gold.dim_customer GROUP BY is_current;
+-- Expected: is_current=1 → ~99,441
 ```
 
 ---
+---
 
-## BƯỚC 6: SSIS Package 3 – `Load_Fact_Customer_Orders.dtsx`
+# PHẦN E – SSIS PACKAGE 3: LOAD FACT_CUSTOMER_ORDERS
+
+---
+
+## BƯỚC 6: Xây dựng `Load_Fact_Customer_Orders.dtsx`
 
 ### 6.1. Điều kiện tiên quyết
 
-Package này **CHỈ chạy sau khi:**
-- `fact_orders` (TV2) đã được load xong
+⚠️ Package này **CHỈ chạy sau khi:**
+- `gold.fact_orders` (TV2) đã load xong
 - Tất cả dimensions đã load xong
 
-### 6.2. Control Flow
-
-```
-┌──────────────────────────────────────┐
-│ Execute SQL Task                     │
-│ "Truncate fact_customer_orders"      │
-└──────────────┬───────────────────────┘
-               │
-┌──────────────▼───────────────────────┐
-│ DFT: Aggregate & Load               │
-│ fact_customer_orders                 │
-└──────────────┬───────────────────────┘
-               │
-┌──────────────▼───────────────────────┐
-│ Execute SQL Task                     │
-│ "Truncate fact_customer_orders_year" │
-└──────────────┬───────────────────────┘
-               │
-┌──────────────▼───────────────────────┐
-│ DFT: Aggregate & Load               │
-│ fact_customer_orders_year            │
-└──────────────────────────────────────┘
-```
-
-### 6.3. Execute SQL Task – Truncate
-
+Kiểm tra:
 ```sql
-TRUNCATE TABLE gold.fact_customer_orders;
+SELECT
+    (SELECT COUNT(*) FROM gold.fact_orders)    AS fact_orders,
+    (SELECT COUNT(*) FROM gold.dim_customer WHERE is_current = 1) AS dim_customer,
+    (SELECT COUNT(*) FROM gold.dim_date)       AS dim_date;
+-- Tất cả phải > 0
 ```
 
-### 6.4. Data Flow Task – Load fact_customer_orders
+> **Nếu `gold.fact_orders` chưa có dữ liệu (TV2 chưa chạy):** Dùng query thay thế ở bước 6.4 bên dưới.
 
-**OLE DB Source – SQL Command:**
+### 6.2. Mở Package → Control Flow
+
+```
+┌──────────────────────────────────┐
+│ EST - Truncate fact_customer_    │
+│ orders                           │
+└──────────┬───────────────────────┘
+           │
+┌──────────▼───────────────────────┐
+│ DFT - Load fact_customer_orders  │
+│ (monthly)                        │
+└──────────┬───────────────────────┘
+           │
+┌──────────▼───────────────────────┐
+│ EST - Truncate fact_customer_    │
+│ orders_year                      │
+└──────────┬───────────────────────┘
+           │
+┌──────────▼───────────────────────┐
+│ DFT - Load fact_customer_orders  │
+│ _year                            │
+└──────────────────────────────────┘
+```
+
+### 6.3. Task 1 – Truncate
+
+1. Kéo **Execute SQL Task** → đổi tên `EST - Truncate fact_customer_orders`
+2. SQL: `TRUNCATE TABLE gold.fact_customer_orders;`
+
+### 6.4. Task 2 – Data Flow: fact_customer_orders (monthly)
+
+1. Kéo DFT → đổi tên `DFT - Load fact_customer_orders`
+2. Nối từ Truncate
+3. Vào Data Flow:
+
+**OLE DB Source** – dùng query từ **staging tables** (để không phụ thuộc fact_orders của TV2):
 
 ```sql
 SELECT
-    fo.customer_key,
-    fo.order_status,
-    -- date_key = first day of month
-    CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01') AS date_key,
-    COUNT(DISTINCT fo.order_id)  AS total_orders,
+    dc.customer_key,
+    o.order_status,
+    CONVERT(INT, FORMAT(CAST(o.order_purchase_timestamp AS DATE), 'yyyyMM') + '01') AS date_key,
+    COUNT(DISTINCT o.order_id)  AS total_orders,
     COUNT(*)                     AS total_items,
-    SUM(fo.price + fo.freight_value) AS total_spent,
-    AVG(CAST(fo.review_score AS DECIMAL(3,2))) AS avg_review_score
-FROM gold.fact_orders fo
-INNER JOIN gold.dim_date dd ON fo.order_date_key = dd.date_key
+    SUM(oi.price + oi.freight_value) AS total_spent,
+    AVG(CAST(r.review_score AS DECIMAL(3,2))) AS avg_review_score
+FROM staging.stg_order_items oi
+INNER JOIN staging.stg_orders o
+    ON oi.order_id = o.order_id
+LEFT JOIN staging.stg_order_reviews r
+    ON o.order_id = r.order_id
+INNER JOIN gold.dim_customer dc
+    ON o.customer_id = dc.customer_id
+    AND dc.is_current = 1
+WHERE o.order_purchase_timestamp IS NOT NULL
 GROUP BY
-    fo.customer_key,
-    fo.order_status,
-    CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01');
+    dc.customer_key,
+    o.order_status,
+    CONVERT(INT, FORMAT(CAST(o.order_purchase_timestamp AS DATE), 'yyyyMM') + '01');
 ```
+
+> **Lưu ý:** Query này dùng `staging.stg_orders` (TV3) và `staging.stg_order_items` (TV2). Cần đảm bảo cả 2 đã chạy Extract trước.
+
+> **Query thay thế nếu `gold.fact_orders` ĐÃ có dữ liệu** (dùng khi chạy trong Master Package):
+> ```sql
+> SELECT
+>     fo.customer_key,
+>     fo.order_status,
+>     CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01') AS date_key,
+>     COUNT(DISTINCT fo.order_id)  AS total_orders,
+>     COUNT(*)                     AS total_items,
+>     SUM(fo.price + fo.freight_value) AS total_spent,
+>     AVG(CAST(fo.review_score AS DECIMAL(3,2))) AS avg_review_score
+> FROM gold.fact_orders fo
+> INNER JOIN gold.dim_date dd ON fo.order_date_key = dd.date_key
+> GROUP BY fo.customer_key, fo.order_status,
+>     CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01');
+> ```
 
 **OLE DB Destination:**
-- Table: `gold.fact_customer_orders`
-- Map tất cả cột tương ứng
+1. Table: `[gold].[fact_customer_orders]`
+2. Mappings:
 
-### 6.5. Tương tự cho fact_customer_orders_year
+| Input Column | Destination Column |
+|---|---|
+| customer_key | customer_key |
+| order_status | order_status |
+| date_key | date_key |
+| total_orders | total_orders |
+| total_items | total_items |
+| total_spent | total_spent |
+| avg_review_score | avg_review_score |
+
+### 6.5. Task 3 + 4 – fact_customer_orders_year
+
+**Truncate:** `TRUNCATE TABLE gold.fact_customer_orders_year;`
+
+**OLE DB Source:**
 
 ```sql
 SELECT
-    fo.customer_key,
-    fo.order_status,
-    dd.year * 10000 + 101 AS year_key,  -- YYYY0101
-    COUNT(DISTINCT fo.order_id)  AS total_orders,
+    dc.customer_key,
+    o.order_status,
+    YEAR(o.order_purchase_timestamp) * 10000 + 101 AS year_key,
+    COUNT(DISTINCT o.order_id)  AS total_orders,
     COUNT(*)                     AS total_items,
-    SUM(fo.price + fo.freight_value) AS total_spent,
-    AVG(CAST(fo.review_score AS DECIMAL(3,2))) AS avg_review_score
-FROM gold.fact_orders fo
-INNER JOIN gold.dim_date dd ON fo.order_date_key = dd.date_key
+    SUM(oi.price + oi.freight_value) AS total_spent,
+    AVG(CAST(r.review_score AS DECIMAL(3,2))) AS avg_review_score
+FROM staging.stg_order_items oi
+INNER JOIN staging.stg_orders o
+    ON oi.order_id = o.order_id
+LEFT JOIN staging.stg_order_reviews r
+    ON o.order_id = r.order_id
+INNER JOIN gold.dim_customer dc
+    ON o.customer_id = dc.customer_id
+    AND dc.is_current = 1
+WHERE o.order_purchase_timestamp IS NOT NULL
 GROUP BY
-    fo.customer_key,
-    fo.order_status,
-    dd.year * 10000 + 101;
+    dc.customer_key,
+    o.order_status,
+    YEAR(o.order_purchase_timestamp) * 10000 + 101;
+```
+
+**OLE DB Destination:** `[gold].[fact_customer_orders_year]`
+
+### 6.6. Chạy test
+
+```sql
+SELECT 'fact_customer_orders'     AS tbl, COUNT(*) AS cnt FROM gold.fact_customer_orders
+UNION ALL
+SELECT 'fact_customer_orders_year',       COUNT(*) FROM gold.fact_customer_orders_year;
 ```
 
 ---
+---
 
-## BƯỚC 7: SQL Truy vấn phân tích (2–3 câu insight)
+# PHẦN F – SQL TRUY VẤN PHÂN TÍCH
+
+---
+
+## BƯỚC 7: Viết 3 câu truy vấn insight
 
 ### Query 1: Top 10 khách hàng chi tiêu nhiều nhất
 
@@ -843,73 +1247,84 @@ SELECT TOP 10
     dc.customer_unique_id,
     dc.city,
     dc.state,
-    SUM(fco.total_spent) AS lifetime_spent,
-    SUM(fco.total_orders) AS lifetime_orders,
+    dg.region,
+    SUM(fco.total_spent)   AS lifetime_spent,
+    SUM(fco.total_orders)  AS lifetime_orders,
     AVG(fco.avg_review_score) AS avg_review
 FROM gold.fact_customer_orders fco
-INNER JOIN gold.dim_customer dc ON fco.customer_key = dc.customer_key
-    AND dc.is_current = 1
-GROUP BY dc.customer_unique_id, dc.city, dc.state
+INNER JOIN gold.dim_customer dc
+    ON fco.customer_key = dc.customer_key AND dc.is_current = 1
+LEFT JOIN gold.dim_geolocation dg
+    ON dc.geo_key = dg.geo_key
+GROUP BY dc.customer_unique_id, dc.city, dc.state, dg.region
 ORDER BY lifetime_spent DESC;
 ```
 
-### Query 2: Phân bố khách hàng theo vùng địa lý và xu hướng hàng tháng
+### Query 2: Phân bố khách hàng & doanh thu theo vùng địa lý
 
 ```sql
 SELECT
     dg.region,
     dg.state,
-    dd.year,
-    dd.month,
     COUNT(DISTINCT dc.customer_unique_id) AS unique_customers,
-    SUM(fco.total_spent) AS region_revenue
+    SUM(fco.total_spent)   AS total_revenue,
+    SUM(fco.total_orders)  AS total_orders,
+    AVG(fco.avg_review_score) AS avg_review
 FROM gold.fact_customer_orders fco
-INNER JOIN gold.dim_customer dc ON fco.customer_key = dc.customer_key
-INNER JOIN gold.dim_geolocation dg ON dc.geo_key = dg.geo_key
-INNER JOIN gold.dim_date dd ON fco.date_key = dd.date_key
-GROUP BY dg.region, dg.state, dd.year, dd.month
-ORDER BY dd.year, dd.month, region_revenue DESC;
+INNER JOIN gold.dim_customer dc
+    ON fco.customer_key = dc.customer_key AND dc.is_current = 1
+INNER JOIN gold.dim_geolocation dg
+    ON dc.geo_key = dg.geo_key
+GROUP BY dg.region, dg.state
+ORDER BY total_revenue DESC;
 ```
 
-### Query 3: Tỷ lệ đánh giá trung bình theo trạng thái đơn hàng
+### Query 3: Đánh giá trung bình theo trạng thái đơn hàng
 
 ```sql
 SELECT
     dos.order_status,
     dos.description,
-    COUNT(*) AS total_records,
+    SUM(fco.total_orders) AS total_orders,
     AVG(fco.avg_review_score) AS avg_score,
-    SUM(fco.total_orders) AS total_orders
+    SUM(fco.total_spent) AS total_revenue
 FROM gold.fact_customer_orders fco
-INNER JOIN gold.dim_order_status dos ON fco.order_status = dos.order_status
+INNER JOIN gold.dim_order_status dos
+    ON fco.order_status = dos.order_status
 GROUP BY dos.order_status, dos.description
 ORDER BY avg_score DESC;
 ```
 
 ---
+---
 
-## BƯỚC 8: Verify & Test
+# PHẦN G – VERIFY & TEST
 
-### 8.1. Kiểm tra row count
+---
+
+## BƯỚC 8: Kiểm tra toàn bộ
+
+### 8.1. Row counts
 
 ```sql
-SELECT 'dim_date'          AS tbl, COUNT(*) AS cnt FROM gold.dim_date
-UNION ALL
-SELECT 'dim_geolocation',         COUNT(*) FROM gold.dim_geolocation
-UNION ALL
-SELECT 'dim_customer',            COUNT(*) FROM gold.dim_customer
-UNION ALL
-SELECT 'dim_order_status',        COUNT(*) FROM gold.dim_order_status
-UNION ALL
-SELECT 'fact_customer_orders',    COUNT(*) FROM gold.fact_customer_orders
-UNION ALL
-SELECT 'fact_customer_orders_yr', COUNT(*) FROM gold.fact_customer_orders_year;
+SELECT 'dim_date'              AS tbl, COUNT(*) AS cnt FROM gold.dim_date
+UNION ALL SELECT 'dim_geolocation',     COUNT(*) FROM gold.dim_geolocation
+UNION ALL SELECT 'dim_customer',        COUNT(*) FROM gold.dim_customer
+UNION ALL SELECT 'dim_order_status',    COUNT(*) FROM gold.dim_order_status
+UNION ALL SELECT 'fact_customer_orders',COUNT(*) FROM gold.fact_customer_orders
+UNION ALL SELECT 'fact_cust_orders_yr', COUNT(*) FROM gold.fact_customer_orders_year;
 ```
 
 ### 8.2. Kiểm tra SCD Type 2
 
 ```sql
--- Tìm khách hàng có nhiều hơn 1 version (đã thay đổi city/state)
+-- Tất cả customers phải có ít nhất 1 bản ghi is_current = 1
+SELECT
+    (SELECT COUNT(DISTINCT customer_unique_id) FROM gold.dim_customer) AS unique_custs,
+    (SELECT COUNT(DISTINCT customer_unique_id) FROM gold.dim_customer WHERE is_current = 1) AS current_custs;
+-- Hai số phải bằng nhau
+
+-- Tìm customers có nhiều versions
 SELECT customer_unique_id, COUNT(*) AS versions
 FROM gold.dim_customer
 GROUP BY customer_unique_id
@@ -917,38 +1332,66 @@ HAVING COUNT(*) > 1
 ORDER BY versions DESC;
 ```
 
-### 8.3. Kiểm tra referential integrity
+### 8.3. Kiểm tra SCD Type 1 (geolocation)
 
 ```sql
--- Kiểm tra fact_customer_orders không có orphan keys
-SELECT 'Missing customer' AS issue, COUNT(*)
+-- Chạy lại Load_Dim_Date_Geo_Customer.dtsx
+-- dim_geolocation count không đổi (chỉ update lat/lng nếu khác)
+SELECT COUNT(*) FROM gold.dim_geolocation;
+```
+
+### 8.4. Kiểm tra FK integrity
+
+```sql
+SELECT 'orphan_customer' AS issue, COUNT(*)
 FROM gold.fact_customer_orders f
 LEFT JOIN gold.dim_customer d ON f.customer_key = d.customer_key
 WHERE d.customer_key IS NULL
-
 UNION ALL
-
-SELECT 'Missing date', COUNT(*)
+SELECT 'orphan_date', COUNT(*)
 FROM gold.fact_customer_orders f
 LEFT JOIN gold.dim_date d ON f.date_key = d.date_key
-WHERE d.date_key IS NULL;
+WHERE d.date_key IS NULL
+UNION ALL
+SELECT 'orphan_status', COUNT(*)
+FROM gold.fact_customer_orders f
+LEFT JOIN gold.dim_order_status d ON f.order_status = d.order_status
+WHERE d.order_status IS NULL;
+-- Tất cả phải = 0
+```
+
+### 8.5. Kiểm tra dim_date completeness
+
+```sql
+SELECT
+    MIN(full_date) AS earliest,
+    MAX(full_date) AS latest,
+    COUNT(*) AS total_days,
+    SUM(CAST(is_weekend AS INT)) AS weekend_days,
+    SUM(CAST(is_holiday_brazil AS INT)) AS holidays
+FROM gold.dim_date;
+-- Expected: 2016-01-01 to 2019-12-31, 1461 days
 ```
 
 ---
+---
 
-## Checklist hoàn thành TV1
+# CHECKLIST HOÀN THÀNH TV1
 
-- [ ] Database + schemas đã tạo
-- [ ] 3 staging tables DDL chạy thành công
-- [ ] 4 dimension tables DDL chạy thành công
-- [ ] 2 fact tables DDL chạy thành công
-- [ ] dim_date populated (1461 rows: 2016–2019)
-- [ ] dim_order_status populated (8 rows)
-- [ ] Package `Extract_Customer_Geo.dtsx` chạy xanh
-- [ ] Package `Load_Dim_Date_Geo_Customer.dtsx` chạy xanh
-- [ ] Package `Load_Fact_Customer_Orders.dtsx` chạy xanh
-- [ ] dim_geolocation SCD Type 1 hoạt động
-- [ ] dim_customer SCD Type 2 hoạt động (có effective_from/to, is_current)
-- [ ] 3 SQL queries chạy đúng, có kết quả insight
-- [ ] Verify row counts hợp lý
-- [ ] Không có orphan foreign keys
+- [ ] **Database:** `OlistDW` tạo thành công
+- [ ] **Schemas:** `staging` và `gold` tạo thành công
+- [ ] **DDL:** 3 staging tables tạo thành công
+- [ ] **DDL:** 4 dimension tables tạo thành công (dim_customer có SCD Type 2 columns)
+- [ ] **DDL:** 2 fact tables tạo thành công
+- [ ] **Connection:** `OlistDW_OLEDB` Project Connection tạo thành công
+- [ ] **Package 1:** `Extract_Customer_Geo.dtsx` – 3 DFT xanh, row counts đúng
+- [ ] **Package 2:** `Load_Dim_Date_Geo_Customer.dtsx`:
+  - [ ] dim_date populated (1461 rows)
+  - [ ] dim_order_status populated (8 rows)
+  - [ ] dim_geolocation SCD Type 1 hoạt động
+  - [ ] dim_customer SCD Type 2 hoạt động (Multicast → Expire + Insert)
+- [ ] **Package 3:** `Load_Fact_Customer_Orders.dtsx` – fact tables load thành công
+- [ ] **SCD Type 2:** dim_customer có effective_from/to, is_current đúng
+- [ ] **SQL Queries:** 3 queries chạy đúng, trả về insight hợp lý
+- [ ] **FK Integrity:** Không có orphan foreign keys
+- [ ] **Thông báo team:** Server name + Database name gửi cho TV2, TV3
