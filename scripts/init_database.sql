@@ -1,26 +1,44 @@
+-- TV1
+-- Tạo database chính cho Data Warehouse
 CREATE DATABASE OlistDW;
+GO
+
+-- Chuyển sang database vừa tạo
 USE OlistDW;
 GO
 
+-- Schema cho vùng đệm staging (truncate-reload)
 CREATE SCHEMA staging;
 GO
+
+-- Schema cho Gold layer (star schema)
 CREATE SCHEMA gold;
 GO
 
--- B\u01af\u1edaC 1: T\u1ea1o Staging Tables (DDL)
+SELECT name FROM sys.schemas WHERE name IN ('staging', 'gold');
+
+-- BƯỚC 1: Tạo Staging Tables
 -- 1.1. staging.stg_customers
+USE OlistDW;
+GO
+
 IF OBJECT_ID('staging.stg_customers', 'U') IS NOT NULL
     DROP TABLE staging.stg_customers;
 GO
 
 CREATE TABLE staging.stg_customers (
-    customer_id             VARCHAR(50)   NOT NULL,
-    customer_unique_id      VARCHAR(50)   NOT NULL,
-    customer_zip_code_prefix VARCHAR(10)  NULL,
-    customer_city           NVARCHAR(100) NULL,
-    customer_state          VARCHAR(5)    NULL
+    customer_id              VARCHAR(50)   NOT NULL,
+    customer_unique_id       VARCHAR(50)   NOT NULL,
+    customer_zip_code_prefix VARCHAR(10)   NULL,
+    customer_city            NVARCHAR(100) NULL,
+    customer_state           VARCHAR(5)    NULL
 );
 GO
+
+-- Verify
+SELECT TABLE_SCHEMA, TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'stg_customers';
 
 -- 1.2. staging.stg_geolocation
 IF OBJECT_ID('staging.stg_geolocation', 'U') IS NOT NULL
@@ -52,14 +70,14 @@ CREATE TABLE staging.stg_order_reviews (
 );
 GO
 
--- B\u01af\u1edaC 2: T\u1ea1o Dimension Tables (DDL)
+-- BƯỚC 2: Tạo Dimension Tables
 -- 2.1. gold.dim_date
 IF OBJECT_ID('gold.dim_date', 'U') IS NOT NULL
     DROP TABLE gold.dim_date;
 GO
 
 CREATE TABLE gold.dim_date (
-    date_key          INT          NOT NULL PRIMARY KEY,  -- format: YYYYMMDD
+    date_key          INT          NOT NULL PRIMARY KEY,  -- format YYYYMMDD
     full_date         DATE         NOT NULL,
     year              INT          NOT NULL,
     quarter           INT          NOT NULL,
@@ -105,7 +123,7 @@ CREATE TABLE gold.dim_customer (
     city               NVARCHAR(100)     NULL,
     state              VARCHAR(5)        NULL,
     geo_key            INT               NULL,
-    -- SCD Type 2 columns
+    -- SCD Type 2: theo dõi lịch sử thay đổi city/state
     effective_from     DATE              NOT NULL DEFAULT '1900-01-01',
     effective_to       DATE              NOT NULL DEFAULT '9999-12-31',
     is_current         BIT               NOT NULL DEFAULT 1,
@@ -123,13 +141,13 @@ IF OBJECT_ID('gold.dim_order_status', 'U') IS NOT NULL
 GO
 
 CREATE TABLE gold.dim_order_status (
-    order_status  VARCHAR(30)  NOT NULL PRIMARY KEY,
+    order_status  VARCHAR(30)   NOT NULL PRIMARY KEY,
     description   NVARCHAR(100) NULL
 );
 GO
 
--- B\u01af\u1edaC 3: T\u1ea1o Fact Tables (DDL)
--- 3.1. gold.fact_customer_orders
+-- BƯỚC 3: Tạo Fact Tables
+-- 3.1. gold.fact_customer_orders (monthly)
 IF OBJECT_ID('gold.fact_customer_orders', 'U') IS NOT NULL
     DROP TABLE gold.fact_customer_orders;
 GO
@@ -137,7 +155,7 @@ GO
 CREATE TABLE gold.fact_customer_orders (
     customer_key     INT            NOT NULL,
     order_status     VARCHAR(30)    NOT NULL,
-    date_key         INT            NOT NULL,  -- first day of month: YYYYMM01
+    date_key         INT            NOT NULL,
     total_orders     INT            NOT NULL DEFAULT 0,
     total_items      INT            NOT NULL DEFAULT 0,
     total_spent      DECIMAL(12,2)  NOT NULL DEFAULT 0,
@@ -161,7 +179,7 @@ GO
 CREATE TABLE gold.fact_customer_orders_year (
     customer_key     INT            NOT NULL,
     order_status     VARCHAR(30)    NOT NULL,
-    year_key         INT            NOT NULL,  -- YYYY0101
+    year_key         INT            NOT NULL,
     total_orders     INT            NOT NULL DEFAULT 0,
     total_items      INT            NOT NULL DEFAULT 0,
     total_spent      DECIMAL(12,2)  NOT NULL DEFAULT 0,
@@ -171,11 +189,21 @@ CREATE TABLE gold.fact_customer_orders_year (
 );
 GO
 
+-- Check
+SELECT TABLE_SCHEMA, TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA IN ('staging', 'gold')
+ORDER BY TABLE_SCHEMA, TABLE_NAME;
 
--- 4.5. Test Package
-SELECT COUNT(*) AS cnt FROM staging.stg_customers;       -- Expected: ~99,441
-SELECT COUNT(*) AS cnt FROM staging.stg_geolocation;     -- Expected: ~19,015 (sau dedup)
-SELECT COUNT(*) AS cnt FROM staging.stg_order_reviews;   -- Expected: ~99,224
+
+SELECT 'dim_date'         AS tbl, COUNT(*) AS cnt FROM gold.dim_date
+UNION ALL SELECT 'dim_order_status',  COUNT(*) FROM gold.dim_order_status
+UNION ALL SELECT 'dim_geolocation',   COUNT(*) FROM gold.dim_geolocation
+UNION ALL SELECT 'dim_customer',      COUNT(*) FROM gold.dim_customer;
+
+-- Verify SCD Type 2: lần đầu tất cả is_current = 1
+SELECT is_current, COUNT(*) FROM gold.dim_customer GROUP BY is_current;
+-- Expected: is_current=1 → ~99,441
 
 
 
