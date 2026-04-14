@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Extract_Product_Items"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{628F1718-DFE0-4C5B-A4AC-D7A885F291C7}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{4A14FD4C-C2A1-43E8-98CB-87FA96A3B87C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -233,113 +233,6 @@
               DTS:TextQualified="True"
               DTS:ObjectName="product_width_cm"
               DTS:DTSID="{DBE55CEF-A4DE-47E3-9C58-DC1D39C9121E}"
-              DTS:CreationName="" />
-          </DTS:FlatFileColumns>
-        </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
-      DTS:CreationName="FLATFILE"
-      DTS:DTSID="{FA57BCE8-6C85-46DF-9C0C-636A51B14928}"
-      DTS:ObjectName="Flat File Connection Manager">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:Format="Delimited"
-          DTS:LocaleID="1033"
-          DTS:HeaderRowDelimiter="_x000D__x000A_"
-          DTS:RowDelimiter=""
-          DTS:TextQualifier="_x003C_none_x003E_"
-          DTS:CodePage="1252"
-          DTS:ConnectionString="E:\C++\Exercise_Code\debug.txt">
-          <DTS:FlatFileColumns>
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="&quot;order_id&quot;"
-              DTS:DTSID="{BD20D076-9715-4051-A930-E58DF7A065D4}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="&quot;order_item_id&quot;"
-              DTS:DTSID="{0C10AB39-7610-4F4B-8620-45F42070B094}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="&quot;product_id&quot;"
-              DTS:DTSID="{35D66CFD-0F9A-4EB8-9720-862F3A9D0D37}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="&quot;seller_id&quot;"
-              DTS:DTSID="{384D1B3A-D4D5-4D32-81CE-0F40E5D1E960}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="30"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="&quot;shipping_limit_date&quot;"
-              DTS:DTSID="{C213AEEA-511C-486A-9608-C8A613788C2D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="30"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="&quot;price&quot;"
-              DTS:DTSID="{AF3D9B46-6092-434F-8A58-B1CF5174671F}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="10"
-              DTS:DataType="129"
-              DTS:TextQualified="True"
-              DTS:ObjectName="&quot;freight_value&quot;"
-              DTS:DTSID="{B6693CDF-6FF4-46A0-A2D7-27B73B202B2D}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="14"
-              DTS:DataScale="2"
-              DTS:TextQualified="True"
-              DTS:ObjectName="clean_price"
-              DTS:DTSID="{D9920B0B-6013-4B95-B800-118F7F4B5856}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:DataType="3"
-              DTS:TextQualified="True"
-              DTS:ObjectName="ErrorCode"
-              DTS:DTSID="{8B4B5C58-B1A9-4D34-A53B-FE5FC4BFC239}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:DataType="3"
-              DTS:TextQualified="True"
-              DTS:ObjectName="ErrorColumn"
-              DTS:DTSID="{76460F46-4879-48BF-867A-1E20B9EA985D}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -2386,10 +2279,10 @@
         <NodeLayout
           Size="191.2,41.6"
           Id="Package\DFT - Load Order Items"
-          TopLeft="280.000000596047,150.647058691481" />
+          TopLeft="280.714286311853,150.647058691481" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="374.114286322496,76.7764705574017">
+          TopLeft="374.4714291804,76.7764705574017">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
