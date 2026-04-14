@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Extract_Customer_Geo"
   DTS:PackageType="5"
-  DTS:VersionBuild="50"
-  DTS:VersionGUID="{ED12BE6D-44AA-42C0-ADA3-7DB46BB1A0B5}">
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{42353370-C507-40A3-B6FE-BEF80C6713CF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -238,7 +238,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Extract_Customer_Geo-{BE05C2F9-8EFC-46F7-99E3-0B5F3A95B970}localhost.OlistDW;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=LAPTOP-NS3FCL96\DWHSQLSERVER;Initial Catalog=OlistDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Trust Server Certificate=True;Application Name=SSIS-Extract_Customer_Geo-{BE05C2F9-8EFC-46F7-99E3-0B5F3A95B970}OlistDW_OLEDB;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -2458,19 +2458,19 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="184,42"
+          Size="184,41.6"
           Id="Package\DFT - Load Customers"
           TopLeft="261.5,255.5" />
         <NodeLayout
-          Size="194,42"
+          Size="193.6,41.6"
           Id="Package\DFT - Load Geolocations"
           TopLeft="580,264" />
         <NodeLayout
-          Size="173,42"
+          Size="172.8,41.6"
           Id="Package\DFT - Load Reviews"
           TopLeft="407,339" />
         <NodeLayout
-          Size="193,42"
+          Size="192.8,41.6"
           Id="Package\Truncate Staging Tables"
           TopLeft="403,159" />
         <EdgeLayout
@@ -2572,15 +2572,15 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="156,42"
+          Size="156,41.6"
           Id="Package\DFT - Load Customers\Data Conversion"
           TopLeft="241,208" />
         <NodeLayout
-          Size="143,42"
+          Size="143.2,41.6"
           Id="Package\DFT - Load Customers\Stg Customer"
           TopLeft="358,302" />
         <NodeLayout
-          Size="146,42"
+          Size="145.6,41.6"
           Id="Package\DFT - Load Customers\FF_Customers"
           TopLeft="323,133" />
         <EdgeLayout

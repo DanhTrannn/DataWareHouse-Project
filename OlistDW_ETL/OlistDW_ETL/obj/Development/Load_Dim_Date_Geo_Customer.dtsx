@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="20"
-  DTS:VersionGUID="{9ADF8F23-A88D-421F-BA12-D8AA96949C7F}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{6186666A-8478-4E0C-AF84-83A550A09723}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{051094D8-90A5-4518-AED7-A52B1B2DDA0E}localhost.OlistDW;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=LAPTOP-NS3FCL96\DWHSQLSERVER;Initial Catalog=OlistDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Trust Server Certificate=True;Application Name=SSIS-Package1-{051094D8-90A5-4518-AED7-A52B1B2DDA0E}OlistDW_OLEDB;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -2593,19 +2593,19 @@ FROM staging.stg_geolocation;</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="238,42"
+          Size="238.4,41.6"
           Id="Package\Load dim_customer (SCD Type 2)"
           TopLeft="319,356" />
         <NodeLayout
-          Size="248,42"
+          Size="248,41.6"
           Id="Package\Load dim_geolocation (SCD Type 1)"
           TopLeft="318,263" />
         <NodeLayout
-          Size="167,42"
+          Size="167.2,41.6"
           Id="Package\Populate dim_date"
           TopLeft="358,70" />
         <NodeLayout
-          Size="205,42"
+          Size="204.8,41.6"
           Id="Package\Populate dim_order_status"
           TopLeft="338,165" />
         <EdgeLayout
@@ -3099,27 +3099,27 @@ FROM staging.stg_geolocation;</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="171,42"
+          Size="171.2,41.6"
           Id="Package\Load dim_geolocation (SCD Type 1)\OLE DB Destination"
           TopLeft="383,475" />
         <NodeLayout
-          Size="113,42"
+          Size="112.8,41.6"
           Id="Package\Load dim_geolocation (SCD Type 1)\Lookup"
           TopLeft="405,217" />
         <NodeLayout
-          Size="153,42"
+          Size="152.8,41.6"
           Id="Package\Load dim_geolocation (SCD Type 1)\stg_geolocation"
           TopLeft="382,56" />
         <NodeLayout
-          Size="166,42"
+          Size="166.4,41.6"
           Id="Package\Load dim_geolocation (SCD Type 1)\OLE DB Command"
           TopLeft="381,401" />
         <NodeLayout
-          Size="155,42"
+          Size="155.2,41.6"
           Id="Package\Load dim_geolocation (SCD Type 1)\Conditional Split"
           TopLeft="384,304" />
         <NodeLayout
-          Size="154,42"
+          Size="153.6,41.6"
           Id="Package\Load dim_geolocation (SCD Type 1)\Derived Column"
           TopLeft="379,136" />
         <EdgeLayout

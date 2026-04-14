@@ -133,7 +133,7 @@ CREATE TABLE staging.stg_order_items (
     product_id          VARCHAR(50)   NOT NULL,
     seller_id           VARCHAR(50)   NOT NULL,
     shipping_limit_date DATETIME      NULL,
-    price               DECIMAL(10,2) NOT NULL,
+    price               DECIMAL(10,5) NOT NULL,
     freight_value       DECIMAL(10,2) NOT NULL
 );
 GO
@@ -417,7 +417,7 @@ Cho mỗi cột, chọn `<add as new column>` ở dropdown "Derived Column":
 | Thuộc tính | Giá trị |
 |---|---|
 | Derived Column Name | `clean_product_id` |
-| Expression | `TRIM(product_id)` |
+| Expression | `(DT_STR, 50, 1252)TRIM(product_id)` |
 
 **Cột 2 – category_name (giữ nguyên):**
 
