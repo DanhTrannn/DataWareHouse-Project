@@ -1,0 +1,3074 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/15/2026 10:30:53 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-GTRVT9Q"
+  DTS:CreatorName="DESKTOP-GTRVT9Q\danhtran"
+  DTS:DTSID="{20EB27C9-8D79-4ABC-87FD-684B89EA362F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{223E7832-606C-4E6F-BE1D-FAF24F6FC974}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load fact_order_lifecycle (Upsert)"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E28E0A70-1EEE-4BFF-913B-8622BD5CCF86}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load fact_order_lifecycle (Upsert)"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Inputs[Conditional Split Input].Columns[order_status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="order_status"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_status]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Inputs[Conditional Split Input].Columns[delivered_date]"
+                      cachedDataType="dbDate"
+                      cachedName="delivered_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[delivered_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Inputs[Conditional Split Input].Columns[existing_status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="existing_status"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_status]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Inputs[Conditional Split Input].Columns[existing_delivered]"
+                      cachedDataType="dbDate"
+                      cachedName="existing_delivered"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_delivered]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Outputs[Is_Updated]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Is_Updated"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_status]} != #{Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_status]} || (![ISNULL](#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[delivered_date]}) &amp;&amp; [ISNULL](#{Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_delivered]}))</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">order_status != existing_status || (!ISNULL(delivered_date) &amp;&amp; ISNULL(existing_delivered))</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Outputs[Unchanged]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Unchanged"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Output].Columns[lkp_customer_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Output].Columns[lkp_customer_key]"
+                      name="lkp_customer_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">NULL(DT_I4)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">NULL(DT_I4)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Output].Columns[lkp_seller_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Output].Columns[lkp_seller_key]"
+                      name="lkp_seller_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">NULL(DT_I4)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">NULL(DT_I4)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup dim_custome"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT customer_key, customer_id
+FROM gold.dim_customer
+WHERE is_current = 1;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT customer_key, customer_id
+FROM gold.dim_customer
+WHERE is_current = 1;) [refTable]
+where [refTable].[customer_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="customer_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="customer_id" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Inputs[Lookup Input].Columns[customer_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="customer_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">customer_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Match Output].Columns[lkp_customer_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Match Output].Columns[lkp_customer_key]"
+                      name="lkp_customer_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">customer_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup fact_order_lifecycle"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    fact_lifecycle_id,
+    order_id,
+    order_status  AS existing_status,
+    delivered_date AS existing_delivered
+FROM gold.fact_order_lifecycle;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT
+    fact_lifecycle_id,
+    order_id,
+    order_status  AS existing_status,
+    delivered_date AS existing_delivered
+FROM gold.fact_order_lifecycle;) [refTable]
+where [refTable].[order_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="fact_lifecycle_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="order_id" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="existing_status" dataType="DT_STR" length="30" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="existing_delivered" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Inputs[Lookup Input].Columns[order_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">order_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_lifecycle_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_lifecycle_id]"
+                      name="existing_lifecycle_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">fact_lifecycle_id</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="30"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_status]"
+                      name="existing_status"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">existing_status</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_delivered]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_delivered]"
+                      name="existing_delivered"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">existing_delivered</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE gold.fact_order_lifecycle
+SET order_status = ?,
+    approved_date = ?,
+    delivered_date = ?,
+    days_to_approve = ?,
+    days_to_delivery = ?,
+    is_delayed = ?
+WHERE fact_lifecycle_id = ?;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].Columns[order_status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="order_status"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_status]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].Columns[approved_date]"
+                      cachedDataType="dbDate"
+                      cachedName="approved_date"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[approved_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].Columns[delivered_date]"
+                      cachedDataType="dbDate"
+                      cachedName="delivered_date"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[delivered_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].Columns[days_to_approve]"
+                      cachedDataType="i4"
+                      cachedName="days_to_approve"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_approve]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].Columns[days_to_delivery]"
+                      cachedDataType="i4"
+                      cachedName="days_to_delivery"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_delivery]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].Columns[is_delayed]"
+                      cachedDataType="i4"
+                      cachedName="is_delayed"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[is_delayed]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].Columns[existing_lifecycle_id]"
+                      cachedDataType="i4"
+                      cachedName="existing_lifecycle_id"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output].Columns[existing_lifecycle_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="dbDate"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="dbDate"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="i4"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="bool"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      dataType="i4"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[gold].[fact_order_lifecycle]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[order_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_id]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[order_status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="order_status"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_status]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_status]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[order_date]"
+                      cachedDataType="dbDate"
+                      cachedName="order_date"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_date]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[approved_date]"
+                      cachedDataType="dbDate"
+                      cachedName="approved_date"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[approved_date]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[approved_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[delivered_date]"
+                      cachedDataType="dbDate"
+                      cachedName="delivered_date"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[delivered_date]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[delivered_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[estimated_delivery_date]"
+                      cachedDataType="dbDate"
+                      cachedName="estimated_delivery_date"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[estimated_delivery_date]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[estimated_delivery_date]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[days_to_approve]"
+                      cachedDataType="i4"
+                      cachedName="days_to_approve"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[days_to_approve]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_approve]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[days_to_delivery]"
+                      cachedDataType="i4"
+                      cachedName="days_to_delivery"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[days_to_delivery]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_delivery]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[is_delayed]"
+                      cachedDataType="i4"
+                      cachedName="is_delayed"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_delayed]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[is_delayed]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lkp_customer_key]"
+                      cachedDataType="i4"
+                      cachedName="lkp_customer_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_key]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_customer_key]" />
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lkp_seller_key]"
+                      cachedDataType="i4"
+                      cachedName="lkp_seller_key"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[seller_key]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_seller_key]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fact_lifecycle_id]"
+                      dataType="i4"
+                      name="fact_lifecycle_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[customer_key]"
+                      dataType="i4"
+                      name="customer_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[seller_key]"
+                      dataType="i4"
+                      name="seller_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_date]"
+                      dataType="dbDate"
+                      name="order_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[approved_date]"
+                      dataType="dbDate"
+                      name="approved_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[delivered_date]"
+                      dataType="dbDate"
+                      name="delivered_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[estimated_delivery_date]"
+                      dataType="dbDate"
+                      name="estimated_delivery_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[days_to_approve]"
+                      dataType="i4"
+                      name="days_to_approve" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[days_to_delivery]"
+                      dataType="i4"
+                      name="days_to_delivery" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_delayed]"
+                      dataType="bool"
+                      name="is_delayed" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="order_status" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    o.order_id,
+    o.customer_id,
+    -- Lấy seller_id từ order_item đầu tiên
+    (SELECT TOP 1 oi.seller_id
+     FROM staging.stg_order_items oi
+     WHERE oi.order_id = o.order_id) AS seller_id,
+    o.order_status,
+    CAST(o.order_purchase_timestamp AS DATE)       AS order_date,
+    CAST(o.order_approved_at AS DATE)              AS approved_date,
+    CAST(o.order_delivered_customer_date AS DATE)   AS delivered_date,
+    CAST(o.order_estimated_delivery_date AS DATE)   AS estimated_delivery_date,
+    -- Derived measures tính sẵn trong SQL
+    DATEDIFF(DAY, o.order_purchase_timestamp, o.order_approved_at)
+        AS days_to_approve,
+    DATEDIFF(DAY, o.order_purchase_timestamp, o.order_delivered_customer_date)
+        AS days_to_delivery,
+    CASE
+        WHEN o.order_delivered_customer_date &gt; o.order_estimated_delivery_date THEN 1
+        WHEN o.order_delivered_customer_date IS NULL THEN NULL
+        ELSE 0
+    END AS is_delayed
+FROM staging.stg_orders o;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[order_id]"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_id]"
+                      name="order_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[seller_id]"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_id]"
+                      name="seller_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[order_status]"
+                      length="30"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_status]"
+                      name="order_status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[order_date]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_date]"
+                      name="order_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[approved_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[approved_date]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[approved_date]"
+                      name="approved_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[delivered_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[delivered_date]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[delivered_date]"
+                      name="delivered_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[estimated_delivery_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[estimated_delivery_date]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[estimated_delivery_date]"
+                      name="estimated_delivery_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[days_to_approve]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[days_to_approve]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[days_to_approve]"
+                      name="days_to_approve"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[days_to_delivery]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[days_to_delivery]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[days_to_delivery]"
+                      name="days_to_delivery"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_delayed]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_delayed]"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_delayed]"
+                      name="is_delayed"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[order_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="order_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[seller_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="seller_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[order_status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="order_status" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[order_date]"
+                      dataType="dbDate"
+                      name="order_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[approved_date]"
+                      dataType="dbDate"
+                      name="approved_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[delivered_date]"
+                      dataType="dbDate"
+                      name="delivered_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[estimated_delivery_date]"
+                      dataType="dbDate"
+                      name="estimated_delivery_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[days_to_approve]"
+                      dataType="i4"
+                      name="days_to_approve" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[days_to_delivery]"
+                      dataType="i4"
+                      name="days_to_delivery" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[is_delayed]"
+                      dataType="i4"
+                      name="is_delayed" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[order_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[order_id]"
+                      name="order_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[seller_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[seller_id]"
+                      name="seller_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[order_status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[order_status]"
+                      name="order_status" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[order_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[order_date]"
+                      name="order_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[approved_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[approved_date]"
+                      name="approved_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[delivered_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[delivered_date]"
+                      name="delivered_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[estimated_delivery_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[estimated_delivery_date]"
+                      name="estimated_delivery_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[days_to_approve]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[days_to_approve]"
+                      name="days_to_approve" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[days_to_delivery]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[days_to_delivery]"
+                      name="days_to_delivery" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_delayed]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[is_delayed]"
+                      name="is_delayed" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="seller lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT seller_key, seller_id
+FROM gold.dim_seller
+WHERE is_current = 1;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT seller_key, seller_id
+FROM gold.dim_seller
+WHERE is_current = 1;) [refTable]
+where [refTable].[seller_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="seller_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="seller_id" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[seller_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Inputs[Lookup Input].Columns[seller_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="seller_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[seller_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">seller_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Match Output].Columns[lkp_seller_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Match Output].Columns[lkp_seller_key]"
+                      name="lkp_seller_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">seller_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[order_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[customer_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="customer_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[customer_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[seller_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="seller_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[seller_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[order_status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="order_status"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_status]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_status]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[order_date]"
+                      cachedDataType="dbDate"
+                      cachedName="order_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[approved_date]"
+                      cachedDataType="dbDate"
+                      cachedName="approved_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[approved_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[approved_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[delivered_date]"
+                      cachedDataType="dbDate"
+                      cachedName="delivered_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[delivered_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[delivered_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[estimated_delivery_date]"
+                      cachedDataType="dbDate"
+                      cachedName="estimated_delivery_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[estimated_delivery_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[estimated_delivery_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[days_to_approve]"
+                      cachedDataType="i4"
+                      cachedName="days_to_approve"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[days_to_approve]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_approve]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[days_to_delivery]"
+                      cachedDataType="i4"
+                      cachedName="days_to_delivery"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[days_to_delivery]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_delivery]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[is_delayed]"
+                      cachedDataType="i4"
+                      cachedName="is_delayed"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_delayed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[is_delayed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1].Columns[lkp_customer_key]"
+                      cachedDataType="i4"
+                      cachedName="lkp_customer_key"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Match Output].Columns[lkp_customer_key]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[lkp_customer_key]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[order_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[customer_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="customer_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[customer_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[customer_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[seller_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="seller_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[seller_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[order_status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="order_status"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_status]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_status]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[order_date]"
+                      cachedDataType="dbDate"
+                      cachedName="order_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[order_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[approved_date]"
+                      cachedDataType="dbDate"
+                      cachedName="approved_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[approved_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[approved_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[delivered_date]"
+                      cachedDataType="dbDate"
+                      cachedName="delivered_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[delivered_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[delivered_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[estimated_delivery_date]"
+                      cachedDataType="dbDate"
+                      cachedName="estimated_delivery_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[estimated_delivery_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[estimated_delivery_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[days_to_approve]"
+                      cachedDataType="i4"
+                      cachedName="days_to_approve"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[days_to_approve]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_approve]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[days_to_delivery]"
+                      cachedDataType="i4"
+                      cachedName="days_to_delivery"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[days_to_delivery]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_delivery]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[is_delayed]"
+                      cachedDataType="i4"
+                      cachedName="is_delayed"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output].Columns[is_delayed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[is_delayed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2].Columns[lkp_customer_key]"
+                      cachedDataType="i4"
+                      cachedName="lkp_customer_key"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Output].Columns[lkp_customer_key]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[lkp_customer_key]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_id]"
+                      name="order_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[seller_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[seller_id]"
+                      name="seller_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_status]"
+                      name="order_status" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_date]"
+                      name="order_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[approved_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[approved_date]"
+                      name="approved_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[delivered_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[delivered_date]"
+                      name="delivered_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[estimated_delivery_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[estimated_delivery_date]"
+                      name="estimated_delivery_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_approve]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_approve]"
+                      name="days_to_approve" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_delivery]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_delivery]"
+                      name="days_to_delivery" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[is_delayed]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[is_delayed]"
+                      name="is_delayed" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[lkp_customer_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[lkp_customer_key]"
+                      name="lkp_customer_key" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All 1"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[order_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[customer_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="customer_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[customer_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[customer_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[seller_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="seller_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[seller_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[seller_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[order_status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="order_status"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_status]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_status]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[order_date]"
+                      cachedDataType="dbDate"
+                      cachedName="order_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[approved_date]"
+                      cachedDataType="dbDate"
+                      cachedName="approved_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[approved_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[approved_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[delivered_date]"
+                      cachedDataType="dbDate"
+                      cachedName="delivered_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[delivered_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[delivered_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[estimated_delivery_date]"
+                      cachedDataType="dbDate"
+                      cachedName="estimated_delivery_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[estimated_delivery_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[estimated_delivery_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[days_to_approve]"
+                      cachedDataType="i4"
+                      cachedName="days_to_approve"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_approve]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_approve]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[days_to_delivery]"
+                      cachedDataType="i4"
+                      cachedName="days_to_delivery"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_delivery]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_delivery]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[is_delayed]"
+                      cachedDataType="i4"
+                      cachedName="is_delayed"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[is_delayed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[is_delayed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[lkp_customer_key]"
+                      cachedDataType="i4"
+                      cachedName="lkp_customer_key"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[lkp_customer_key]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_customer_key]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1].Columns[lkp_seller_key]"
+                      cachedDataType="i4"
+                      cachedName="lkp_seller_key"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Match Output].Columns[lkp_seller_key]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_seller_key]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[order_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="order_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[customer_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="customer_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[customer_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[customer_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[seller_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="seller_id"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[seller_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[seller_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[order_status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="order_status"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_status]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_status]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[order_date]"
+                      cachedDataType="dbDate"
+                      cachedName="order_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[order_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[approved_date]"
+                      cachedDataType="dbDate"
+                      cachedName="approved_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[approved_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[approved_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[delivered_date]"
+                      cachedDataType="dbDate"
+                      cachedName="delivered_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[delivered_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[delivered_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[estimated_delivery_date]"
+                      cachedDataType="dbDate"
+                      cachedName="estimated_delivery_date"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[estimated_delivery_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[estimated_delivery_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[days_to_approve]"
+                      cachedDataType="i4"
+                      cachedName="days_to_approve"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_approve]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_approve]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[days_to_delivery]"
+                      cachedDataType="i4"
+                      cachedName="days_to_delivery"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[days_to_delivery]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_delivery]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[is_delayed]"
+                      cachedDataType="i4"
+                      cachedName="is_delayed"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[is_delayed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[is_delayed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[lkp_customer_key]"
+                      cachedDataType="i4"
+                      cachedName="lkp_customer_key"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1].Columns[lkp_customer_key]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_customer_key]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2].Columns[lkp_seller_key]"
+                      cachedDataType="i4"
+                      cachedName="lkp_seller_key"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Output].Columns[lkp_seller_key]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_seller_key]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_id]"
+                      name="order_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[customer_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[seller_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[seller_id]"
+                      name="seller_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_status]"
+                      name="order_status" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[order_date]"
+                      name="order_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[approved_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[approved_date]"
+                      name="approved_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[delivered_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[delivered_date]"
+                      name="delivered_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[estimated_delivery_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[estimated_delivery_date]"
+                      name="estimated_delivery_date" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_approve]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_approve]"
+                      name="days_to_approve" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_delivery]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[days_to_delivery]"
+                      name="days_to_delivery" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[is_delayed]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[is_delayed]"
+                      name="is_delayed" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_customer_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_customer_key]"
+                      name="lkp_customer_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_seller_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1].Columns[lkp_seller_key]"
+                      name="lkp_seller_key" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Derived Column Output]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 2]"
+              name="Derived Column Output"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Derived Column Output1]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 2]"
+              name="Derived Column Output"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Is_Updated]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Is_Updated"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Outputs[Is_Updated]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup Match Output]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Inputs[Union All Input 1]"
+              name="Lookup Match Output"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup Match Output1]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Inputs[Union All Input 1]"
+              name="Lookup Match Output"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup Match Output2]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup No Match Output]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup No Match Output1]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup No Match Output2]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[OLE DB Source Output]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Union All Output 1]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup.Inputs[Lookup Input]"
+              name="Union All Output 1"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Union All Output 11]"
+              endId="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle.Inputs[Lookup Input]"
+              name="Union All Output 1"
+              startId="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="275,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)"
+          TopLeft="387.5,118.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_order_lifecycle (Upsert)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source"
+          TopLeft="466,10" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome"
+          TopLeft="448.5,86.5" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[OLE DB Source Output]"
+          TopLeft="542.25,52">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.5"
+              Start="0,0"
+              End="0,27">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="158,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column"
+          TopLeft="733,85" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup No Match Output]"
+          TopLeft="631.5,106.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="101.5,0"
+              Start="0,0"
+              End="94,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="94,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8.80638671875,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="123,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All"
+          TopLeft="599,170" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup Match Output]"
+          TopLeft="540,128.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="101.333333333333,41.5"
+              Start="0,0"
+              End="101.333333333333,34">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5802568218298" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5802568218298"
+                    Point2="0,24.5802568218298"
+                    Point3="4,24.5802568218298" />
+                  <mssgle:LineSegment
+                    End="97.3333333333334,24.5802568218298" />
+                  <mssgle:CubicBezierSegment
+                    Point1="97.3333333333334,24.5802568218298"
+                    Point2="101.333333333333,24.5802568218298"
+                    Point3="101.333333333333,28.5802568218298" />
+                  <mssgle:LineSegment
+                    End="101.333333333333,34" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="2.47527994791668,29.5802568218298,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Derived Column Output]"
+          TopLeft="812,127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-132.333333333333,43"
+              Start="0,0"
+              End="-132.333333333333,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.4686998394863" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.4686998394863"
+                    Point2="0,25.4686998394863"
+                    Point3="-4,25.4686998394863" />
+                  <mssgle:LineSegment
+                    End="-128.333333333333,25.4686998394863" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-128.333333333333,25.4686998394863"
+                    Point2="-132.333333333333,25.4686998394863"
+                    Point3="-132.333333333333,29.4686998394863" />
+                  <mssgle:LineSegment
+                    End="-132.333333333333,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="141,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup"
+          TopLeft="474,241" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Union All Output 1]"
+          TopLeft="660.5,212">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-116,29"
+              Start="0,0"
+              End="-116,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5"
+                    Point2="0,14.5"
+                    Point3="-4,14.5" />
+                  <mssgle:LineSegment
+                    End="-112,14.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-112,14.5"
+                    Point2="-116,14.5"
+                    Point3="-116,18.5" />
+                  <mssgle:LineSegment
+                    End="-116,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="167,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\Derived Column 1"
+          TopLeft="732,237" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup No Match Output1]"
+          TopLeft="615,260">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="117,0"
+              Start="0,0"
+              End="109.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="109.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-1.05638671875,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="132,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\Union All 1"
+          TopLeft="604,306" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup Match Output1]"
+          TopLeft="544.5,283">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="104.833333333333,23"
+              Start="0,0"
+              End="104.833333333333,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.63473053892215" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.63473053892215"
+                    Point2="0,13.6347305389222"
+                    Point3="4,13.6347305389222" />
+                  <mssgle:LineSegment
+                    End="100.833333333333,13.6347305389222" />
+                  <mssgle:CubicBezierSegment
+                    Point1="100.833333333333,13.6347305389222"
+                    Point2="104.833333333333,13.6347305389222"
+                    Point3="104.833333333333,17.6347305389221" />
+                  <mssgle:LineSegment
+                    End="104.833333333333,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="4.22527994791668,18.6347305389221,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Derived Column Output1]"
+          TopLeft="815.5,279">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-124.833333333333,27"
+              Start="0,0"
+              End="-124.833333333333,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.0059880239521" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.0059880239521"
+                    Point2="0,16.0059880239521"
+                    Point3="-4,16.0059880239521" />
+                  <mssgle:LineSegment
+                    End="-120.833333333333,16.0059880239521" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-120.833333333333,16.0059880239521"
+                    Point2="-124.833333333333,16.0059880239521"
+                    Point3="-124.833333333333,20.0059880239521" />
+                  <mssgle:LineSegment
+                    End="-124.833333333333,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="213,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle"
+          TopLeft="571,381" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Union All Output 11]"
+          TopLeft="673.75,348">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33"
+              Start="0,0"
+              End="0,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="177,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination"
+          TopLeft="474,474" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup No Match Output2]"
+          TopLeft="677.5,423">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-115,51"
+              Start="0,0"
+              End="-115,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.5"
+                    Point2="0,25.5"
+                    Point3="-4,25.5" />
+                  <mssgle:LineSegment
+                    End="-111,25.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-111,25.5"
+                    Point2="-115,25.5"
+                    Point3="-115,29.5" />
+                  <mssgle:LineSegment
+                    End="-115,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-113.30638671875,30.5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="159,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\Conditional Split"
+          TopLeft="736,475" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Lookup Match Output2]"
+          TopLeft="711.666666666667,423">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="103.833333333333,52"
+              Start="0,0"
+              End="103.833333333333,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.0326188257223" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.0326188257223"
+                    Point2="0,21.0326188257223"
+                    Point3="4,21.0326188257223" />
+                  <mssgle:LineSegment
+                    End="99.8333333333334,21.0326188257223" />
+                  <mssgle:CubicBezierSegment
+                    Point1="99.8333333333334,21.0326188257223"
+                    Point2="103.833333333333,21.0326188257223"
+                    Point3="103.833333333333,25.0326188257223" />
+                  <mssgle:LineSegment
+                    End="103.833333333333,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="3.72527994791668,26.0326188257223,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="173,42"
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Command"
+          TopLeft="732,554" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_order_lifecycle (Upsert).Paths[Is_Updated]"
+          TopLeft="817,517">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-25.76458984375,8.9453125,51.5291796875,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup dim_custome">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_order_lifecycle (Upsert)\seller lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_order_lifecycle (Upsert)\Lookup fact_order_lifecycle">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_order_lifecycle (Upsert)\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

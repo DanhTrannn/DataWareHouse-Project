@@ -1,0 +1,334 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/15/2026 10:45:14 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-GTRVT9Q"
+  DTS:CreatorName="DESKTOP-GTRVT9Q\danhtran"
+  DTS:DTSID="{15EE6911-ABA7-44CC-87A3-04759DC4C615}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{32AB6E71-F725-4CD3-AB9E-4200FF4F6A6F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT - Load fact_delivery"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{52D9A175-BF31-4D40-9086-85A6ABC1FA57}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT - Load fact_delivery"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Load fact_delivery\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    fo.seller_key,
+    CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01') AS date_key,
+    COUNT(DISTINCT fo.order_id) AS total_orders_delivered,
+    SUM(CASE WHEN fl.is_delayed = 0 THEN 1 ELSE 0 END) AS on_time_orders,
+    CAST(
+        SUM(CASE WHEN fl.is_delayed = 0 THEN 1.0 ELSE 0.0 END)
+        / NULLIF(COUNT(DISTINCT fo.order_id), 0)
+    AS DECIMAL(5,4)) AS on_time_rate
+FROM gold.fact_orders fo
+INNER JOIN gold.dim_date dd
+    ON fo.order_date_key = dd.date_key
+INNER JOIN gold.fact_order_lifecycle fl
+    ON fo.order_id = fl.order_id
+WHERE fo.seller_key IS NOT NULL
+  AND fl.order_status = 'delivered'
+GROUP BY
+    fo.seller_key,
+    CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01');</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load fact_delivery\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[seller_key]"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_key]"
+                      name="seller_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[date_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[date_key]"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[date_key]"
+                      name="date_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_delivered]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_delivered]"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[total_orders_delivered]"
+                      name="total_orders_delivered"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[on_time_orders]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[on_time_orders]"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[on_time_orders]"
+                      name="on_time_orders"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[on_time_rate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[on_time_rate]"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].Columns[on_time_rate]"
+                      name="on_time_rate"
+                      precision="5"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[seller_key]"
+                      dataType="i4"
+                      name="seller_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[date_key]"
+                      dataType="i4"
+                      name="date_key" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[total_orders_delivered]"
+                      dataType="i4"
+                      name="total_orders_delivered" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[on_time_orders]"
+                      dataType="i4"
+                      name="on_time_orders" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[on_time_rate]"
+                      dataType="numeric"
+                      name="on_time_rate"
+                      precision="5"
+                      scale="4" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[seller_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[seller_key]"
+                      name="seller_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[date_key]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[date_key]"
+                      name="date_key" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_delivered]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[total_orders_delivered]"
+                      name="total_orders_delivered" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[on_time_orders]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[on_time_orders]"
+                      name="on_time_orders" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[on_time_rate]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[on_time_rate]"
+                      name="on_time_rate"
+                      precision="5"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load fact_delivery\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EST - Truncate Delivery"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E8C258DC-5315-4A01-AA74-F79C60A9B559}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EST - Truncate Delivery"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE gold.fact_delivery;&#xA;TRUNCATE TABLE gold.fact_delivery_year;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7F8A5EB1-33F7-4662-A52D-EFAD1E7DD4B4}"
+      DTS:From="Package\EST - Truncate Delivery"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT - Load fact_delivery" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="196,42"
+          Id="Package\EST - Truncate Delivery"
+          TopLeft="281,61" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\DFT - Load fact_delivery"
+          TopLeft="277,157" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="377.75,103">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT - Load fact_delivery">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\DFT - Load fact_delivery\OLE DB Source"
+          TopLeft="473,46" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_delivery\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

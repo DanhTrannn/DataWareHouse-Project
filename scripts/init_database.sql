@@ -337,7 +337,23 @@ CREATE TABLE gold.fact_delivery_year (
     CONSTRAINT PK_fact_delivery_year PRIMARY KEY (seller_key, year_key)
 );
 GO
+IF OBJECT_ID('gold.fact_payment_trends', 'U') IS NOT NULL
+    DROP TABLE gold.fact_payment_trends;
+GO
 
+CREATE TABLE gold.fact_payment_trends (
+    payment_type        VARCHAR(30)    NOT NULL,
+    date_key            INT            NOT NULL,
+    total_payment_value DECIMAL(14,2)  NOT NULL DEFAULT 0,
+    transaction_count   INT            NOT NULL DEFAULT 0,
+    order_count         INT            NOT NULL DEFAULT 0,
+    CONSTRAINT PK_fact_payment_trends PRIMARY KEY (payment_type, date_key),
+    CONSTRAINT FK_fpt_payment FOREIGN KEY (payment_type)
+        REFERENCES gold.dim_payment_method(payment_type),
+    CONSTRAINT FK_fpt_date FOREIGN KEY (date_key)
+        REFERENCES gold.dim_date(date_key)
+);
+GO
 -- gold.fact_payment_trends_year
 IF OBJECT_ID('gold.fact_payment_trends_year', 'U') IS NOT NULL
     DROP TABLE gold.fact_payment_trends_year;
@@ -352,4 +368,205 @@ CREATE TABLE gold.fact_payment_trends_year (
     CONSTRAINT PK_fact_payment_trends_year PRIMARY KEY (payment_type, year_key)
 );
 GO
+SELECT COUNT(*) AS total_rows FROM gold.dim_seller;
+SELECT is_current, COUNT(*) AS cnt
+FROM gold.dim_seller
+GROUP BY is_current;
 
+SELECT seller_region, COUNT(*) AS cnt
+FROM gold.dim_seller
+GROUP BY seller_region
+ORDER BY cnt DESC;
+
+SELECT COUNT(*) FROM gold.fact_order_lifecycle;
+
+SELECT order_status, COUNT(*) AS cnt
+FROM gold.fact_order_lifecycle
+GROUP BY order_status
+ORDER BY cnt DESC;
+
+SELECT
+    SUM(CASE WHEN is_delayed = 1 THEN 1 ELSE 0 END) AS delayed,
+    SUM(CASE WHEN is_delayed = 0 THEN 1 ELSE 0 END) AS on_time,
+    SUM(CASE WHEN is_delayed IS NULL THEN 1 ELSE 0 END) AS unknown
+FROM gold.fact_order_lifecycle;
+--TV2
+--  staging.stg_products
+IF OBJECT_ID('staging.stg_products', 'U') IS NOT NULL
+    DROP TABLE staging.stg_products;
+GO
+
+CREATE TABLE staging.stg_products (
+    product_id                  VARCHAR(50)    NOT NULL,
+    product_category_name       NVARCHAR(100)  NULL,
+    product_name_lenght         INT            NULL,  -- typo gốc trong dataset Olist
+    product_description_lenght  INT            NULL,  -- typo gốc trong dataset Olist
+    product_photos_qty          INT            NULL,
+    product_weight_g            DECIMAL(10,2)  NULL,
+    product_length_cm           DECIMAL(10,2)  NULL,
+    product_height_cm           DECIMAL(10,2)  NULL,
+    product_width_cm            DECIMAL(10,2)  NULL
+);
+GO
+
+-- staging.stg_category_translation
+IF OBJECT_ID('staging.stg_category_translation', 'U') IS NOT NULL
+    DROP TABLE staging.stg_category_translation;
+GO
+
+CREATE TABLE staging.stg_category_translation (
+    product_category_name         NVARCHAR(100) NOT NULL,
+    product_category_name_english NVARCHAR(100) NOT NULL
+);
+GO
+--  staging.stg_order_items
+IF OBJECT_ID('staging.stg_order_items', 'U') IS NOT NULL
+    DROP TABLE staging.stg_order_items;
+GO
+
+CREATE TABLE staging.stg_order_items (
+    order_id            VARCHAR(50)   NOT NULL,
+    order_item_id       INT           NOT NULL,
+    product_id          VARCHAR(50)   NOT NULL,
+    seller_id           VARCHAR(50)   NOT NULL,
+    shipping_limit_date DATETIME      NULL,
+    price               DECIMAL(10,5) NOT NULL,
+    freight_value       DECIMAL(10,2) NOT NULL
+);
+GO
+
+-- gold.dim_product_category
+IF OBJECT_ID('gold.dim_product_category', 'U') IS NOT NULL
+    DROP TABLE gold.dim_product_category;
+GO
+
+CREATE TABLE gold.dim_product_category (
+    category_key              INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    category_name_portuguese  NVARCHAR(100)     NOT NULL,
+    category_name_english     NVARCHAR(100)     NULL
+);
+GO
+
+-- Unique index để Lookup nhanh hơn
+CREATE UNIQUE INDEX UX_dim_prodcat_name
+    ON gold.dim_product_category(category_name_portuguese);
+GO
+
+--  gold.dim_product
+IF OBJECT_ID('gold.dim_product', 'U') IS NOT NULL
+    DROP TABLE gold.dim_product;
+GO
+
+CREATE TABLE gold.dim_product (
+    product_key                INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    product_id                 VARCHAR(50)        NOT NULL,
+    category_key               INT                NULL,
+    product_name_length        INT                NULL,
+    product_description_length INT                NULL,
+    product_photos_qty         INT                NULL,
+    product_weight_g           DECIMAL(10,2)      NULL,
+    product_length_cm          DECIMAL(10,2)      NULL,
+    product_height_cm          DECIMAL(10,2)      NULL,
+    product_width_cm           DECIMAL(10,2)      NULL,
+    CONSTRAINT FK_dim_product_category FOREIGN KEY (category_key)
+        REFERENCES gold.dim_product_category(category_key)
+);
+GO
+
+CREATE UNIQUE INDEX UX_dim_product_id ON gold.dim_product(product_id);
+GO
+-- gold.dim_payment_method
+IF OBJECT_ID('gold.dim_payment_method', 'U') IS NOT NULL
+    DROP TABLE gold.dim_payment_method;
+GO
+
+CREATE TABLE gold.dim_payment_method (
+    payment_type  VARCHAR(30)   NOT NULL PRIMARY KEY,
+    description   NVARCHAR(100) NULL
+);
+GO
+
+-- gold.fact_orders
+IF OBJECT_ID('gold.fact_orders', 'U') IS NOT NULL
+    DROP TABLE gold.fact_orders;
+GO
+
+CREATE TABLE gold.fact_orders (
+    fact_order_item_id          INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    order_id                    VARCHAR(50)        NOT NULL,
+    order_item_id               INT                NOT NULL,
+    customer_key                INT                NULL,
+    seller_key                  INT                NULL,
+    product_key                 INT                NULL,
+    order_date_key              INT                NULL,
+    approved_date_key           INT                NULL,
+    delivered_date_key          INT                NULL,
+    estimated_delivery_date_key INT                NULL,
+    order_status                VARCHAR(30)        NULL,
+    price                       DECIMAL(10,2)      NOT NULL,
+    freight_value               DECIMAL(10,2)      NOT NULL,
+    quantity                    INT                NOT NULL DEFAULT 1,
+    review_score                INT                NULL,
+    CONSTRAINT FK_fo_customer FOREIGN KEY (customer_key)
+        REFERENCES gold.dim_customer(customer_key),
+    CONSTRAINT FK_fo_seller FOREIGN KEY (seller_key)
+        REFERENCES gold.dim_seller(seller_key),
+    CONSTRAINT FK_fo_product FOREIGN KEY (product_key)
+        REFERENCES gold.dim_product(product_key),
+    CONSTRAINT FK_fo_order_date FOREIGN KEY (order_date_key)
+        REFERENCES gold.dim_date(date_key),
+    CONSTRAINT FK_fo_status FOREIGN KEY (order_status)
+        REFERENCES gold.dim_order_status(order_status)
+);
+GO
+
+-- Index phục vụ Incremental Load (kiểm tra record đã tồn tại)
+CREATE UNIQUE INDEX UX_fact_orders_bk ON gold.fact_orders(order_id, order_item_id);
+GO
+
+-- Indexes cho FK joins (cải thiện performance truy vấn)
+CREATE INDEX IX_fo_customer ON gold.fact_orders(customer_key);
+CREATE INDEX IX_fo_seller   ON gold.fact_orders(seller_key);
+CREATE INDEX IX_fo_product  ON gold.fact_orders(product_key);
+CREATE INDEX IX_fo_date     ON gold.fact_orders(order_date_key);
+GO
+
+-- gold.fact_sales (monthly)
+IF OBJECT_ID('gold.fact_sales', 'U') IS NOT NULL
+    DROP TABLE gold.fact_sales;
+GO
+
+CREATE TABLE gold.fact_sales (
+    seller_key       INT            NOT NULL,
+    category_key     INT            NOT NULL,
+    date_key         INT            NOT NULL,
+    total_revenue    DECIMAL(14,2)  NOT NULL DEFAULT 0,
+    total_items_sold INT            NOT NULL DEFAULT 0,
+    total_orders     INT            NOT NULL DEFAULT 0,
+    avg_review_score DECIMAL(3,2)   NULL,
+    CONSTRAINT PK_fact_sales PRIMARY KEY (seller_key, category_key, date_key),
+    CONSTRAINT FK_fs_seller FOREIGN KEY (seller_key)
+        REFERENCES gold.dim_seller(seller_key),
+    CONSTRAINT FK_fs_category FOREIGN KEY (category_key)
+        REFERENCES gold.dim_product_category(category_key),
+    CONSTRAINT FK_fs_date FOREIGN KEY (date_key)
+        REFERENCES gold.dim_date(date_key)
+);
+GO
+
+-- gold.fact_sales_year
+IF OBJECT_ID('gold.fact_sales_year', 'U') IS NOT NULL
+    DROP TABLE gold.fact_sales_year;
+GO
+
+CREATE TABLE gold.fact_sales_year (
+    seller_key       INT            NOT NULL,
+    category_key     INT            NOT NULL,
+    year_key         INT            NOT NULL,
+    total_revenue    DECIMAL(14,2)  NOT NULL DEFAULT 0,
+    total_items_sold INT            NOT NULL DEFAULT 0,
+    total_orders     INT            NOT NULL DEFAULT 0,
+    avg_review_score DECIMAL(3,2)   NULL,
+    CONSTRAINT PK_fact_sales_year PRIMARY KEY (seller_key, category_key, year_key)
+);
+GO

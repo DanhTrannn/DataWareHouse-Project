@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Load_Dim_Product"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{C351FF4A-1C85-4DDF-937F-D68BD44D1A42}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{DEC6A229-EC1E-4D9B-8875-18E582496FC7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=LAPTOP-NS3FCL96\DWHSQLSERVER;Initial Catalog=OlistDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Extract_Product_Items-{1CBE51DA-EA16-436A-8720-BC11449B95F1}LAPTOP-NS3FCL96\DWHSQLSERVER.OlistDW;Trust Server Certificate=True;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Extract_Product_Items-{1CBE51DA-EA16-436A-8720-BC11449B95F1}LAPTOP-NS3FCL96\DWHSQLSERVER.OlistDW;Trust Server Certificate=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -2564,13 +2564,17 @@ WHERE category_key = ?;</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="256.8,41.6"
-          Id="Package\EST - Populate dim_payment_method"
-          TopLeft="213.571429026066,71.1176469964862" />
+          Size="193,42"
+          Id="Package\DFT - Load dim_product"
+          TopLeft="240.714286226703,255.411764482004" />
         <NodeLayout
-          Size="239.2,41.6"
+          Size="239,42"
           Id="Package\DFT - Load dim_product_category"
           TopLeft="217.857143320903,155.235293981577" />
+        <NodeLayout
+          Size="257,42"
+          Id="Package\EST - Populate dim_payment_method"
+          TopLeft="213.571429026066,71.1176469964862" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="339.714286173485,112.717646996486">
@@ -2593,10 +2597,6 @@ WHERE category_key = ?;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="192.8,41.6"
-          Id="Package\DFT - Load dim_product"
-          TopLeft="240.714286226703,255.411764482004" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="337.285714773803,196.835293981577">
@@ -2622,201 +2622,6 @@ WHERE category_key = ?;</property>
       </GraphLayout>
     </LayoutInfo>
   </Package>
-  <TaskHost
-    design-time-name="Package\DFT - Load dim_product_category">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="194.4,41.6"
-          Id="Package\DFT - Load dim_product_category\stg_category_translation"
-          TopLeft="295.000000627977,45.8823529009588" />
-        <NodeLayout
-          Size="220.8,41.6"
-          Id="Package\DFT - Load dim_product_category\Lookup dim_product_category"
-          TopLeft="284.285714890884,129.99999988605" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_product_category.Paths[OLE DB Source Output]"
-          TopLeft="393.442857759431,87.4823529009588">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,42.5176469850912"
-              Start="0,0"
-              End="0,35.0176469850912">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35.0176469850912" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="223.2,41.6"
-          Id="Package\DFT - Load dim_product_category\INSERT dim_product_category"
-          TopLeft="485.000001032438,212.588235107776" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_product_category.Paths[Lookup No Match Output]"
-          TopLeft="394.685714890884,171.59999988605">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="201.914286141554,40.9882352217258"
-              Start="0,0"
-              End="201.914286141554,33.4882352217258">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.4941176108629" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.4941176108629"
-                    Point2="0,20.4941176108629"
-                    Point3="4,20.4941176108629" />
-                  <mssgle:LineSegment
-                    End="197.914286141554,20.4941176108629" />
-                  <mssgle:CubicBezierSegment
-                    Point1="197.914286141554,20.4941176108629"
-                    Point2="201.914286141554,20.4941176108629"
-                    Point3="201.914286141554,24.4941176108629" />
-                  <mssgle:LineSegment
-                    End="201.914286141554,33.4882352217258" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="45.1507563520269,25.4941176108629,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\DFT - Load dim_product_category\Conditional Split"
-          TopLeft="100.71428592868,214.211764550374" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_product_category.Paths[Lookup Match Output]"
-          TopLeft="359.219048224217,171.59999988605">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-181.304762295537,42.6117646643241"
-              Start="0,0"
-              End="-181.304762295537,35.1117646643241">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,13.2286415405397" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,13.2286415405397"
-                    Point2="0,17.2286415405397"
-                    Point3="-4,17.2286415405397" />
-                  <mssgle:LineSegment
-                    End="-177.304762295537,17.2286415405397" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-177.304762295537,17.2286415405397"
-                    Point2="-181.304762295537,17.2286415405397"
-                    Point3="-181.304762295537,21.2286415405397" />
-                  <mssgle:LineSegment
-                    End="-181.304762295537,35.1117646643241" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-138.843767866519,22.2286415405397,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="225.6,41.6"
-          Id="Package\DFT - Load dim_product_category\UPDATE dim_product_category"
-          TopLeft="61.4285715593367,282.411764493399" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_product_category.Paths[Is_Changed]"
-          TopLeft="176.071428744008,255.811764550374">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,26.5999999430249"
-              Start="0,0"
-              End="0,19.0999999430249">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.0999999430249" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-26.63458984375,3.71845700276246,53.2691796875,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_product_category\stg_category_translation">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_product_category\Lookup dim_product_category">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[gold].[dim_product_category]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_product_category\INSERT dim_product_category">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\DFT - Load dim_product">
     <LayoutInfo>
@@ -3076,52 +2881,6 @@ WHERE category_key = ?;</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_product\Lookup dim_product_category">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_product\Lookup dim_product">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[gold].[dim_product]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT - Load dim_product\OLE DB Destination">
     <Properties>
       <Property>
@@ -3131,6 +2890,247 @@ WHERE category_key = ?;</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load dim_product\Lookup dim_product">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[gold].[dim_product]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load dim_product\Lookup dim_product_category">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT - Load dim_product_category">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="194.4,41.6"
+          Id="Package\DFT - Load dim_product_category\stg_category_translation"
+          TopLeft="295.000000627977,45.8823529009588" />
+        <NodeLayout
+          Size="220.8,41.6"
+          Id="Package\DFT - Load dim_product_category\Lookup dim_product_category"
+          TopLeft="284.285714890884,129.99999988605" />
+        <EdgeLayout
+          Id="Package\DFT - Load dim_product_category.Paths[OLE DB Source Output]"
+          TopLeft="393.442857759431,87.4823529009588">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.5176469850912"
+              Start="0,0"
+              End="0,35.0176469850912">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.0176469850912" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="223.2,41.6"
+          Id="Package\DFT - Load dim_product_category\INSERT dim_product_category"
+          TopLeft="485.000001032438,212.588235107776" />
+        <EdgeLayout
+          Id="Package\DFT - Load dim_product_category.Paths[Lookup No Match Output]"
+          TopLeft="394.685714890884,171.59999988605">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="201.914286141554,40.9882352217258"
+              Start="0,0"
+              End="201.914286141554,33.4882352217258">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4941176108629" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4941176108629"
+                    Point2="0,20.4941176108629"
+                    Point3="4,20.4941176108629" />
+                  <mssgle:LineSegment
+                    End="197.914286141554,20.4941176108629" />
+                  <mssgle:CubicBezierSegment
+                    Point1="197.914286141554,20.4941176108629"
+                    Point2="201.914286141554,20.4941176108629"
+                    Point3="201.914286141554,24.4941176108629" />
+                  <mssgle:LineSegment
+                    End="201.914286141554,33.4882352217258" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="45.1507563520269,25.4941176108629,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\DFT - Load dim_product_category\Conditional Split"
+          TopLeft="100.71428592868,214.211764550374" />
+        <EdgeLayout
+          Id="Package\DFT - Load dim_product_category.Paths[Lookup Match Output]"
+          TopLeft="359.219048224217,171.59999988605">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-181.304762295537,42.6117646643241"
+              Start="0,0"
+              End="-181.304762295537,35.1117646643241">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.2286415405397" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.2286415405397"
+                    Point2="0,17.2286415405397"
+                    Point3="-4,17.2286415405397" />
+                  <mssgle:LineSegment
+                    End="-177.304762295537,17.2286415405397" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-177.304762295537,17.2286415405397"
+                    Point2="-181.304762295537,17.2286415405397"
+                    Point3="-181.304762295537,21.2286415405397" />
+                  <mssgle:LineSegment
+                    End="-181.304762295537,35.1117646643241" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-138.843767866519,22.2286415405397,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\DFT - Load dim_product_category\UPDATE dim_product_category"
+          TopLeft="61.4285715593367,282.411764493399" />
+        <EdgeLayout
+          Id="Package\DFT - Load dim_product_category.Paths[Is_Changed]"
+          TopLeft="176.071428744008,255.811764550374">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.5999999430249"
+              Start="0,0"
+              End="0,19.0999999430249">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.0999999430249" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.63458984375,3.71845700276246,53.2691796875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load dim_product_category\stg_category_translation">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load dim_product_category\INSERT dim_product_category">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load dim_product_category\Lookup dim_product_category">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[gold].[dim_product_category]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

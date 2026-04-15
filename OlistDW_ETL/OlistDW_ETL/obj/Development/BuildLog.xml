@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>OlistDW_ETL</Name>
-    <LastWriteTime>2026-04-15T05:19:48.8587687Z</LastWriteTime>
+    <LastWriteTime>2026-04-15T17:47:03.5945809Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -13,7 +13,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Dim_Date_Geo_Customer.dtsx</Name>
-      <LastWriteTime>2026-04-15T06:13:26.8576011Z</LastWriteTime>
+      <LastWriteTime>2026-04-15T07:02:59.7103968Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -28,22 +28,22 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Extract_Seller_Order_Payment.dtsx</Name>
-      <LastWriteTime>2026-04-15T03:35:10.961094Z</LastWriteTime>
+      <LastWriteTime>2026-04-15T17:30:11.5964462Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Dim_Seller.dtsx</Name>
-      <LastWriteTime>2026-04-15T03:35:11.0456897Z</LastWriteTime>
+      <LastWriteTime>2026-04-15T16:49:33.5668038Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Extract_Product_Items.dtsx</Name>
-      <LastWriteTime>2026-04-15T03:35:10.9348306Z</LastWriteTime>
+      <LastWriteTime>2026-04-15T17:30:11.560447Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Dim_Product.dtsx</Name>
-      <LastWriteTime>2026-04-15T03:35:11.0181886Z</LastWriteTime>
+      <LastWriteTime>2026-04-15T07:05:04.3303993Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -54,6 +54,16 @@
     <ProjectBuildItemInfo>
       <Name>Load_Fact_Sales.dtsx</Name>
       <LastWriteTime>2026-04-15T03:35:11.1280333Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>Load_Fact_Lifecycle.dtsx</Name>
+      <LastWriteTime>2026-04-15T17:44:56.1335697Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>Load_Fact_Delivery_Payment.dtsx</Name>
+      <LastWriteTime>2026-04-15T17:47:03.5455726Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
