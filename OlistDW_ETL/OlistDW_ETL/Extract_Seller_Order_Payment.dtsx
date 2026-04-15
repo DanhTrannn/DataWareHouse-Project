@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Extract_Seller_Order_Payment"
   DTS:PackageType="5"
-  DTS:VersionBuild="28"
-  DTS:VersionGUID="{D2571E57-0A1E-4611-956E-29EA79B712FC}">
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{605E5044-4596-48AE-BF62-EAD14DF53F6D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -196,7 +196,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_id&quot;"
-              DTS:DTSID="{B6B184B3-6732-4B9E-ABE1-990BDEC2540C}"
+              DTS:DTSID="{3923B8B7-B92D-4280-A2DF-E90D8A229D69}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -205,7 +205,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_zip_code_prefix&quot;"
-              DTS:DTSID="{1169EDEC-F69A-4215-80C0-A4BB4A56B8BE}"
+              DTS:DTSID="{7D4CB148-5D90-409C-899F-97C56752E4B6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -214,7 +214,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_city&quot;"
-              DTS:DTSID="{0808E6E4-587D-45F2-964C-9B3960529DBC}"
+              DTS:DTSID="{0246B323-BA88-4B75-A194-FD2C81A86D3E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -223,7 +223,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_state&quot;"
-              DTS:DTSID="{E99E09C7-0C20-43CC-BCBE-A8481DCB03BB}"
+              DTS:DTSID="{4F7F8713-74BF-46A2-86DF-E903EC988C17}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -238,7 +238,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=LAPTOP-NS3FCL96\DWHSQLSERVER;Initial Catalog=OlistDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Application Name=SSIS-Extract_Seller_Order_Payment-{86A1F01D-F9B5-4324-BE4A-F13CB3A869EF}OlistDW_OLEDB;Trust Server Certificate=True;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Application Name=SSIS-Extract_Seller_Order_Payment-{86A1F01D-F9B5-4324-BE4A-F13CB3A869EF}OlistDW_OLEDB;Trust Server Certificate=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -2141,19 +2141,19 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="140,41.6"
+          Size="140,42"
           Id="Package\Load Orders"
           TopLeft="545,220" />
         <NodeLayout
-          Size="155.2,41.6"
+          Size="155,42"
           Id="Package\Load Payments"
           TopLeft="765.5,225.5" />
         <NodeLayout
-          Size="140,41.6"
+          Size="140,42"
           Id="Package\Load Sellers"
           TopLeft="309,220" />
         <NodeLayout
-          Size="199.2,41.6"
+          Size="199,42"
           Id="Package\Truncate Staging Tables"
           TopLeft="491,90" />
         <EdgeLayout
@@ -2255,13 +2255,17 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="156,42"
-          Id="Package\Load Orders\Flat File Source"
-          TopLeft="521.5,85.5" />
+          Size="177,42"
+          Id="Package\Load Orders\OLE DB Destination"
+          TopLeft="505,302" />
         <NodeLayout
           Size="158,42"
           Id="Package\Load Orders\Derived Column"
           TopLeft="513,195" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Load Orders\Flat File Source"
+          TopLeft="521.5,85.5" />
         <EdgeLayout
           Id="Package\Load Orders.Paths[Flat File Source Output]"
           TopLeft="595.75,127.5">
@@ -2284,10 +2288,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Load Orders\OLE DB Destination"
-          TopLeft="505,302" />
         <EdgeLayout
           Id="Package\Load Orders.Paths[Derived Column Output]"
           TopLeft="592.75,237">
@@ -2330,15 +2330,19 @@
     design-time-name="Package\Load Payments">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="156,42"
-          Id="Package\Load Payments\Flat File Source"
-          TopLeft="533,114" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="161,42"
           Id="Package\Load Payments\Data Conversion"
           TopLeft="528,223" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Load Payments\OLE DB Destination"
+          TopLeft="516,344" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Load Payments\Flat File Source"
+          TopLeft="533,114" />
         <EdgeLayout
           Id="Package\Load Payments.Paths[Flat File Source Output]"
           TopLeft="609.75,156">
@@ -2358,13 +2362,11 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Load Payments\OLE DB Destination"
-          TopLeft="516,344" />
         <EdgeLayout
           Id="Package\Load Payments.Paths[Data Conversion Output]"
           TopLeft="606.5,265">
@@ -2384,7 +2386,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2409,15 +2413,15 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="156,41.6"
+          Size="156,42"
           Id="Package\Load Sellers\Flat File Source"
           TopLeft="534,97" />
         <NodeLayout
-          Size="160.8,41.6"
+          Size="161,42"
           Id="Package\Load Sellers\Data Conversion"
           TopLeft="534,210" />
         <NodeLayout
-          Size="176.8,41.6"
+          Size="177,42"
           Id="Package\Load Sellers\OLE DB Destination"
           TopLeft="533,318" />
         <EdgeLayout
