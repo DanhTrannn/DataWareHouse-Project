@@ -11,24 +11,10 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{B07E306C-8B52-4829-9380-5C4EC0ADD91C}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{E946FE16-3D65-4FD9-A72B-C4C45E00766A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[OlistDW_OLEDB]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{96F7B4F7-1147-44C0-AC09-BAECD7543A7A}"
-      DTS:ObjectName="OlistDW_OLEDB">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{96F7B4F7-1147-44C0-AC09-BAECD7543A7A}localhost.OlistDW;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -96,8 +82,8 @@
               <connections>
                 <connection
                   refId="Package\Load fact_customer_orders\OLE DB Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -322,11 +308,11 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="207,42"
+          Size="207.2,41.6"
           Id="Package\Load fact_customer_orders"
           TopLeft="398,234" />
         <NodeLayout
-          Size="261,42"
+          Size="260.8,41.6"
           Id="Package\Truncate fact_customer_orders"
           TopLeft="371,137" />
         <EdgeLayout
@@ -360,7 +346,7 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="150,42"
+          Size="150.4,41.6"
           Id="Package\Load fact_customer_orders\OLE DB Source"
           TopLeft="388,111" />
       </GraphLayout>

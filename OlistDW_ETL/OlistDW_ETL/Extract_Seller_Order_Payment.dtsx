@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Extract_Seller_Order_Payment"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{605E5044-4596-48AE-BF62-EAD14DF53F6D}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{DD49C8FC-4DA8-4475-B3A7-007C365E118E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -39,7 +39,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_id&quot;"
-              DTS:DTSID="{7F0F0C3E-D8FD-41AE-9BB2-B6E9123FB66A}"
+              DTS:DTSID="{2F75F81A-864D-43BF-A5EC-9F8CE6C05196}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;customer_id&quot;"
-              DTS:DTSID="{5D7F4D49-0444-4325-852A-4089E0DF7E89}"
+              DTS:DTSID="{6FE14799-DE52-46B4-AB98-7AB57D35F0F6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_status&quot;"
-              DTS:DTSID="{0D9C7D68-422C-4399-ADA3-AAD333D3AD4B}"
+              DTS:DTSID="{3EFCA094-11FF-41A9-A73B-01A386E42DFA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -66,7 +66,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_purchase_timestamp&quot;"
-              DTS:DTSID="{18F1EB6A-544A-48E3-8AAB-CA2C48F87956}"
+              DTS:DTSID="{C44021B0-EC89-4125-B5EC-35B603DDC0DA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -75,7 +75,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_approved_at&quot;"
-              DTS:DTSID="{F5AAC5CC-A492-4156-BFE0-243665650472}"
+              DTS:DTSID="{AC1DC62F-340C-4A3F-BE1A-0974ABE0D84E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -84,7 +84,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_delivered_carrier_date&quot;"
-              DTS:DTSID="{6D9E7B83-910E-40C3-B4B3-0F9938C07F5A}"
+              DTS:DTSID="{6B67BE8C-77D0-4A7F-BCB4-3DA68A00A820}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -93,16 +93,16 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_delivered_customer_date&quot;"
-              DTS:DTSID="{DD1E3023-77A2-425A-BBFB-9BF19BA069F1}"
+              DTS:DTSID="{7E177641-8310-44D7-B1A6-A70ED4F7941B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000A_"
+              DTS:ColumnDelimiter="_x000D__x000A_"
               DTS:MaximumWidth="100"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_estimated_delivery_date&quot;"
-              DTS:DTSID="{1562CA95-985F-4C49-AFE3-BDE3B9ABEA6C}"
+              DTS:DTSID="{CFC06AEF-AD4A-4F89-B0F7-0F9A3D008F42}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -131,7 +131,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_id&quot;"
-              DTS:DTSID="{9C0D9994-5F7C-4F4C-AB54-1A48FBF4539F}"
+              DTS:DTSID="{8F685922-8A89-45F4-8E5F-FC1622D09F7F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -140,7 +140,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;payment_sequential&quot;"
-              DTS:DTSID="{7D1B4517-AD5E-498A-94B0-157E560C932D}"
+              DTS:DTSID="{72DEF842-CD98-4E6F-9D46-F4183B47ED66}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -149,7 +149,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;payment_type&quot;"
-              DTS:DTSID="{CBE70EE2-969E-4C88-8A46-716D4585AC75}"
+              DTS:DTSID="{9B5F4EEC-20CE-40DC-A1B8-75F96B1435B2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -158,16 +158,16 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;payment_installments&quot;"
-              DTS:DTSID="{4E805DDC-D675-4604-B6E2-43E28190AA3C}"
+              DTS:DTSID="{7C8913D3-23D1-4F7E-9AAF-906E87EF3DAE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000A_"
+              DTS:ColumnDelimiter="_x000D__x000A_"
               DTS:MaximumWidth="100"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;payment_value&quot;"
-              DTS:DTSID="{09F29571-9379-4E3D-9214-36FAB34AE029}"
+              DTS:DTSID="{AEDB12A4-5E01-44AF-B7FE-F01596CC950D}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -196,7 +196,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_id&quot;"
-              DTS:DTSID="{3923B8B7-B92D-4280-A2DF-E90D8A229D69}"
+              DTS:DTSID="{CBCE8767-DD51-477B-B604-D847186B38AE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -205,7 +205,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_zip_code_prefix&quot;"
-              DTS:DTSID="{7D4CB148-5D90-409C-899F-97C56752E4B6}"
+              DTS:DTSID="{574B6841-CE0A-475B-8058-A2445EBCA339}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -214,31 +214,19 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_city&quot;"
-              DTS:DTSID="{0246B323-BA88-4B75-A194-FD2C81A86D3E}"
+              DTS:DTSID="{7F917F3E-93E3-4646-9F1E-2BAC43FE5119}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000A_"
+              DTS:ColumnDelimiter="_x000D__x000A_"
               DTS:MaximumWidth="100"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_state&quot;"
-              DTS:DTSID="{4F7F8713-74BF-46A2-86DF-E903EC988C17}"
+              DTS:DTSID="{67480ED7-AEFB-4DA0-8F84-F16B4556B419}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[OlistDW_OLEDB]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{86A1F01D-F9B5-4324-BE4A-F13CB3A869EF}"
-      DTS:ObjectName="OlistDW_OLEDB">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Application Name=SSIS-Extract_Seller_Order_Payment-{86A1F01D-F9B5-4324-BE4A-F13CB3A869EF}OlistDW_OLEDB;Trust Server Certificate=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -804,8 +792,8 @@
               <connections>
                 <connection
                   refId="Package\Load Orders\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1429,8 +1417,8 @@
               <connections>
                 <connection
                   refId="Package\Load Payments\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1970,8 +1958,8 @@
               <connections>
                 <connection
                   refId="Package\Load Sellers\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -2097,7 +2085,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{86A1F01D-F9B5-4324-BE4A-F13CB3A869EF}"
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE staging.stg_sellers;&#xA;TRUNCATE TABLE staging.stg_orders;&#xA;TRUNCATE TABLE staging.stg_order_payments;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -2141,19 +2129,19 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="140,42"
+          Size="140,41.6"
           Id="Package\Load Orders"
           TopLeft="545,220" />
         <NodeLayout
-          Size="155,42"
+          Size="155.2,41.6"
           Id="Package\Load Payments"
           TopLeft="765.5,225.5" />
         <NodeLayout
-          Size="140,42"
+          Size="140,41.6"
           Id="Package\Load Sellers"
           TopLeft="309,220" />
         <NodeLayout
-          Size="199,42"
+          Size="199.2,41.6"
           Id="Package\Truncate Staging Tables"
           TopLeft="491,90" />
         <EdgeLayout
@@ -2255,15 +2243,15 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="177,42"
+          Size="176.8,41.6"
           Id="Package\Load Orders\OLE DB Destination"
           TopLeft="505,302" />
         <NodeLayout
-          Size="158,42"
+          Size="158.4,41.6"
           Id="Package\Load Orders\Derived Column"
           TopLeft="513,195" />
         <NodeLayout
-          Size="156,42"
+          Size="156,41.6"
           Id="Package\Load Orders\Flat File Source"
           TopLeft="521.5,85.5" />
         <EdgeLayout
@@ -2330,17 +2318,17 @@
     design-time-name="Package\Load Payments">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="161,42"
+          Size="160.8,41.6"
           Id="Package\Load Payments\Data Conversion"
           TopLeft="528,223" />
         <NodeLayout
-          Size="177,42"
+          Size="176.8,41.6"
           Id="Package\Load Payments\OLE DB Destination"
           TopLeft="516,344" />
         <NodeLayout
-          Size="156,42"
+          Size="156,41.6"
           Id="Package\Load Payments\Flat File Source"
           TopLeft="533,114" />
         <EdgeLayout
@@ -2362,9 +2350,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2386,9 +2372,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2413,15 +2397,15 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="156,42"
+          Size="156,41.6"
           Id="Package\Load Sellers\Flat File Source"
           TopLeft="534,97" />
         <NodeLayout
-          Size="161,42"
+          Size="160.8,41.6"
           Id="Package\Load Sellers\Data Conversion"
           TopLeft="534,210" />
         <NodeLayout
-          Size="177,42"
+          Size="176.8,41.6"
           Id="Package\Load Sellers\OLE DB Destination"
           TopLeft="533,318" />
         <EdgeLayout

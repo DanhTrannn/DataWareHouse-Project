@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="22"
-  DTS:VersionGUID="{D3663463-A940-4F20-AF8F-3307E6E35F7B}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{EB1AA18D-152A-4A7F-9007-EA2843CC9546}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -431,7 +431,7 @@ GROUP BY
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[fact_delivery_year]</property>
+                  name="OpenRowset">[gold].[fact_delivery]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -494,12 +494,6 @@ GROUP BY
                       externalMetadataColumnId="Package\DFT - Load fact_delivery_year\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[seller_key]"
                       lineageId="Package\DFT - Load fact_delivery_year\OLE DB Source.Outputs[OLE DB Source Output].Columns[seller_key]" />
                     <inputColumn
-                      refId="Package\DFT - Load fact_delivery_year\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[year_key]"
-                      cachedDataType="i4"
-                      cachedName="year_key"
-                      externalMetadataColumnId="Package\DFT - Load fact_delivery_year\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
-                      lineageId="Package\DFT - Load fact_delivery_year\OLE DB Source.Outputs[OLE DB Source Output].Columns[year_key]" />
-                    <inputColumn
                       refId="Package\DFT - Load fact_delivery_year\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[total_orders_delivered]"
                       cachedDataType="i4"
                       cachedName="total_orders_delivered"
@@ -527,10 +521,6 @@ GROUP BY
                       dataType="i4"
                       name="seller_key" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load fact_delivery_year\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year_key]"
-                      dataType="i4"
-                      name="year_key" />
-                    <externalMetadataColumn
                       refId="Package\DFT - Load fact_delivery_year\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[total_orders_delivered]"
                       dataType="i4"
                       name="total_orders_delivered" />
@@ -544,6 +534,10 @@ GROUP BY
                       name="on_time_rate"
                       precision="5"
                       scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load fact_delivery_year\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[date_key]"
+                      dataType="i4"
+                      name="date_key" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1639,13 +1633,29 @@ GROUP BY
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="196,42"
+          Size="199.2,41.6"
+          Id="Package\DFT - Load fact_delivery"
+          TopLeft="277,157" />
+        <NodeLayout
+          Size="227.2,41.6"
+          Id="Package\DFT - Load fact_delivery_year"
+          TopLeft="260,249" />
+        <NodeLayout
+          Size="240,41.6"
+          Id="Package\DFT - Load fact_payment_trends"
+          TopLeft="635,157" />
+        <NodeLayout
+          Size="267.2,41.6"
+          Id="Package\DFT - Load fact_payment_trends_year"
+          TopLeft="626,246" />
+        <NodeLayout
+          Size="196,41.6"
           Id="Package\EST - Truncate Delivery"
           TopLeft="281,61" />
         <NodeLayout
-          Size="199,42"
-          Id="Package\DFT - Load fact_delivery"
-          TopLeft="277,157" />
+          Size="236.8,41.6"
+          Id="Package\EST - Truncate Payment Trends"
+          TopLeft="637,63" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="377.75,103">
@@ -1668,10 +1678,6 @@ GROUP BY
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="227,42"
-          Id="Package\DFT - Load fact_delivery_year"
-          TopLeft="260,249" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="375,199">
@@ -1694,14 +1700,6 @@ GROUP BY
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="237,42"
-          Id="Package\EST - Truncate Payment Trends"
-          TopLeft="637,63" />
-        <NodeLayout
-          Size="240,42"
-          Id="Package\DFT - Load fact_payment_trends"
-          TopLeft="635,157" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="755.25,105">
@@ -1724,10 +1722,6 @@ GROUP BY
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="267,42"
-          Id="Package\DFT - Load fact_payment_trends_year"
-          TopLeft="626,246" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="757.25,199">
@@ -1792,14 +1786,6 @@ GROUP BY
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_delivery\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT - Load fact_delivery\OLE DB Destination">
     <Properties>
       <Property>
@@ -1812,19 +1798,27 @@ GROUP BY
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_delivery\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\DFT - Load fact_delivery_year">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="157,42"
-          Id="Package\DFT - Load fact_delivery_year\OLE DB Source"
-          TopLeft="440,54" />
-        <NodeLayout
-          Size="177,42"
+          Size="176.8,41.6"
           Id="Package\DFT - Load fact_delivery_year\OLE DB Destination"
           TopLeft="433,134" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\DFT - Load fact_delivery_year\OLE DB Source"
+          TopLeft="440,54" />
         <EdgeLayout
           Id="Package\DFT - Load fact_delivery_year.Paths[OLE DB Source Output]"
           TopLeft="520,96">
@@ -1851,14 +1845,6 @@ GROUP BY
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_delivery_year\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT - Load fact_delivery_year\OLE DB Destination">
     <Properties>
       <Property>
@@ -1868,6 +1854,14 @@ GROUP BY
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_delivery_year\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -1910,14 +1904,6 @@ GROUP BY
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_payment_trends\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT - Load fact_payment_trends\OLE DB Destination">
     <Properties>
       <Property>
@@ -1927,6 +1913,14 @@ GROUP BY
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_payment_trends\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -1969,14 +1963,6 @@ GROUP BY
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_payment_trends_year\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT - Load fact_payment_trends_year\OLE DB Destination">
     <Properties>
       <Property>
@@ -1986,6 +1972,14 @@ GROUP BY
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_payment_trends_year\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

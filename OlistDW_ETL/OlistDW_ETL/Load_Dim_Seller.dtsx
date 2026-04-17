@@ -11,24 +11,10 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="41"
-  DTS:VersionGUID="{A795C62B-1628-4927-9844-30F13C6D80C0}">
+  DTS:VersionBuild="43"
+  DTS:VersionGUID="{52D16AE7-A451-4F5A-A45B-F880F80A1C9B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:ConnectionManagers>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[OlistDW_OLEDB]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{337C1084-A616-4D17-BD9D-E695ECA3BEF6}"
-      DTS:ObjectName="OlistDW_OLEDB">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{337C1084-A616-4D17-BD9D-E695ECA3BEF6}localhost.OlistDW;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -618,8 +604,8 @@ where [refTable].[zip_code_prefix] = ?</property>
               <connections>
                 <connection
                   refId="Package\Load dim_seller (SCD Type 2)\Lookup dim_geolocation.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -791,8 +777,8 @@ where [refTable].[seller_id] = ?</property>
               <connections>
                 <connection
                   refId="Package\Load dim_seller (SCD Type 2)\Lookup dim_seller.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="Connection manager used to access lookup data."
                   name="OleDbConnection" />
               </connections>
@@ -979,8 +965,8 @@ WHERE seller_key = ?;</property>
               <connections>
                 <connection
                   refId="Package\Load dim_seller (SCD Type 2)\OLE DB Command.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1106,8 +1092,8 @@ WHERE seller_key = ?;</property>
               <connections>
                 <connection
                   refId="Package\Load dim_seller (SCD Type 2)\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1307,8 +1293,8 @@ WHERE seller_key = ?;</property>
               <connections>
                 <connection
                   refId="Package\Load dim_seller (SCD Type 2)\OLE DB Destination 1.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1505,8 +1491,8 @@ FROM staging.stg_sellers;</property>
               <connections>
                 <connection
                   refId="Package\Load dim_seller (SCD Type 2)\OLE DB Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1938,7 +1924,7 @@ FROM staging.stg_sellers;</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="227,42"
+          Size="227.2,41.6"
           Id="Package\Load dim_seller (SCD Type 2)"
           TopLeft="499,87" />
       </GraphLayout>
@@ -1950,109 +1936,57 @@ FROM staging.stg_sellers;</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="167,42"
+          Size="167.2,41.6"
           Id="Package\Load dim_seller (SCD Type 2)\Derived Column 1"
           TopLeft="77,571" />
         <NodeLayout
-          Size="330,42"
-          Id="Package\Load dim_seller (SCD Type 2)\Derived Column cho SCD columns (No Match path)"
-          TopLeft="455,424" />
-        <NodeLayout
-          Size="231,42"
-          Id="Package\Load dim_seller (SCD Type 2)\Derived Column (seller_region)"
-          TopLeft="508,271" />
-        <NodeLayout
-          Size="173,42"
-          Id="Package\Load dim_seller (SCD Type 2)\OLE DB Command"
-          TopLeft="303,571" />
-        <NodeLayout
-          Size="198,42"
-          Id="Package\Load dim_seller (SCD Type 2)\Lookup dim_geolocation"
-          TopLeft="369,90" />
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Load dim_seller (SCD Type 2)\OLE DB Destination"
-          TopLeft="528.5,499.5" />
-        <NodeLayout
-          Size="158,42"
-          Id="Package\Load dim_seller (SCD Type 2)\Derived Column"
-          TopLeft="682,93" />
-        <NodeLayout
-          Size="157,42"
-          Id="Package\Load dim_seller (SCD Type 2)\OLE DB Source"
-          TopLeft="382,15" />
-        <NodeLayout
-          Size="168,42"
+          Size="168,41.6"
           Id="Package\Load dim_seller (SCD Type 2)\Lookup dim_seller"
           TopLeft="532,344" />
         <NodeLayout
-          Size="123,42"
+          Size="176.8,41.6"
+          Id="Package\Load dim_seller (SCD Type 2)\OLE DB Destination"
+          TopLeft="528.5,499.5" />
+        <NodeLayout
+          Size="231.2,41.6"
+          Id="Package\Load dim_seller (SCD Type 2)\Derived Column (seller_region)"
+          TopLeft="508,271" />
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\Load dim_seller (SCD Type 2)\OLE DB Destination 1"
+          TopLeft="69,657" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Load dim_seller (SCD Type 2)\OLE DB Source"
+          TopLeft="382,15" />
+        <NodeLayout
+          Size="329.6,41.6"
+          Id="Package\Load dim_seller (SCD Type 2)\Derived Column cho SCD columns (No Match path)"
+          TopLeft="455,424" />
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Load dim_seller (SCD Type 2)\Derived Column"
+          TopLeft="682,93" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\Load dim_seller (SCD Type 2)\OLE DB Command"
+          TopLeft="303,571" />
+        <NodeLayout
+          Size="123.2,41.6"
           Id="Package\Load dim_seller (SCD Type 2)\Union All"
           TopLeft="554.5,181.5" />
         <NodeLayout
-          Size="159,42"
-          Id="Package\Load dim_seller (SCD Type 2)\Conditional Split"
-          TopLeft="175.5,384.5" />
-        <NodeLayout
-          Size="123,42"
+          Size="123.2,41.6"
           Id="Package\Load dim_seller (SCD Type 2)\Multicast"
           TopLeft="192,492" />
-        <EdgeLayout
-          Id="Package\Load dim_seller (SCD Type 2).Paths[Derived Column Output1]"
-          TopLeft="619.75,313">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,31"
-              Start="0,0"
-              End="0,23.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load dim_seller (SCD Type 2).Paths[Derived Column Output]"
-          TopLeft="761,135">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-125.833333333333,46.5"
-              Start="0,0"
-              End="-125.833333333333,39">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.5417335473515" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.5417335473515"
-                    Point2="0,27.5417335473515"
-                    Point3="-4,27.5417335473515" />
-                  <mssgle:LineSegment
-                    End="-121.833333333333,27.5417335473515" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-121.833333333333,27.5417335473515"
-                    Point2="-125.833333333333,27.5417335473515"
-                    Point3="-125.833333333333,31.5417335473515" />
-                  <mssgle:LineSegment
-                    End="-125.833333333333,39" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Load dim_seller (SCD Type 2)\Lookup dim_geolocation"
+          TopLeft="369,90" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\Load dim_seller (SCD Type 2)\Conditional Split"
+          TopLeft="175.5,384.5" />
         <EdgeLayout
           Id="Package\Load dim_seller (SCD Type 2).Paths[Union All Output 1]"
           TopLeft="619.75,223.5">
@@ -2310,32 +2244,6 @@ FROM staging.stg_sellers;</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Load dim_seller (SCD Type 2).Paths[Derived Column Output2]"
-          TopLeft="618.5,466">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,33.5"
-              Start="0,0"
-              End="0,26">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="186,42"
-          Id="Package\Load dim_seller (SCD Type 2)\OLE DB Destination 1"
-          TopLeft="69,657" />
-        <EdgeLayout
           Id="Package\Load dim_seller (SCD Type 2).Paths[Derived Column Output3]"
           TopLeft="161.25,613">
           <EdgeLayout.Curve>
@@ -2357,6 +2265,84 @@ FROM staging.stg_sellers;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_seller (SCD Type 2).Paths[Derived Column Output2]"
+          TopLeft="618.5,466">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.5"
+              Start="0,0"
+              End="0,26">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_seller (SCD Type 2).Paths[Derived Column Output1]"
+          TopLeft="619.75,313">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load dim_seller (SCD Type 2).Paths[Derived Column Output]"
+          TopLeft="761,135">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-125.833333333333,46.5"
+              Start="0,0"
+              End="-125.833333333333,39">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5417335473515" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.5417335473515"
+                    Point2="0,27.5417335473515"
+                    Point3="-4,27.5417335473515" />
+                  <mssgle:LineSegment
+                    End="-121.833333333333,27.5417335473515" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-121.833333333333,27.5417335473515"
+                    Point2="-125.833333333333,27.5417335473515"
+                    Point3="-125.833333333333,31.5417335473515" />
+                  <mssgle:LineSegment
+                    End="-125.833333333333,39" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -2366,7 +2352,7 @@ FROM staging.stg_sellers;</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2376,7 +2362,7 @@ FROM staging.stg_sellers;</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
+          type="q4:int">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2397,25 +2383,15 @@ FROM staging.stg_sellers;</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load dim_seller (SCD Type 2)\Lookup dim_geolocation">
+    design-time-name="Package\Load dim_seller (SCD Type 2)\OLE DB Destination 1">
     <Properties>
       <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
+        <Name>DataSourceViewID</Name>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -2428,15 +2404,25 @@ FROM staging.stg_sellers;</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load dim_seller (SCD Type 2)\OLE DB Destination 1">
+    design-time-name="Package\Load dim_seller (SCD Type 2)\Lookup dim_geolocation">
     <Properties>
       <Property>
-        <Name>DataSourceViewID</Name>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q2:string">Table</Value>
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

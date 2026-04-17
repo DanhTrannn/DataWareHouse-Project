@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Extract_Product_Items"
   DTS:PackageType="5"
-  DTS:VersionBuild="53"
-  DTS:VersionGUID="{EF78FC6A-F007-496D-9AE9-804DF19ACF55}">
+  DTS:VersionBuild="57"
+  DTS:VersionGUID="{8BAFC9A2-2E33-4A5C-A42B-DB7B966170D2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -39,7 +39,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="product_category_name"
-              DTS:DTSID="{8AA7E09A-9981-4977-A12B-E7D914576BC6}"
+              DTS:DTSID="{6D5ADE33-3F90-472B-BDAB-8BF3751BEBB1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="product_category_name_english"
-              DTS:DTSID="{26DD3038-8586-4599-A3C7-ABFCC2337E71}"
+              DTS:DTSID="{31E05C5F-2BC0-4C35-87F8-F0054F691E97}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -77,7 +77,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_id&quot;"
-              DTS:DTSID="{F803CBE6-221F-4A1B-8046-03369E486F7D}"
+              DTS:DTSID="{0C0E2D58-807D-4FBF-B8D2-021FB94D010F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -86,7 +86,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;order_item_id&quot;"
-              DTS:DTSID="{A4252889-D123-455B-9525-F4065EC7A7C1}"
+              DTS:DTSID="{692795ED-1533-4250-B2C1-BA9EF17440C4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -95,7 +95,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;product_id&quot;"
-              DTS:DTSID="{6D173AA7-EDA4-4C6F-937B-63E5BDC8CCA1}"
+              DTS:DTSID="{547B6BF4-394D-4F11-B9BA-CC1222349CAA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -104,7 +104,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_id&quot;"
-              DTS:DTSID="{70042015-32F0-4207-9CFE-AC4E7CCF5648}"
+              DTS:DTSID="{E5E4675D-ED78-423A-B6B8-4B9BD580A3AD}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -113,7 +113,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;shipping_limit_date&quot;"
-              DTS:DTSID="{C549666D-94B1-4E1E-9DD8-A4ADDC267EB8}"
+              DTS:DTSID="{13D7D29F-896B-4ACA-9A32-A2B03D7285A0}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -122,16 +122,16 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;price&quot;"
-              DTS:DTSID="{CCE8E5A2-B794-43B0-816C-0EE2B8D5FEB2}"
+              DTS:DTSID="{39A4CE31-4B20-4749-8F8E-A2C7688AC6F4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000A_"
+              DTS:ColumnDelimiter="_x000D__x000A_"
               DTS:MaximumWidth="10"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;freight_value&quot;"
-              DTS:DTSID="{DA861FCF-3EE1-49CA-B663-48A274099055}"
+              DTS:DTSID="{2A6B523D-D5F8-4AF5-BC89-7E35DF7BA129}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -160,7 +160,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="product_id"
-              DTS:DTSID="{E2E43E90-E0A7-4564-9E04-81758AB84C41}"
+              DTS:DTSID="{054DA944-84B8-4F5D-81EF-AE570DC275B3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -169,7 +169,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="product_category_name"
-              DTS:DTSID="{6CF2F4C3-D0F2-4A69-A8A5-7A8D6D71B4E0}"
+              DTS:DTSID="{DB7A51FB-4C95-41A2-B188-2E9F9248DF76}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -178,7 +178,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="product_name_lenght"
-              DTS:DTSID="{C02E9C4E-6DE3-4F4F-9191-3EA881E68D5B}"
+              DTS:DTSID="{49B5271A-5A0F-436F-9591-88EC89757786}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -187,7 +187,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="product_description_lenght"
-              DTS:DTSID="{D9D11032-21A6-42F3-9C14-0FBC282F0EB6}"
+              DTS:DTSID="{64A324C6-9D5E-434F-BA14-1802A48C70A0}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -196,7 +196,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="product_photos_qty"
-              DTS:DTSID="{E48018AC-C275-4213-8BD2-6C1F1447C72B}"
+              DTS:DTSID="{CB10BD30-0C70-4636-8B52-9A4E68C6CD81}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -205,7 +205,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="product_weight_g"
-              DTS:DTSID="{83B7D437-9318-4F9C-A7B0-CA2FBD1EC645}"
+              DTS:DTSID="{56ECCE1F-EBBC-4182-A359-28FF34AB7DBD}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -214,7 +214,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="product_length_cm"
-              DTS:DTSID="{7245E595-BB1F-4371-9048-11948DB1B0DB}"
+              DTS:DTSID="{005ECCC6-0075-495E-8250-466FDA20A73F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -223,31 +223,19 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="product_height_cm"
-              DTS:DTSID="{A93F479F-C0DB-4395-83EF-9C935F0A4716}"
+              DTS:DTSID="{0370C03D-CEBC-4366-A6FF-27D44CFDD0D2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000A_"
+              DTS:ColumnDelimiter="_x000D__x000A_"
               DTS:MaximumWidth="20"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="product_width_cm"
-              DTS:DTSID="{0FFF9545-2D61-4E53-925C-3D0203966EC5}"
+              DTS:DTSID="{E693D06D-7F1B-453E-8428-A2DBA395B538}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[OlistDW_OLEDB]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{1CBE51DA-EA16-436A-8720-BC11449B95F1}"
-      DTS:ObjectName="OlistDW_OLEDB">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Extract_Product_Items-{1CBE51DA-EA16-436A-8720-BC11449B95F1}LAPTOP-NS3FCL96\DWHSQLSERVER.OlistDW;Trust Server Certificate=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -443,8 +431,8 @@
               <connections>
                 <connection
                   refId="Package\DFT - Load Category Translation\Load stg_category_translation.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1106,8 +1094,8 @@
               <connections>
                 <connection
                   refId="Package\DFT - Load Order Items\Load stg_order_items.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1968,8 +1956,8 @@
               <connections>
                 <connection
                   refId="Package\DFT - Load Products\Load stg_products.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[OlistDW_OLEDB]"
-                  connectionManagerRefId="Package.ConnectionManagers[OlistDW_OLEDB]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -2153,7 +2141,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{1CBE51DA-EA16-436A-8720-BC11449B95F1}"
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE staging.stg_products;&#xA;TRUNCATE TABLE staging.stg_category_translation;&#xA;TRUNCATE TABLE staging.stg_order_items;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -2197,47 +2185,47 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="231,42"
+          Size="231.2,41.6"
           Id="Package\DFT - Load Category Translation"
           TopLeft="497.142858201144,147.588235164751" />
         <NodeLayout
-          Size="191,42"
+          Size="191.2,41.6"
           Id="Package\DFT - Load Order Items"
           TopLeft="280.714286311853,150.647058691481" />
         <NodeLayout
-          Size="174,42"
+          Size="174.4,41.6"
           Id="Package\DFT - Load Products"
-          TopLeft="72.1428572964302,148.352941046433" />
+          TopLeft="71.428571580624,148.352941046433" />
         <NodeLayout
-          Size="162,42"
+          Size="161.6,41.6"
           Id="Package\Execute SQL Task"
           TopLeft="291.428572048946,35.1764705574017" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="346.895238715613,76.7764705574017">
+          TopLeft="333.828572048946,76.7764705574017">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-187.552381419183,71.5764704890317"
+              EndConnector="-175.200000468322,71.5764704890313"
               Start="0,0"
-              End="-187.552381419183,64.0764704890317">
+              End="-175.200000468322,64.0764704890313">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.0495724131095" />
+                    End="0,20.6334606228484" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,25.0495724131095"
-                    Point2="0,29.0495724131095"
-                    Point3="-4,29.0495724131095" />
+                    Point1="0,20.6334606228484"
+                    Point2="0,24.6334606228484"
+                    Point3="-4,24.6334606228484" />
                   <mssgle:LineSegment
-                    End="-183.552381419183,29.0495724131095" />
+                    End="-171.200000468322,24.6334606228484" />
                   <mssgle:CubicBezierSegment
-                    Point1="-183.552381419183,29.0495724131095"
-                    Point2="-187.552381419183,29.0495724131095"
-                    Point3="-187.552381419183,33.0495724131095" />
+                    Point1="-171.200000468322,24.6334606228484"
+                    Point2="-175.200000468322,24.6334606228484"
+                    Point3="-175.200000468322,28.6334606228484" />
                   <mssgle:LineSegment
-                    End="-187.552381419183,64.0764704890317" />
+                    End="-175.200000468322,64.0764704890313" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2309,7 +2297,7 @@
     design-time-name="Package\DFT - Load Category Translation">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="220,41.6"
           Id="Package\DFT - Load Category Translation\Load stg_category_translation"
@@ -2337,9 +2325,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2364,15 +2350,15 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="181,42"
+          Size="180.8,41.6"
           Id="Package\DFT - Load Order Items\Load stg_order_items"
           TopLeft="324.999995157123,249.99999588728" />
         <NodeLayout
-          Size="161,42"
+          Size="160.8,41.6"
           Id="Package\DFT - Load Order Items\Data Conversion"
           TopLeft="336.99999499321,157.999997064471" />
         <NodeLayout
-          Size="149,42"
+          Size="148.8,41.6"
           Id="Package\DFT - Load Order Items\FF_OrderItems"
           TopLeft="336.999994978309,66.9999990016222" />
         <EdgeLayout
@@ -2441,15 +2427,15 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="165,42"
+          Size="164.8,41.6"
           Id="Package\DFT - Load Products\Load stg_products"
           TopLeft="272.142857722178,216.411764516189" />
         <NodeLayout
-          Size="136,42"
+          Size="136,41.6"
           Id="Package\DFT - Load Products\FF_Products"
           TopLeft="285.714286322496,38.999999965815" />
         <NodeLayout
-          Size="153,42"
+          Size="152.8,41.6"
           Id="Package\DFT - Load Products\Derived Column"
           TopLeft="280.000000596047,137.647058702876" />
         <EdgeLayout
