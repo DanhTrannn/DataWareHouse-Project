@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>OlistDW_ETL</Name>
-    <LastWriteTime>2026-04-16T19:17:32.0540896Z</LastWriteTime>
+    <LastWriteTime>2026-04-17T15:08:55.2018685Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -18,7 +18,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Fact_Customer_Orders.dtsx</Name>
-      <LastWriteTime>2026-04-16T19:17:18.0823267Z</LastWriteTime>
+      <LastWriteTime>2026-04-17T15:08:55.1302979Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -38,7 +38,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Extract_Product_Items.dtsx</Name>
-      <LastWriteTime>2026-04-16T19:13:09.2742759Z</LastWriteTime>
+      <LastWriteTime>2026-04-17T13:43:46.8073176Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -53,7 +53,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Fact_Sales.dtsx</Name>
-      <LastWriteTime>2026-04-16T20:14:01.8515949Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T20:27:46.5592868Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
