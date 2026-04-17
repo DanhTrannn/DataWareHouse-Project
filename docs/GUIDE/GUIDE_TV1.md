@@ -1109,16 +1109,6 @@ SELECT
 ┌──────────▼───────────────────────┐
 │ DFT - Load fact_customer_orders  │
 │ (monthly)                        │
-└──────────┬───────────────────────┘
-           │
-┌──────────▼───────────────────────┐
-│ EST - Truncate fact_customer_    │
-│ orders_year                      │
-└──────────┬───────────────────────┘
-           │
-┌──────────▼───────────────────────┐
-│ DFT - Load fact_customer_orders  │
-│ _year                            │
 └──────────────────────────────────┘
 ```
 
@@ -1163,18 +1153,20 @@ GROUP BY
 
 > **Query thay thế nếu `gold.fact_orders` ĐÃ có dữ liệu** (dùng khi chạy trong Master Package):
 > ```sql
-> SELECT
->     fo.customer_key,
->     fo.order_status,
->     CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01') AS date_key,
->     COUNT(DISTINCT fo.order_id)  AS total_orders,
->     COUNT(*)                     AS total_items,
->     SUM(fo.price + fo.freight_value) AS total_spent,
->     AVG(CAST(fo.review_score AS DECIMAL(3,2))) AS avg_review_score
-> FROM gold.fact_orders fo
-> INNER JOIN gold.dim_date dd ON fo.order_date_key = dd.date_key
-> GROUP BY fo.customer_key, fo.order_status,
->     CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01');
+>SELECT
+>    fo.customer_key,
+>    fo.order_status,
+>    fo.order_date_key AS date_key, 
+>    COUNT(DISTINCT fo.order_id)  AS total_orders,
+>    COUNT(*)                     AS total_items,
+>    SUM(fo.price + fo.freight_value) AS total_spent,
+>    AVG(CAST(fo.review_score AS DECIMAL(3,2))) AS avg_review_score
+>FROM gold.fact_orders fo
+>WHERE fo.customer_key IS NOT NULL
+>GROUP BY 
+>    fo.customer_key, 
+>    fo.order_status, 
+>    fo.order_date_key; -- Nhóm theo từng ngày cụ thể
 > ```
 
 **OLE DB Destination:**
@@ -1191,44 +1183,10 @@ GROUP BY
 | total_spent | total_spent |
 | avg_review_score | avg_review_score |
 
-### 6.5. Task 3 + 4 – fact_customer_orders_year
-
-**Truncate:** `TRUNCATE TABLE gold.fact_customer_orders_year;`
-
-**OLE DB Source:**
-
-```sql
-SELECT
-    dc.customer_key,
-    o.order_status,
-    YEAR(o.order_purchase_timestamp) * 10000 + 101 AS year_key,
-    COUNT(DISTINCT o.order_id)  AS total_orders,
-    COUNT(*)                     AS total_items,
-    SUM(oi.price + oi.freight_value) AS total_spent,
-    AVG(CAST(r.review_score AS DECIMAL(3,2))) AS avg_review_score
-FROM staging.stg_order_items oi
-INNER JOIN staging.stg_orders o
-    ON oi.order_id = o.order_id
-LEFT JOIN staging.stg_order_reviews r
-    ON o.order_id = r.order_id
-INNER JOIN gold.dim_customer dc
-    ON o.customer_id = dc.customer_id
-    AND dc.is_current = 1
-WHERE o.order_purchase_timestamp IS NOT NULL
-GROUP BY
-    dc.customer_key,
-    o.order_status,
-    YEAR(o.order_purchase_timestamp) * 10000 + 101;
-```
-
-**OLE DB Destination:** `[gold].[fact_customer_orders_year]`
-
-### 6.6. Chạy test
+### 6.5. Chạy test
 
 ```sql
 SELECT 'fact_customer_orders'     AS tbl, COUNT(*) AS cnt FROM gold.fact_customer_orders
-UNION ALL
-SELECT 'fact_customer_orders_year',       COUNT(*) FROM gold.fact_customer_orders_year;
 ```
 
 ---
