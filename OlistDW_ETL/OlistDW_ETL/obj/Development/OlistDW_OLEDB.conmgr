@@ -7,6 +7,6 @@
     <DTS:ConnectionManager
       DTS:ConnectRetryCount="1"
       DTS:ConnectRetryInterval="5"
-      DTS:ConnectionString="Data Source=localhost;Initial Catalog=OlistDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{EBD54FEC-B16B-4A71-820D-637DA8D41382}localhost.OlistDW;" />
+      DTS:ConnectionString="Data Source=LAPTOP-NS3FCL96\DWHSQLSERVER;Initial Catalog=OlistDW;Provider=MSOLEDBSQL19.1;Integrated Security=SSPI;Application Name=SSIS-{EBD54FEC-B16B-4A71-820D-637DA8D41382}OlistDW_OLEDB;Trust Server Certificate=True;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>

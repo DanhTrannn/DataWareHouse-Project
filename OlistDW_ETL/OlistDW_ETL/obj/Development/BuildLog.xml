@@ -2,23 +2,23 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>OlistDW_ETL</Name>
-    <LastWriteTime>2026-04-15T17:47:03.5945809Z</LastWriteTime>
+    <LastWriteTime>2026-04-16T19:17:32.0540896Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>Extract_Customer_Geo.dtsx</Name>
-      <LastWriteTime>2026-04-15T05:35:40.5280483Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T19:11:52.2770242Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Dim_Date_Geo_Customer.dtsx</Name>
-      <LastWriteTime>2026-04-15T07:02:59.7103968Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T18:15:31.3616903Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Fact_Customer_Orders.dtsx</Name>
-      <LastWriteTime>2026-04-15T03:35:11.0781762Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T19:17:18.0823267Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -28,42 +28,42 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Extract_Seller_Order_Payment.dtsx</Name>
-      <LastWriteTime>2026-04-15T17:30:11.5964462Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T19:15:43.9488531Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Dim_Seller.dtsx</Name>
-      <LastWriteTime>2026-04-15T16:49:33.5668038Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T18:56:53.3053092Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Extract_Product_Items.dtsx</Name>
-      <LastWriteTime>2026-04-15T17:30:11.560447Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T19:13:09.2742759Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Dim_Product.dtsx</Name>
-      <LastWriteTime>2026-04-15T07:05:04.3303993Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T18:52:39.481708Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Fact_Orders.dtsx</Name>
-      <LastWriteTime>2026-04-15T03:35:11.1047285Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T20:04:30.2274452Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Fact_Sales.dtsx</Name>
-      <LastWriteTime>2026-04-15T03:35:11.1280333Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T20:14:01.8515949Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Fact_Lifecycle.dtsx</Name>
-      <LastWriteTime>2026-04-15T17:44:56.1335697Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T18:15:31.3671578Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Load_Fact_Delivery_Payment.dtsx</Name>
-      <LastWriteTime>2026-04-15T17:47:03.5455726Z</LastWriteTime>
+      <LastWriteTime>2026-04-16T18:53:09.2353389Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

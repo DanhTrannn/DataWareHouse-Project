@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Extract_Customer_Geo"
   DTS:PackageType="5"
-  DTS:VersionBuild="81"
-  DTS:VersionGUID="{15021CB5-0F6B-4443-B2FB-3B6D318EF74B}">
+  DTS:VersionBuild="83"
+  DTS:VersionGUID="{1B6D8FF1-FA60-4D69-AE66-17A479A6CD03}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -39,7 +39,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="customer_id"
-              DTS:DTSID="{486E474A-2A90-4CF1-86BD-A679042B186A}"
+              DTS:DTSID="{6A9AE25C-D45D-461A-AD2C-9CFEC04F1C32}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="customer_unique_id"
-              DTS:DTSID="{96C74A1A-29E0-45F1-AC3D-66791934FEBC}"
+              DTS:DTSID="{E0F96AEA-EC85-4F58-93D7-E10AE558F201}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="customer_zip_code_prefix"
-              DTS:DTSID="{0B98B23E-CFE7-4F90-8217-C6FD018E758D}"
+              DTS:DTSID="{DE98FE2C-C5F5-441D-973F-9196CECA294F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -66,16 +66,16 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="customer_city"
-              DTS:DTSID="{518C8489-0868-44A4-8B59-DABC9F059CE3}"
+              DTS:DTSID="{C9B5DD9E-E75D-4AAB-A820-56EACBEDF398}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000A_"
+              DTS:ColumnDelimiter="_x000D__x000A_"
               DTS:MaximumWidth="5"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="customer_state"
-              DTS:DTSID="{2EF93622-4BC8-477A-B8F0-DC7A7F4652DF}"
+              DTS:DTSID="{0A0A4992-6E83-472C-AFAE-6B1E08AA1AF2}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -104,7 +104,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="geolocation_zip_code_prefix"
-              DTS:DTSID="{4F9D8E6D-E7E1-4171-BB06-CF0E21D46A19}"
+              DTS:DTSID="{C90739A6-7B8B-4166-B35F-AD2E415F386C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -113,7 +113,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="geolocation_lat"
-              DTS:DTSID="{30A00F32-FD9E-4D6D-A190-D28145E9F6F5}"
+              DTS:DTSID="{8EDB9EE2-DF7A-4F88-8DF2-FE24F807EF3F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -122,7 +122,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="geolocation_lng"
-              DTS:DTSID="{EF46D437-2737-427A-8292-112122855A20}"
+              DTS:DTSID="{7F9CD464-5DD4-4E09-ADBB-0DBE2C7F9EC5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -131,16 +131,16 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="geolocation_city"
-              DTS:DTSID="{95F666E0-B9CB-47A8-8952-E742F53BEAE5}"
+              DTS:DTSID="{B88F1791-473F-456D-8B68-4948BDCB9A6E}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x000A_"
+              DTS:ColumnDelimiter="_x000D__x000A_"
               DTS:MaximumWidth="5"
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="geolocation_state"
-              DTS:DTSID="{0C85AD1B-038D-4D1C-992F-BCDACA739BC0}"
+              DTS:DTSID="{E8BF090B-7F3A-4E45-B4AB-4E3CDBB7CF3E}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -169,7 +169,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="review_id"
-              DTS:DTSID="{A683D2C0-DE68-45A4-BE96-60C999A0BB82}"
+              DTS:DTSID="{EAFDE2E0-1D47-4DB9-9187-78FE53C5DFC7}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -178,7 +178,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="order_id"
-              DTS:DTSID="{4F492A7D-7661-4B7E-A598-6A92DD7A3EC5}"
+              DTS:DTSID="{C247DB1E-1C48-4FAE-8B5B-B64B546F9719}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -187,7 +187,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="review_score"
-              DTS:DTSID="{17A359D3-89B6-4994-BDC5-C248F2C9DC41}"
+              DTS:DTSID="{7F2C233E-C6AF-4025-A5BA-1BB0DC293E99}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -196,7 +196,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="review_comment_title"
-              DTS:DTSID="{46DEC424-5C3B-4510-B4F4-AEB45E193265}"
+              DTS:DTSID="{32DE115A-F6E0-4768-9AB6-D3076DE4D2C3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -205,7 +205,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="review_comment_message"
-              DTS:DTSID="{934B433E-866F-44FC-ACEC-3AB7081D7162}"
+              DTS:DTSID="{055F4702-60BB-4C0A-9AC0-8177441E14E2}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -214,7 +214,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="review_creation_date"
-              DTS:DTSID="{7081E0CB-437E-4B62-A55F-511DB571D736}"
+              DTS:DTSID="{1A2A1906-51B2-43D5-BFA8-25663FAD1B08}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -223,7 +223,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="review_answer_timestamp"
-              DTS:DTSID="{2232B0D7-0AA2-4ED4-A904-E3B5B510FA7F}"
+              DTS:DTSID="{9F82B422-00ED-48FF-BEA4-7BED36D98756}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -2093,19 +2093,19 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="184,42"
+          Size="184,41.6"
           Id="Package\DFT - Load Customers"
           TopLeft="261.5,255.5" />
         <NodeLayout
-          Size="194,42"
+          Size="193.6,41.6"
           Id="Package\DFT - Load Geolocations"
           TopLeft="580,264" />
         <NodeLayout
-          Size="173,42"
+          Size="172.8,41.6"
           Id="Package\DFT - Load Reviews"
           TopLeft="407,339" />
         <NodeLayout
-          Size="222,42"
+          Size="222.4,41.6"
           Id="Package\EST - Truncate Staging Tables"
           TopLeft="403,159" />
         <EdgeLayout
@@ -2217,13 +2217,13 @@
     design-time-name="Package\DFT - Load Customers">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="171,42"
+          Size="171.2,41.6"
           Id="Package\DFT - Load Customers\OLE DB Destination"
           TopLeft="314,261" />
         <NodeLayout
-          Size="146,42"
+          Size="145.6,41.6"
           Id="Package\DFT - Load Customers\FF_Customers"
           TopLeft="323,133" />
         <EdgeLayout
@@ -2245,9 +2245,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2272,43 +2270,21 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="98,42"
+          Size="97.6,41.6"
           Id="Package\DFT - Load Geolocations\Sort"
           TopLeft="368.5,298.5" />
         <NodeLayout
-          Size="154,42"
-          Id="Package\DFT - Load Geolocations\Derived Column"
-          TopLeft="348,190" />
+          Size="171.2,41.6"
+          Id="Package\DFT - Load Geolocations\OLE DB Destination"
+          TopLeft="336,398" />
         <NodeLayout
-          Size="151,42"
+          Size="151.2,41.6"
           Id="Package\DFT - Load Geolocations\FF_Geolocation"
           TopLeft="356,91" />
         <NodeLayout
-          Size="171,42"
-          Id="Package\DFT - Load Geolocations\OLE DB Destination"
-          TopLeft="336,398" />
-        <EdgeLayout
-          Id="Package\DFT - Load Geolocations.Paths[Derived Column Output]"
-          TopLeft="421.25,232">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,66.5"
-              Start="0,0"
-              End="0,59">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,59" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="153.6,41.6"
+          Id="Package\DFT - Load Geolocations\Derived Column"
+          TopLeft="348,190" />
         <EdgeLayout
           Id="Package\DFT - Load Geolocations.Paths[Sort Output]"
           TopLeft="419.5,340.5">
@@ -2345,6 +2321,28 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load Geolocations.Paths[Derived Column Output]"
+          TopLeft="421.25,232">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.5"
+              Start="0,0"
+              End="0,59">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

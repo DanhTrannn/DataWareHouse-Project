@@ -1108,6 +1108,17 @@ OLE DB Destination (gold.fact_orders)
    - SQL:
 
 ```sql
+WITH LatestReviews AS (
+    SELECT 
+        order_id,
+        review_score,
+        -- Sắp xếp để lấy review mới nhất lên đầu (rn = 1)
+        ROW_NUMBER() OVER (
+            PARTITION BY order_id 
+            ORDER BY review_creation_date DESC, review_answer_timestamp DESC
+        ) AS rn
+    FROM staging.stg_order_reviews
+)
 SELECT
     oi.order_id,
     oi.order_item_id,
@@ -1126,9 +1137,9 @@ SELECT
 FROM staging.stg_order_items oi
 INNER JOIN staging.stg_orders o
     ON oi.order_id = o.order_id
-LEFT JOIN staging.stg_order_reviews r
+LEFT JOIN LatestReviews r
     ON o.order_id = r.order_id
--- INCREMENTAL LOAD: chỉ lấy records chưa có trong fact_orders
+    AND r.rn = 1 -- CHỈ LẤY REVIEW MỚI NHẤT
 WHERE NOT EXISTS (
     SELECT 1 FROM gold.fact_orders f
     WHERE f.order_id = oi.order_id
@@ -1305,16 +1316,9 @@ SELECT COUNT(*) AS total_rows FROM gold.fact_orders;
 └──────────┬───────────────────────┘
            │
 ┌──────────▼───────────────────────┐
-│ DFT - Load fact_sales (monthly)  │
-└──────────┬───────────────────────┘
-           │
-┌──────────▼───────────────────────┐
-│ EST - Truncate fact_sales_year   │
-└──────────┬───────────────────────┘
-           │
-┌──────────▼───────────────────────┐
-│ DFT - Load fact_sales_year       │
+│ DFT - Load fact_sales (daily)  │
 └──────────────────────────────────┘
+
 ```
 
 ### 7.3. Task 1 – Execute SQL: Truncate fact_sales
@@ -1341,8 +1345,8 @@ TRUNCATE TABLE gold.fact_sales;
 SELECT
     fo.seller_key,
     dp.category_key,
-    CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01') AS date_key,
-    SUM(fo.price + fo.freight_value)               AS total_revenue,
+    dd.date_key, 
+    SUM(fo.price + fo.freight_value)                AS total_revenue,
     COUNT(*)                                        AS total_items_sold,
     COUNT(DISTINCT fo.order_id)                     AS total_orders,
     AVG(CAST(fo.review_score AS DECIMAL(3,2)))      AS avg_review_score
@@ -1356,7 +1360,7 @@ WHERE fo.seller_key IS NOT NULL
 GROUP BY
     fo.seller_key,
     dp.category_key,
-    CONVERT(INT, FORMAT(dd.full_date, 'yyyyMM') + '01');
+    dd.date_key; 
 ```
 
 > **Nếu lỗi do fact_orders phụ thuộc bảng khác:** Query này join `gold.fact_orders` (bạn) + `gold.dim_product` (bạn) + `gold.dim_date` (TV1). Tất cả phải có dữ liệu.
@@ -1378,45 +1382,7 @@ GROUP BY
 
 4. **OK**
 
-### 7.5. Task 3 – Execute SQL: Truncate fact_sales_year
-
-1. Kéo **Execute SQL Task** → đổi tên `EST - Truncate fact_sales_year`
-2. Nối: `DFT - Load fact_sales` → `EST - Truncate fact_sales_year`
-3. SQL: `TRUNCATE TABLE gold.fact_sales_year;`
-
-### 7.6. Task 4 – Data Flow: Load fact_sales_year
-
-1. Kéo **Data Flow Task** → đổi tên `DFT - Load fact_sales_year`
-2. Nối: `EST - Truncate fact_sales_year` → `DFT - Load fact_sales_year`
-3. Vào Data Flow:
-
-**OLE DB Source:**
-
-```sql
-SELECT
-    fo.seller_key,
-    dp.category_key,
-    dd.year * 10000 + 101 AS year_key,
-    SUM(fo.price + fo.freight_value)               AS total_revenue,
-    COUNT(*)                                        AS total_items_sold,
-    COUNT(DISTINCT fo.order_id)                     AS total_orders,
-    AVG(CAST(fo.review_score AS DECIMAL(3,2)))      AS avg_review_score
-FROM gold.fact_orders fo
-INNER JOIN gold.dim_product dp
-    ON fo.product_key = dp.product_key
-INNER JOIN gold.dim_date dd
-    ON fo.order_date_key = dd.date_key
-WHERE fo.seller_key IS NOT NULL
-  AND dp.category_key IS NOT NULL
-GROUP BY
-    fo.seller_key,
-    dp.category_key,
-    dd.year * 10000 + 101;
-```
-
-**OLE DB Destination:** `[gold].[fact_sales_year]` → map tương tự.
-
-### 7.7. Chạy test
+### 7.4. Chạy test
 
 ```sql
 SELECT 'fact_sales'      AS tbl, COUNT(*) AS cnt FROM gold.fact_sales
@@ -1453,7 +1419,7 @@ ORDER BY revenue DESC;
 
 ```sql
 SELECT
-    dd.year,
+    dd.year,git config core.autocrlf false
     dd.month,
     dd.month_name,
     SUM(fs.total_revenue) AS monthly_revenue,
