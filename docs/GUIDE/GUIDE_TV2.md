@@ -1419,7 +1419,7 @@ ORDER BY revenue DESC;
 
 ```sql
 SELECT
-    dd.year,git config core.autocrlf false
+    dd.year,
     dd.month,
     dd.month_name,
     SUM(fs.total_revenue) AS monthly_revenue,
