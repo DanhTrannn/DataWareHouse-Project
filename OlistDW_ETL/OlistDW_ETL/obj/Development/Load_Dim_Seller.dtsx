@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="43"
-  DTS:VersionGUID="{52D16AE7-A451-4F5A-A45B-F880F80A1C9B}">
+  DTS:VersionBuild="44"
+  DTS:VersionGUID="{B8C65740-5001-4EFC-AB86-EA8E25C56F1E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -547,14 +547,14 @@
                   expressionType="Notify"
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT geo_key, zip_code_prefix
-FROM gold.dim_geolocation;</property>
+FROM datamart.dim_geolocation;</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT geo_key, zip_code_prefix
-FROM gold.dim_geolocation;) [refTable]
+FROM datamart.dim_geolocation;) [refTable]
 where [refTable].[zip_code_prefix] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -713,7 +713,7 @@ where [refTable].[zip_code_prefix] = ?</property>
     city,
     state,
     geo_key
-FROM gold.dim_seller
+FROM datamart.dim_seller
 WHERE is_current = 1;</property>
                 <property
                   dataType="System.String"
@@ -726,7 +726,7 @@ WHERE is_current = 1;</property>
     city,
     state,
     geo_key
-FROM gold.dim_seller
+FROM datamart.dim_seller
 WHERE is_current = 1;) [refTable]
 where [refTable].[seller_id] = ?</property>
                 <property
@@ -953,7 +953,7 @@ where [refTable].[seller_id] = ?</property>
                   description="The SQL command to be executed."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE gold.dim_seller
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE datamart.dim_seller
 SET is_current = 0,
     effective_to = CAST(GETDATE() AS DATE)
 WHERE seller_key = ?;</property>
@@ -1049,7 +1049,7 @@ WHERE seller_key = ?;</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[dim_seller]</property>
+                  name="OpenRowset">[datamart].[dim_seller]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1250,7 +1250,7 @@ WHERE seller_key = ?;</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[dim_seller]</property>
+                  name="OpenRowset">[datamart].[dim_seller]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."

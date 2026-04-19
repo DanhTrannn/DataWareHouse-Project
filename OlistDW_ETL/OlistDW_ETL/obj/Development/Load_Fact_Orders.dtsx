@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Load_Fact_Orders"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{0F9086B7-6A1E-4C8B-970A-296768B8EB8C}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{08C9E1DB-D841-46A5-A2F6-A8624979C9DA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -427,7 +427,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[fact_orders]</property>
+                  name="OpenRowset">[datamart].[fact_orders]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -708,7 +708,7 @@
             PARTITION BY order_id 
             ORDER BY review_creation_date DESC, review_answer_timestamp DESC
         ) AS rn
-    FROM staging.stg_order_reviews
+    FROM core.order_reviews
 )
 SELECT
     oi.order_id,
@@ -725,14 +725,14 @@ SELECT
     oi.freight_value,
     1 AS quantity,
     r.review_score
-FROM staging.stg_order_items oi
-INNER JOIN staging.stg_orders o
+FROM core.order_items oi
+INNER JOIN core.orders o
     ON oi.order_id = o.order_id
 LEFT JOIN LatestReviews r
     ON o.order_id = r.order_id
     AND r.rn = 1 -- CHỈ LẤY REVIEW MỚI NHẤT
 WHERE NOT EXISTS (
-    SELECT 1 FROM gold.fact_orders f
+    SELECT 1 FROM datamart.fact_orders f
     WHERE f.order_id = oi.order_id
       AND f.order_item_id = oi.order_item_id
 );</property>
@@ -1107,7 +1107,7 @@ WHERE NOT EXISTS (
                   expressionType="Notify"
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT customer_key, customer_id
-FROM gold.dim_customer
+FROM datamart.dim_customer
 WHERE is_current = 1;</property>
                 <property
                   dataType="System.String"
@@ -1115,7 +1115,7 @@ WHERE is_current = 1;</property>
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT customer_key, customer_id
-FROM gold.dim_customer
+FROM datamart.dim_customer
 WHERE is_current = 1;) [refTable]
 where [refTable].[customer_id] = ?</property>
                 <property
@@ -1269,13 +1269,13 @@ where [refTable].[customer_id] = ?</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [gold].[dim_product]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [datamart].[dim_product]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [gold].[dim_product]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [datamart].[dim_product]) [refTable]
 where [refTable].[product_id] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -1429,7 +1429,7 @@ where [refTable].[product_id] = ?</property>
                   expressionType="Notify"
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT seller_key, seller_id
-FROM gold.dim_seller
+FROM datamart.dim_seller
 WHERE is_current = 1;</property>
                 <property
                   dataType="System.String"
@@ -1437,7 +1437,7 @@ WHERE is_current = 1;</property>
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT seller_key, seller_id
-FROM gold.dim_seller
+FROM datamart.dim_seller
 WHERE is_current = 1;) [refTable]
 where [refTable].[seller_id] = ?</property>
                 <property
@@ -3417,13 +3417,119 @@ where [refTable].[seller_id] = ?</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="176,41.6"
+          Id="Package\DFT - Load fact_orders (Incremental)\Derived product_key"
+          TopLeft="282.525510805504,343.306722610795" />
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\DFT - Load fact_orders (Incremental)\Lookup dim_product"
+          TopLeft="523.72449091079,340.386554493535" />
+        <NodeLayout
           Size="225.6,41.6"
           Id="Package\DFT - Load fact_orders (Incremental)\Load fact_orders (New Record)"
           TopLeft="117.142857392224,46.6470587826415" />
         <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\DFT - Load fact_orders (Incremental)\Derived customer_key"
+          TopLeft="426.938776419045,122.462184766607" />
+        <NodeLayout
+          Size="174.4,55.2"
+          Id="Package\DFT - Load fact_orders (Incremental)\Union customer_key"
+          TopLeft="305.357143507168,218.214285523012" />
+        <NodeLayout
+          Size="164,41.6"
+          Id="Package\DFT - Load fact_orders (Incremental)\Lookup dim_seller"
+          TopLeft="634.387756452486,229.151260352428" />
+        <NodeLayout
+          Size="230.4,41.6"
+          Id="Package\DFT - Load fact_orders (Incremental)\Insert fact_orders (Incremental)"
+          TopLeft="627.551021744055,538.504201641412" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\DFT - Load fact_orders (Incremental)\Union seller_key"
+          TopLeft="797.916668365222,341.868347117579" />
+        <NodeLayout
+          Size="181.6,41.6"
+          Id="Package\DFT - Load fact_orders (Incremental)\Union All product_key"
+          TopLeft="410.331633526549,457.485294012913" />
+        <NodeLayout
           Size="182.4,41.6"
           Id="Package\DFT - Load fact_orders (Incremental)\Lookup dim_customer"
           TopLeft="142.857143161248,120.823529305858" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\DFT - Load fact_orders (Incremental)\Derived seller_key"
+          TopLeft="925.714287684888,227.541736662823" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\DFT - Load fact_orders (Incremental)\Derived Column"
+          TopLeft="661.224491203492,453.193277018867" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Union All Output 12]"
+          TopLeft="591.931633526549,476.13928551589">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.2928576769433,0"
+              Start="0,0"
+              End="61.7928576769433,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="61.7928576769433,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Union All Output 11]"
+          TopLeft="797.916668365222,361.927450805557">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-99.7921774544313,0"
+              Start="0,0"
+              End="-92.2921774544313,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-92.2921774544313,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Union All Output 1]"
+          TopLeft="479.757143507168,247.88277293772">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="154.630612945317,0"
+              Start="0,0"
+              End="147.130612945317,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="147.130612945317,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load fact_orders (Incremental).Paths[OLE DB Source Output]"
           TopLeft="232.000000276736,88.2470587826415">
@@ -3446,10 +3552,54 @@ where [refTable].[seller_id] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="183.2,41.6"
-          Id="Package\DFT - Load fact_orders (Incremental)\Derived customer_key"
-          TopLeft="426.938776419045,122.462184766607" />
+        <EdgeLayout
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Lookup No Match Output2]"
+          TopLeft="523.72449091079,362.646638552165">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-65.1989801052861,0"
+              Start="0,0"
+              End="-57.6989801052861,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-57.6989801052861,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-84.655876771393,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Lookup No Match Output1]"
+          TopLeft="798.387756452486,249.146498507625">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="127.326531232402,0"
+              Start="0,0"
+              End="119.826531232402,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="119.826531232402,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="4.10687889745116,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load fact_orders (Incremental).Paths[Lookup No Match Output]"
           TopLeft="325.257143161248,142.442857036233">
@@ -3474,42 +3624,76 @@ where [refTable].[seller_id] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="174.4,55.2"
-          Id="Package\DFT - Load fact_orders (Incremental)\Union customer_key"
-          TopLeft="305.357143507168,218.214285523012" />
         <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Derived Column Output]"
-          TopLeft="518.538776419045,164.062184766607">
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Lookup Match Output2]"
+          TopLeft="610.92449091079,381.986554493535">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-98.2482995785428,54.1521007564055"
+              EndConnector="-80.8595240509086,75.4987395193781"
               Start="0,0"
-              End="-98.2482995785428,46.6521007564055">
+              End="-80.8595240509086,67.9987395193781">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.1958853588084" />
+                    End="0,40.9036171289925" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,28.1958853588084"
-                    Point2="0,32.1958853588084"
-                    Point3="-4,32.1958853588084" />
+                    Point1="0,40.9036171289925"
+                    Point2="0,44.9036171289925"
+                    Point3="-4,44.9036171289925" />
                   <mssgle:LineSegment
-                    End="-94.2482995785428,32.1958853588084" />
+                    End="-76.8595240509086,44.9036171289925" />
                   <mssgle:CubicBezierSegment
-                    Point1="-94.2482995785428,32.1958853588084"
-                    Point2="-98.2482995785428,32.1958853588084"
-                    Point3="-98.2482995785428,36.1958853588084" />
+                    Point1="-76.8595240509086,44.9036171289925"
+                    Point2="-80.8595240509086,44.9036171289925"
+                    Point3="-80.8595240509086,48.9036171289925" />
                   <mssgle:LineSegment
-                    End="-98.2482995785428,46.6521007564055" />
+                    End="-80.8595240509086,67.9987395193781" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-88.6211487442043,49.9036171289925,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Lookup Match Output1]"
+          TopLeft="716.387756452486,270.751260352428">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="134.862245246069,71.117086765151"
+              Start="0,0"
+              End="134.862245246069,63.617086765151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.2370515305719" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,38.2370515305719"
+                    Point2="0,42.2370515305719"
+                    Point3="4,42.2370515305719" />
+                  <mssgle:LineSegment
+                    End="130.862245246069,42.2370515305719" />
+                  <mssgle:CubicBezierSegment
+                    Point1="130.862245246069,42.2370515305719"
+                    Point2="134.862245246069,42.2370515305719"
+                    Point3="134.862245246069,46.2370515305719" />
+                  <mssgle:LineSegment
+                    End="134.862245246069,63.617086765151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="19.2397359042847,47.2370515305719,96.3827734375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3548,226 +3732,26 @@ where [refTable].[seller_id] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="164,41.6"
-          Id="Package\DFT - Load fact_orders (Incremental)\Lookup dim_seller"
-          TopLeft="634.387756452486,229.151260352428" />
         <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Union All Output 1]"
-          TopLeft="479.757143507168,247.88277293772">
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Derived Column Output3]"
+          TopLeft="740.187756473773,494.793277018868">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="154.630612945317,0"
+              EndConnector="0,43.7109246225448"
               Start="0,0"
-              End="147.130612945317,0">
+              End="0,36.2109246225448">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="147.130612945317,0" />
+                    End="0,36.2109246225448" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="164.8,41.6"
-          Id="Package\DFT - Load fact_orders (Incremental)\Derived seller_key"
-          TopLeft="925.714287684888,227.541736662823" />
-        <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Lookup No Match Output1]"
-          TopLeft="798.387756452486,249.146498507625">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="127.326531232402,0"
-              Start="0,0"
-              End="119.826531232402,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="119.826531232402,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="4.10687889745116,5,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="156,41.6"
-          Id="Package\DFT - Load fact_orders (Incremental)\Union seller_key"
-          TopLeft="797.916668365222,341.868347117579" />
-        <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Lookup Match Output1]"
-          TopLeft="716.387756452486,270.751260352428">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="134.862245246069,71.117086765151"
-              Start="0,0"
-              End="134.862245246069,63.617086765151">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,38.2370515305719" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,38.2370515305719"
-                    Point2="0,42.2370515305719"
-                    Point3="4,42.2370515305719" />
-                  <mssgle:LineSegment
-                    End="130.862245246069,42.2370515305719" />
-                  <mssgle:CubicBezierSegment
-                    Point1="130.862245246069,42.2370515305719"
-                    Point2="134.862245246069,42.2370515305719"
-                    Point3="134.862245246069,46.2370515305719" />
-                  <mssgle:LineSegment
-                    End="134.862245246069,63.617086765151" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="19.2397359042847,47.2370515305719,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Derived Column Output1]"
-          TopLeft="1008.11428768489,269.141736662823">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-107.530952653,72.7266104547558"
-              Start="0,0"
-              End="-107.530952653,65.2266104547558">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,39.1929615391189" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,39.1929615391189"
-                    Point2="0,43.1929615391189"
-                    Point3="-4,43.1929615391189" />
-                  <mssgle:LineSegment
-                    End="-103.530952653,43.1929615391189" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-103.530952653,43.1929615391189"
-                    Point2="-107.530952653,43.1929615391189"
-                    Point3="-107.530952653,47.1929615391189" />
-                  <mssgle:LineSegment
-                    End="-107.530952653,65.2266104547558" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="174.4,41.6"
-          Id="Package\DFT - Load fact_orders (Incremental)\Lookup dim_product"
-          TopLeft="523.72449091079,340.386554493535" />
-        <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Union All Output 11]"
-          TopLeft="797.916668365222,361.927450805557">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-99.7921774544313,0"
-              Start="0,0"
-              End="-92.2921774544313,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-92.2921774544313,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="176,41.6"
-          Id="Package\DFT - Load fact_orders (Incremental)\Derived product_key"
-          TopLeft="282.525510805504,343.306722610795" />
-        <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Lookup No Match Output2]"
-          TopLeft="523.72449091079,362.646638552165">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-65.1989801052861,0"
-              Start="0,0"
-              End="-57.6989801052861,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-57.6989801052861,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-84.655876771393,5,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="181.6,41.6"
-          Id="Package\DFT - Load fact_orders (Incremental)\Union All product_key"
-          TopLeft="410.331633526549,457.485294012913" />
-        <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Lookup Match Output2]"
-          TopLeft="610.92449091079,381.986554493535">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-80.8595240509086,75.4987395193781"
-              Start="0,0"
-              End="-80.8595240509086,67.9987395193781">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,40.9036171289925" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,40.9036171289925"
-                    Point2="0,44.9036171289925"
-                    Point3="-4,44.9036171289925" />
-                  <mssgle:LineSegment
-                    End="-76.8595240509086,44.9036171289925" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-76.8595240509086,44.9036171289925"
-                    Point2="-80.8595240509086,44.9036171289925"
-                    Point3="-80.8595240509086,48.9036171289925" />
-                  <mssgle:LineSegment
-                    End="-80.8595240509086,67.9987395193781" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-88.6211487442043,49.9036171289925,96.3827734375,11.609375"
-              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3804,24 +3788,32 @@ where [refTable].[seller_id] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\DFT - Load fact_orders (Incremental)\Derived Column"
-          TopLeft="661.224491203492,453.193277018867" />
         <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Union All Output 12]"
-          TopLeft="591.931633526549,476.13928551589">
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Derived Column Output1]"
+          TopLeft="1008.11428768489,269.141736662823">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="69.2928576769433,0"
+              EndConnector="-107.530952653,72.7266104547558"
               Start="0,0"
-              End="61.7928576769433,0">
+              End="-107.530952653,65.2266104547558">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="61.7928576769433,0" />
+                    End="0,39.1929615391189" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.1929615391189"
+                    Point2="0,43.1929615391189"
+                    Point3="-4,43.1929615391189" />
+                  <mssgle:LineSegment
+                    End="-103.530952653,43.1929615391189" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-103.530952653,43.1929615391189"
+                    Point2="-107.530952653,43.1929615391189"
+                    Point3="-107.530952653,47.1929615391189" />
+                  <mssgle:LineSegment
+                    End="-107.530952653,65.2266104547558" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3830,24 +3822,32 @@ where [refTable].[seller_id] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="230.4,41.6"
-          Id="Package\DFT - Load fact_orders (Incremental)\Insert fact_orders (Incremental)"
-          TopLeft="627.551021744055,538.504201641412" />
         <EdgeLayout
-          Id="Package\DFT - Load fact_orders (Incremental).Paths[Derived Column Output3]"
-          TopLeft="740.187756473773,494.793277018868">
+          Id="Package\DFT - Load fact_orders (Incremental).Paths[Derived Column Output]"
+          TopLeft="518.538776419045,164.062184766607">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,43.7109246225448"
+              EndConnector="-98.2482995785428,54.1521007564055"
               Start="0,0"
-              End="0,36.2109246225448">
+              End="-98.2482995785428,46.6521007564055">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.2109246225448" />
+                    End="0,28.1958853588084" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.1958853588084"
+                    Point2="0,32.1958853588084"
+                    Point3="-4,32.1958853588084" />
+                  <mssgle:LineSegment
+                    End="-94.2482995785428,32.1958853588084" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-94.2482995785428,32.1958853588084"
+                    Point2="-98.2482995785428,32.1958853588084"
+                    Point3="-98.2482995785428,36.1958853588084" />
+                  <mssgle:LineSegment
+                    End="-98.2482995785428,46.6521007564055" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3859,37 +3859,6 @@ where [refTable].[seller_id] = ?</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_orders (Incremental)\Load fact_orders (New Record)">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load fact_orders (Incremental)\Lookup dim_customer">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT - Load fact_orders (Incremental)\Lookup dim_seller">
     <Properties>
@@ -3914,6 +3883,14 @@ where [refTable].[seller_id] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_orders (Incremental)\Load fact_orders (New Record)">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\DFT - Load fact_orders (Incremental)\Lookup dim_product">
     <Properties>
       <Property>
@@ -3924,7 +3901,30 @@ where [refTable].[seller_id] = ?</property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[gold].[dim_product]</Value>
+          type="q3:string">[datamart].[dim_product]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load fact_orders (Incremental)\Lookup dim_customer">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>

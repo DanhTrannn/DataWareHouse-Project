@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{DCF4AA18-27C5-492D-AC93-6B8EEA3E882F}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{90D971B1-2F4C-407E-991A-A3C9922FE86A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -47,7 +47,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[fact_customer_orders]</property>
+                  name="OpenRowset">[datamart].[fact_customer_orders]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -244,17 +244,17 @@
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     fo.customer_key,
     fo.order_status,
-    fo.order_date_key AS date_key, -- Dùng trực tiếp key ngày từ bảng Fact
+    fo.order_date_key AS date_key, 
     COUNT(DISTINCT fo.order_id)  AS total_orders,
     COUNT(*)                     AS total_items,
     SUM(fo.price + fo.freight_value) AS total_spent,
     AVG(CAST(fo.review_score AS DECIMAL(3,2))) AS avg_review_score
-FROM gold.fact_orders fo
+FROM datamart.fact_orders fo
 WHERE fo.customer_key IS NOT NULL
 GROUP BY 
     fo.customer_key, 
     fo.order_status, 
-    fo.order_date_key; -- Nhóm theo từng ngày cụ thể</property>
+    fo.order_date_key;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -486,7 +486,7 @@ GROUP BY
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE gold.fact_customer_orders;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="TRUNCATE TABLE datamart.fact_customer_orders;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -513,7 +513,7 @@ GROUP BY
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="207.2,41.6"
+          Size="206.4,41.6"
           Id="Package\Load fact_customer_orders"
           TopLeft="398,234" />
         <NodeLayout
@@ -522,18 +522,18 @@ GROUP BY
           TopLeft="371,137" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="501.5,179">
+          TopLeft="501.3,178.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,55"
+              EndConnector="0,55.4"
               Start="0,0"
-              End="0,47.5">
+              End="0,47.9">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,47.5" />
+                    End="0,47.9" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -584,7 +584,7 @@ GROUP BY
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Load fact_customer_orders\Load fact_orders">
+    design-time-name="Package\Load fact_customer_orders\fact_customer_orders Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -597,7 +597,7 @@ GROUP BY
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load fact_customer_orders\fact_customer_orders Destination">
+    design-time-name="Package\Load fact_customer_orders\Load fact_orders">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

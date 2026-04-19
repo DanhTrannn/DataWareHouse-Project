@@ -1,0 +1,519 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/19/2026 2:32:41 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-NS3FCL96"
+  DTS:CreatorName="LAPTOP-NS3FCL96\ADMIN"
+  DTS:DTSID="{F13C1FDC-4108-4C74-B6AD-A52166CAF27C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1066"
+  DTS:ObjectName="Transform_To_Core"
+  DTS:PackageType="5"
+  DTS:VersionBuild="26"
+  DTS:VersionGUID="{92CB0D77-8045-4456-A8A5-5D30C9DD599E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{51D0833F-6F9D-4F84-8588-C931491CF228}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="INSERT INTO core.products&#xA;SELECT DISTINCT &#xA;    TRIM(product_id) AS product_id,&#xA;    ISNULL(NULLIF(TRIM(product_category_name), ''), 'unknown') AS product_category_name,&#xA;    ISNULL(product_name_length, 0) AS product_name_length,&#xA;    ISNULL(product_description_length, 0) AS product_description_length,&#xA;    ISNULL(product_photos_qty, 0) AS product_photos_qty,&#xA;    ISNULL(product_weight_g, 0) AS product_weight_g,&#xA;    ISNULL(product_length_cm, 0) AS product_length_cm,&#xA;    ISNULL(product_height_cm, 0) AS product_height_cm,&#xA;    ISNULL(product_width_cm, 0) AS product_width_cm&#xA;FROM staging.stg_products&#xA;WHERE product_id IS NOT NULL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_StagingToCoreCategory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9EA98CD7-84AC-439A-A88B-C57ED5C74FE0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_StagingToCoreCategory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="INSERT INTO core.category_translation&#xA;SELECT DISTINCT&#xA;    TRIM(product_category_name) AS product_category_name,&#xA;    ISNULL(NULLIF(TRIM(product_category_name_english), ''), 'Unknown') AS product_category_name_english&#xA;FROM staging.stg_category_translation&#xA;WHERE product_category_name IS NOT NULL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_StagingToCoreCustomer"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FC6434A9-63AD-44DC-B8D1-9B9473E4E37F}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_StagingToCoreCustomer"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="INSERT INTO core.customers&#xA;SELECT&#xA;    TRIM(customer_id) AS customer_id,&#xA;    TRIM(customer_unique_id) AS customer_unique_id,&#xA;    ISNULL(NULLIF(TRIM(customer_zip_code_prefix), ''), '00000') AS customer_zip_code_prefix,&#xA;    ISNULL(NULLIF(TRIM(customer_city), ''), 'Unknown') AS customer_city,&#xA;    UPPER(ISNULL(NULLIF(TRIM(customer_state), ''), 'NA')) AS customer_state&#xA;FROM staging.stg_customers&#xA;WHERE customer_id IS NOT NULL AND customer_unique_id IS NOT NULL&#xA;GROUP BY &#xA;    customer_id, &#xA;    customer_unique_id, &#xA;    customer_zip_code_prefix, &#xA;    customer_city, &#xA;    customer_state;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_StagingToCoreGeo"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{57464F8A-3AC1-4AAB-B5B7-7F639457F9CF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_StagingToCoreGeo"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="INSERT INTO core.geolocation&#xA;SELECT DISTINCT&#xA;    TRIM(geolocation_zip_code_prefix) AS geolocation_zip_code_prefix,&#xA;    ISNULL(geolocation_lat, 0) AS geolocation_lat,&#xA;    ISNULL(geolocation_lng, 0) AS geolocation_lng,&#xA;    ISNULL(NULLIF(TRIM(geolocation_city), ''), 'Unknown') AS geolocation_city,&#xA;    UPPER(ISNULL(NULLIF(TRIM(geolocation_state), ''), 'NA')) AS geolocation_state&#xA;FROM staging.stg_geolocation&#xA;WHERE geolocation_zip_code_prefix IS NOT NULL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_StagingToCoreOrder"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{387D0121-5788-4F68-97F3-EC0916A62119}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_StagingToCoreOrder"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="INSERT INTO core.orders&#xA;SELECT DISTINCT&#xA;    TRIM(order_id) AS order_id,&#xA;    TRIM(customer_id) AS customer_id,&#xA;    UPPER(ISNULL(NULLIF(TRIM(order_status), ''), 'UNKNOWN')) AS order_status,&#xA;    ISNULL(order_purchase_timestamp, '1900-01-01') AS order_purchase_timestamp,&#xA;    order_approved_at,&#xA;    order_delivered_carrier_date,&#xA;    order_delivered_customer_date,&#xA;    order_estimated_delivery_date&#xA;FROM staging.stg_orders&#xA;WHERE order_id IS NOT NULL &#xA;  AND customer_id IS NOT NULL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_StagingToCoreOrderItems"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0DC5CA05-39EC-415E-A1FC-AAFCCA28957B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_StagingToCoreOrderItems"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="INSERT INTO core.order_items&#xA;SELECT DISTINCT&#xA;    TRIM(order_id) AS order_id,&#xA;    order_item_id,&#xA;    TRIM(product_id) AS product_id,&#xA;    TRIM(seller_id) AS seller_id,&#xA;    shipping_limit_date,&#xA;    ISNULL(price, 0.00) AS price,&#xA;    ISNULL(freight_value, 0.00) AS freight_value&#xA;FROM staging.stg_order_items&#xA;WHERE order_id IS NOT NULL&#xA;  AND product_id IS NOT NULL&#xA;  AND seller_id IS NOT NULL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_StagingToCoreOrderPayment"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FB0D89BA-03EE-4996-BEF8-C75BBD7F914E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_StagingToCoreOrderPayment"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="INSERT INTO core.order_payments&#xA;SELECT DISTINCT&#xA;    TRIM(order_id) AS order_id,&#xA;    ISNULL(payment_sequential, 1) AS payment_sequential,&#xA;    LOWER(ISNULL(NULLIF(TRIM(payment_type), ''), 'unknown')) AS payment_type,&#xA;    ISNULL(payment_installments, 1) AS payment_installments,&#xA;    ISNULL(payment_value, 0.00) AS payment_value&#xA;FROM staging.stg_order_payments&#xA;WHERE order_id IS NOT NULL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_StagingToCoreReview"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CD9B581D-A8EC-45DF-A63F-EC425DC3ED3B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_StagingToCoreReview"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="INSERT INTO core.order_reviews&#xA;SELECT DISTINCT&#xA;    TRIM(review_id) AS review_id,&#xA;    TRIM(order_id) AS order_id,&#xA;    CASE &#xA;        WHEN review_score &lt; 1 OR review_score &gt; 5 THEN NULL &#xA;        ELSE review_score &#xA;    END AS review_score,&#xA;    ISNULL(NULLIF(TRIM(review_comment_title), ''), '') AS review_comment_title,&#xA;    ISNULL(NULLIF(TRIM(review_comment_message), ''), '') AS review_comment_message,&#xA;    review_creation_date,&#xA;    review_answer_timestamp&#xA;FROM staging.stg_order_reviews&#xA;WHERE review_id IS NOT NULL AND order_id IS NOT NULL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_StagingToCoreSeller"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{17CAF069-3382-45EE-ABF2-6316D6697056}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_StagingToCoreSeller"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="INSERT INTO core.sellers&#xA;SELECT DISTINCT&#xA;    TRIM(seller_id) AS seller_id,&#xA;    ISNULL(NULLIF(TRIM(seller_zip_code_prefix), ''), '00000') AS seller_zip_code_prefix,&#xA;    ISNULL(NULLIF(TRIM(seller_city), ''), 'Unknown') AS seller_city,&#xA;    UPPER(ISNULL(NULLIF(TRIM(seller_state), ''), 'NA')) AS seller_state&#xA;FROM staging.stg_sellers&#xA;WHERE seller_id IS NOT NULL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_TruncateCoreTables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{04E0CF92-5521-4FE0-B968-35317F01E589}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_TruncateCoreTables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE core.category_translation;&#xA;TRUNCATE TABLE core.order_reviews;&#xA;TRUNCATE TABLE core.order_payments;&#xA;TRUNCATE TABLE core.order_items;&#xA;TRUNCATE TABLE core.orders;&#xA;TRUNCATE TABLE core.products;&#xA;TRUNCATE TABLE core.sellers;&#xA;TRUNCATE TABLE core.geolocation;&#xA;TRUNCATE TABLE core.customers;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2FD10FB1-FECD-4077-9C9C-642AFEEBC394}"
+      DTS:From="Package\SQL_TruncateCoreTables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SQL_StagingToCoreCustomer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{538872F3-8783-47E4-948F-010077561D35}"
+      DTS:From="Package\SQL_StagingToCoreCustomer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\SQL_StagingToCoreGeo" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{6732F00C-ED99-45B1-8F1C-ECE80F008CEB}"
+      DTS:From="Package\SQL_StagingToCoreGeo"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\SQL_StagingToCoreOrder" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{C78E95F6-D7EF-41A4-9C70-02B3AD329E4C}"
+      DTS:From="Package\SQL_StagingToCoreOrder"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\SQL_StagingToCoreOrderItems" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{9A3CB3E6-B388-4FAA-854C-5BA979A60677}"
+      DTS:From="Package\SQL_StagingToCoreOrderItems"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\SQL_StagingToCoreReview" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{043865EB-651A-4ABC-A462-0C12D7B97D0F}"
+      DTS:From="Package\SQL_StagingToCoreReview"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\SQL_StagingToCoreSeller" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{1CF0B990-A27C-4F09-A69A-8160884CE275}"
+      DTS:From="Package\SQL_StagingToCoreSeller"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Execute SQL Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{97C244F6-5DD0-4793-A08A-7315522A1710}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\SQL_StagingToCoreCategory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{B17492BB-228D-41E9-870A-D8BB53464832}"
+      DTS:From="Package\SQL_StagingToCoreCategory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\SQL_StagingToCoreOrderPayment" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Execute SQL Task"
+          TopLeft="575.000001224024,573.494117462728" />
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\SQL_StagingToCoreCategory"
+          TopLeft="549.285715454999,474.117646962301" />
+        <NodeLayout
+          Size="216.8,41.6"
+          Id="Package\SQL_StagingToCoreCustomer"
+          TopLeft="262.142857700891,138.552941057828" />
+        <NodeLayout
+          Size="190.4,41.6"
+          Id="Package\SQL_StagingToCoreGeo"
+          TopLeft="275.714286301209,218.847058634506" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\SQL_StagingToCoreOrder"
+          TopLeft="273.57142915379,294.623529157723" />
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\SQL_StagingToCoreOrderItems"
+          TopLeft="257.857143406053,394.364705608202" />
+        <NodeLayout
+          Size="240,41.6"
+          Id="Package\SQL_StagingToCoreOrderPayment"
+          TopLeft="533.571429707262,359.552941092013" />
+        <NodeLayout
+          Size="205.6,41.6"
+          Id="Package\SQL_StagingToCoreReview"
+          TopLeft="275.714286301209,490.505882081472" />
+        <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\SQL_StagingToCoreSeller"
+          TopLeft="282.857143459271,577.364705619597" />
+        <NodeLayout
+          Size="196.8,41.6"
+          Id="Package\SQL_TruncateCoreTables"
+          TopLeft="274.285714869597,48.1764705460067" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="371.614286285244,89.7764705460067">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.7764705118217"
+              Start="0,0"
+              End="0,41.2764705118217">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.2764705118217" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="370.72857200105,180.152941057828">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.694117576678"
+              Start="0,0"
+              End="0,31.194117576678">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.194117576678" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="371.8428577275,260.447058634506">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.1764705232169"
+              Start="0,0"
+              End="0,26.6764705232169">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.6764705232169" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="371.714286279922,336.223529157723">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.1411764504791"
+              Start="0,0"
+              End="0,50.6411764504791">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.6411764504791" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="374.585714853631,435.964705608203">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54.5411764732693"
+              Start="0,0"
+              End="0,47.0411764732693">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.0411764732693" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="380.08571488024,532.105882081472">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.2588235381256"
+              Start="0,0"
+              End="0,37.7588235381256">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.7588235381256" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="480.457143459271,596.229411541163">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="94.5428577647527,0"
+              Start="0,0"
+              End="87.0428577647527,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="87.0428577647527,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="656.342858339512,573.494117462728">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-57.7764705004266"
+              Start="0,0"
+              End="0,-50.2764705004266">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-50.2764705004266" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="655.028572581131,474.117646962301">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-72.9647058702876"
+              Start="0,0"
+              End="0,-65.4647058702876">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-65.4647058702876" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

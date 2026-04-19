@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="29"
-  DTS:VersionGUID="{B13F209A-E7B6-483E-B9F4-917081B1A09E}">
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{B9B8ABF4-32F5-46A8-9788-56110E401BB1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -463,7 +463,7 @@
                   expressionType="Notify"
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT customer_key, customer_unique_id, city, state, geo_key
-FROM gold.dim_customer
+ FROM datamart.dim_customer 
 WHERE is_current = 1;</property>
                 <property
                   dataType="System.String"
@@ -471,7 +471,7 @@ WHERE is_current = 1;</property>
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT customer_key, customer_unique_id, city, state, geo_key
-FROM gold.dim_customer
+ FROM datamart.dim_customer 
 WHERE is_current = 1;) [refTable]
 where [refTable].[customer_unique_id] = ?</property>
                 <property
@@ -656,15 +656,15 @@ where [refTable].[customer_unique_id] = ?</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT geo_key, zip_code_prefix
-FROM gold.dim_geolocation;</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT geo_key, zip_code_prefix 
+FROM datamart.dim_geolocation;</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT geo_key, zip_code_prefix
-FROM gold.dim_geolocation;) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT geo_key, zip_code_prefix 
+FROM datamart.dim_geolocation;) [refTable]
 where [refTable].[zip_code_prefix] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -859,7 +859,7 @@ where [refTable].[zip_code_prefix] = ?</property>
                   description="The SQL command to be executed."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE gold.dim_customer
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE datamart.dim_customer
 SET is_current = 0, effective_to = CAST(GETDATE() AS DATE)
 WHERE customer_key = ?;</property>
                 <property
@@ -954,7 +954,7 @@ WHERE customer_key = ?;</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[dim_customer]</property>
+                  name="OpenRowset">[datamart].[dim_customer]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1155,7 +1155,7 @@ WHERE customer_key = ?;</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[dim_customer]</property>
+                  name="OpenRowset">[datamart].[dim_customer]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1371,7 +1371,7 @@ WHERE customer_key = ?;</property>
     customer_zip_code_prefix,
     customer_city,
     customer_state
-FROM staging.stg_customers;</property>
+FROM core.customers;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1904,14 +1904,14 @@ FROM staging.stg_customers;</property>
                       cachedName="geolocation_lat"
                       cachedPrecision="10"
                       cachedScale="6"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_geolocation\Conditional Split.Inputs[Conditional Split Input].Columns[geolocation_lng]"
                       cachedDataType="numeric"
                       cachedName="geolocation_lng"
                       cachedPrecision="10"
                       cachedScale="6"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_geolocation\Conditional Split.Inputs[Conditional Split Input].Columns[existing_lat]"
                       cachedDataType="numeric"
@@ -1945,7 +1945,7 @@ FROM staging.stg_customers;</property>
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]} != #{Package\DFT - Load dim_geolocation\Lookup dim_geolocation.Outputs[Lookup Match Output].Columns[existing_lat]} || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]} != #{Package\DFT - Load dim_geolocation\Lookup dim_geolocation.Outputs[Lookup Match Output].Columns[existing_lng]}</property>
+                      name="Expression">#{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]} != #{Package\DFT - Load dim_geolocation\Lookup dim_geolocation.Outputs[Lookup Match Output].Columns[existing_lat]} || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]} != #{Package\DFT - Load dim_geolocation\Lookup dim_geolocation.Outputs[Lookup Match Output].Columns[existing_lng]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
@@ -1998,6 +1998,217 @@ FROM staging.stg_customers;</property>
               </outputs>
             </component>
             <component
+              refId="Package\DFT - Load dim_geolocation\core_geolocation"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="core_geolocation"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT
+    geolocation_zip_code_prefix,
+    geolocation_lat,
+    geolocation_lng,
+    geolocation_city,
+    geolocation_state
+FROM core.geolocation;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load dim_geolocation\core_geolocation.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_zip_code_prefix]"
+                      length="10"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]"
+                      name="geolocation_zip_code_prefix"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_lat]"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]"
+                      name="geolocation_lat"
+                      precision="10"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_lng]"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]"
+                      name="geolocation_lng"
+                      precision="10"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_city]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_city]"
+                      length="100"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_city]"
+                      name="geolocation_city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_state]"
+                      length="5"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]"
+                      name="geolocation_state"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_zip_code_prefix]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="geolocation_zip_code_prefix" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_lat]"
+                      dataType="numeric"
+                      name="geolocation_lat"
+                      precision="10"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_lng]"
+                      dataType="numeric"
+                      name="geolocation_lng"
+                      precision="10"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_city]"
+                      dataType="wstr"
+                      length="100"
+                      name="geolocation_city" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="geolocation_state" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_zip_code_prefix]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_zip_code_prefix]"
+                      name="geolocation_zip_code_prefix" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_lat]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_lat]"
+                      name="geolocation_lat"
+                      precision="10"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_lng]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_lng]"
+                      name="geolocation_lng"
+                      precision="10"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_city]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_city]"
+                      name="geolocation_city" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_state]"
+                      name="geolocation_state" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\DFT - Load dim_geolocation\Derived Column"
               componentClassID="Microsoft.DerivedColumn"
               contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -2016,7 +2227,7 @@ FROM staging.stg_customers;</property>
                       cachedDataType="str"
                       cachedLength="5"
                       cachedName="geolocation_state"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -2044,7 +2255,7 @@ FROM staging.stg_customers;</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_STR,20,1252)(#{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "SP" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RJ" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "MG" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "ES" ? "Sudeste" : #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PR" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "SC" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RS" ? "Sul" : #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "BA" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PE" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "CE" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "MA" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PB" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RN" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "AL" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PI" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "SE" ? "Nordeste" : #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "AM" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PA" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RO" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "TO" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "AC" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "AP" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RR" ? "Norte" : #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "GO" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "MT" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "MS" || #{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "DF" ? "Centro-Oeste" : "Unknown")</property>
+                          name="Expression">(DT_STR,20,1252)(#{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "SP" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RJ" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "MG" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "ES" ? "Sudeste" : #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PR" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "SC" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RS" ? "Sul" : #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "BA" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PE" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "CE" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "MA" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PB" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RN" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "AL" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PI" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "SE" ? "Nordeste" : #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "AM" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "PA" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RO" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "TO" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "AC" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "AP" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "RR" ? "Norte" : #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "GO" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "MT" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "MS" || #{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]} == "DF" ? "Centro-Oeste" : "Unknown")</property>
                         <property
                           containsID="true"
                           dataType="System.String"
@@ -2095,13 +2306,13 @@ FROM staging.stg_customers;</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [gold].[dim_geolocation]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [datamart].[dim_geolocation]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [gold].[dim_geolocation]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [datamart].[dim_geolocation]) [refTable]
 where [refTable].[zip_code_prefix] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -2138,7 +2349,7 @@ where [refTable].[zip_code_prefix] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]};</property>
+                  name="ParameterMap">#{Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2167,7 +2378,7 @@ where [refTable].[zip_code_prefix] = ?</property>
                       cachedDataType="str"
                       cachedLength="10"
                       cachedName="geolocation_zip_code_prefix"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]">
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -2305,7 +2516,7 @@ where [refTable].[zip_code_prefix] = ?</property>
                   description="The SQL command to be executed."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE gold.dim_geolocation
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE datamart.dim_geolocation
 SET latitude = ?, longitude = ?, city = ?
 WHERE geo_key = ?;</property>
                 <property
@@ -2336,7 +2547,7 @@ WHERE geo_key = ?;</property>
                       cachedPrecision="10"
                       cachedScale="6"
                       externalMetadataColumnId="Package\DFT - Load dim_geolocation\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_geolocation\OLE DB Command.Inputs[OLE DB Command Input].Columns[geolocation_lng]"
                       cachedDataType="numeric"
@@ -2344,14 +2555,14 @@ WHERE geo_key = ?;</property>
                       cachedPrecision="10"
                       cachedScale="6"
                       externalMetadataColumnId="Package\DFT - Load dim_geolocation\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_geolocation\OLE DB Command.Inputs[OLE DB Command Input].Columns[geolocation_city]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="geolocation_city"
                       externalMetadataColumnId="Package\DFT - Load dim_geolocation\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_city]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_city]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_geolocation\OLE DB Command.Inputs[OLE DB Command Input].Columns[existing_geo_key]"
                       cachedDataType="i4"
@@ -2461,7 +2672,7 @@ WHERE geo_key = ?;</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[dim_geolocation]</property>
+                  name="OpenRowset">[datamart].[dim_geolocation]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -2532,14 +2743,14 @@ WHERE geo_key = ?;</property>
                       cachedLength="10"
                       cachedName="geolocation_zip_code_prefix"
                       externalMetadataColumnId="Package\DFT - Load dim_geolocation\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[zip_code_prefix]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_geolocation\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[geolocation_city]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="geolocation_city"
                       externalMetadataColumnId="Package\DFT - Load dim_geolocation\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[city]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_city]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_city]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_geolocation\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[geolocation_state]"
                       cachedCodepage="1252"
@@ -2547,7 +2758,7 @@ WHERE geo_key = ?;</property>
                       cachedLength="5"
                       cachedName="geolocation_state"
                       externalMetadataColumnId="Package\DFT - Load dim_geolocation\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_geolocation\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[geolocation_lat]"
                       cachedDataType="numeric"
@@ -2555,7 +2766,7 @@ WHERE geo_key = ?;</property>
                       cachedPrecision="10"
                       cachedScale="6"
                       externalMetadataColumnId="Package\DFT - Load dim_geolocation\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[latitude]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_geolocation\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[geolocation_lng]"
                       cachedDataType="numeric"
@@ -2563,7 +2774,7 @@ WHERE geo_key = ?;</property>
                       cachedPrecision="10"
                       cachedScale="6"
                       externalMetadataColumnId="Package\DFT - Load dim_geolocation\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[longitude]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]" />
+                      lineageId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2634,217 +2845,6 @@ WHERE geo_key = ?;</property>
                 </output>
               </outputs>
             </component>
-            <component
-              refId="Package\DFT - Load dim_geolocation\stg_geolocation"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="stg_geolocation"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset"></property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT
-    geolocation_zip_code_prefix,
-    geolocation_lat,
-    geolocation_lng,
-    geolocation_city,
-    geolocation_state
-FROM staging.stg_geolocation;</property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">2</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\DFT - Load dim_geolocation\stg_geolocation.Connections[OleDbConnection]"
-                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_zip_code_prefix]"
-                      length="10"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_zip_code_prefix]"
-                      name="geolocation_zip_code_prefix"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_lat]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lat]"
-                      name="geolocation_lat"
-                      precision="10"
-                      scale="6"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_lng]"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_lng]"
-                      name="geolocation_lng"
-                      precision="10"
-                      scale="6"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_city]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_city]"
-                      length="100"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_city]"
-                      name="geolocation_city"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_state]"
-                      length="5"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].Columns[geolocation_state]"
-                      name="geolocation_state"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_zip_code_prefix]"
-                      codePage="1252"
-                      dataType="str"
-                      length="10"
-                      name="geolocation_zip_code_prefix" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_lat]"
-                      dataType="numeric"
-                      name="geolocation_lat"
-                      precision="10"
-                      scale="6" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_lng]"
-                      dataType="numeric"
-                      name="geolocation_lng"
-                      precision="10"
-                      scale="6" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_city]"
-                      dataType="wstr"
-                      length="100"
-                      name="geolocation_city" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output].ExternalColumns[geolocation_state]"
-                      codePage="1252"
-                      dataType="str"
-                      length="5"
-                      name="geolocation_state" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_zip_code_prefix]"
-                      codePage="1252"
-                      dataType="str"
-                      length="10"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_zip_code_prefix]"
-                      name="geolocation_zip_code_prefix" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_lat]"
-                      dataType="numeric"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_lat]"
-                      name="geolocation_lat"
-                      precision="10"
-                      scale="6" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_lng]"
-                      dataType="numeric"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_lng]"
-                      name="geolocation_lng"
-                      precision="10"
-                      scale="6" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_city]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_city]"
-                      name="geolocation_city" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_state]"
-                      codePage="1252"
-                      dataType="str"
-                      length="5"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[geolocation_state]"
-                      name="geolocation_state" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
           </components>
           <paths>
             <path
@@ -2871,7 +2871,7 @@ FROM staging.stg_geolocation;</property>
               refId="Package\DFT - Load dim_geolocation.Paths[OLE DB Source Output]"
               endId="Package\DFT - Load dim_geolocation\Derived Column.Inputs[Derived Column Input]"
               name="OLE DB Source Output"
-              startId="Package\DFT - Load dim_geolocation\stg_geolocation.Outputs[OLE DB Source Output]" />
+              startId="Package\DFT - Load dim_geolocation\core_geolocation.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2890,7 +2890,7 @@ FROM staging.stg_geolocation;</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
-          SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT 1 FROM gold.dim_date)&#xA;BEGIN&#xA;    DECLARE @start DATE = '2016-01-01';&#xA;    DECLARE @end   DATE = '2019-12-31';&#xA;&#xA;    ;WITH DateCTE AS (&#xA;        SELECT @start AS dt&#xA;        UNION ALL&#xA;        SELECT DATEADD(DAY, 1, dt) FROM DateCTE WHERE dt &lt; @end&#xA;    )&#xA;    INSERT INTO gold.dim_date (&#xA;        date_key, full_date, year, quarter, month, month_name,&#xA;        day_of_month, day_of_week, day_name, is_weekend,&#xA;        is_holiday_brazil, season_brazil&#xA;    )&#xA;    SELECT&#xA;        CONVERT(INT, FORMAT(dt, 'yyyyMMdd'))       AS date_key,&#xA;        dt                                          AS full_date,&#xA;        YEAR(dt)                                    AS year,&#xA;        DATEPART(QUARTER, dt)                       AS quarter,&#xA;        MONTH(dt)                                   AS month,&#xA;        DATENAME(MONTH, dt)                         AS month_name,&#xA;        DAY(dt)                                     AS day_of_month,&#xA;        DATEPART(WEEKDAY, dt)                       AS day_of_week,&#xA;        DATENAME(WEEKDAY, dt)                       AS day_name,&#xA;        CASE WHEN DATEPART(WEEKDAY, dt) IN (1, 7) THEN 1 ELSE 0 END,&#xA;        CASE&#xA;            WHEN MONTH(dt) = 1  AND DAY(dt) = 1  THEN 1&#xA;            WHEN MONTH(dt) = 4  AND DAY(dt) = 21 THEN 1&#xA;            WHEN MONTH(dt) = 5  AND DAY(dt) = 1  THEN 1&#xA;            WHEN MONTH(dt) = 9  AND DAY(dt) = 7  THEN 1&#xA;            WHEN MONTH(dt) = 10 AND DAY(dt) = 12 THEN 1&#xA;            WHEN MONTH(dt) = 11 AND DAY(dt) = 2  THEN 1&#xA;            WHEN MONTH(dt) = 11 AND DAY(dt) = 15 THEN 1&#xA;            WHEN MONTH(dt) = 12 AND DAY(dt) = 25 THEN 1&#xA;            ELSE 0&#xA;        END,&#xA;        CASE&#xA;            WHEN MONTH(dt) IN (12, 1, 2)  THEN 'Summer'&#xA;            WHEN MONTH(dt) IN (3, 4, 5)   THEN 'Autumn'&#xA;            WHEN MONTH(dt) IN (6, 7, 8)   THEN 'Winter'&#xA;            WHEN MONTH(dt) IN (9, 10, 11) THEN 'Spring'&#xA;        END&#xA;    FROM DateCTE&#xA;    OPTION (MAXRECURSION 1500);&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT 1 FROM datamart.dim_date)&#xA;BEGIN&#xA;    DECLARE @start DATE = '2016-01-01';&#xA;    DECLARE @end   DATE = '2019-12-31';&#xA;&#xA;    ;WITH DateCTE AS (&#xA;        SELECT @start AS dt&#xA;        UNION ALL&#xA;        SELECT DATEADD(DAY, 1, dt) FROM DateCTE WHERE dt &lt; @end&#xA;    )&#xA;    INSERT INTO datamart.dim_date (&#xA;        date_key, full_date, year, quarter, month, month_name,&#xA;        day_of_month, day_of_week, day_name, is_weekend,&#xA;        is_holiday_brazil, season_brazil&#xA;    )&#xA;    SELECT&#xA;        CONVERT(INT, FORMAT(dt, 'yyyyMMdd'))       AS date_key,&#xA;        dt                                          AS full_date,&#xA;        YEAR(dt)                                    AS year,&#xA;        DATEPART(QUARTER, dt)                       AS quarter,&#xA;        MONTH(dt)                                   AS month,&#xA;        DATENAME(MONTH, dt)                         AS month_name,&#xA;        DAY(dt)                                     AS day_of_month,&#xA;        DATEPART(WEEKDAY, dt)                       AS day_of_week,&#xA;        DATENAME(WEEKDAY, dt)                       AS day_name,&#xA;        CASE WHEN DATEPART(WEEKDAY, dt) IN (1, 7) THEN 1 ELSE 0 END,&#xA;        CASE&#xA;            WHEN MONTH(dt) = 1  AND DAY(dt) = 1  THEN 1&#xA;            WHEN MONTH(dt) = 4  AND DAY(dt) = 21 THEN 1&#xA;            WHEN MONTH(dt) = 5  AND DAY(dt) = 1  THEN 1&#xA;            WHEN MONTH(dt) = 9  AND DAY(dt) = 7  THEN 1&#xA;            WHEN MONTH(dt) = 10 AND DAY(dt) = 12 THEN 1&#xA;            WHEN MONTH(dt) = 11 AND DAY(dt) = 2  THEN 1&#xA;            WHEN MONTH(dt) = 11 AND DAY(dt) = 15 THEN 1&#xA;            WHEN MONTH(dt) = 12 AND DAY(dt) = 25 THEN 1&#xA;            ELSE 0&#xA;        END,&#xA;        CASE&#xA;            WHEN MONTH(dt) IN (12, 1, 2)  THEN 'Summer'&#xA;            WHEN MONTH(dt) IN (3, 4, 5)   THEN 'Autumn'&#xA;            WHEN MONTH(dt) IN (6, 7, 8)   THEN 'Winter'&#xA;            WHEN MONTH(dt) IN (9, 10, 11) THEN 'Spring'&#xA;        END&#xA;    FROM DateCTE&#xA;    OPTION (MAXRECURSION 1500);&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -2907,7 +2907,7 @@ FROM staging.stg_geolocation;</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
-          SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT 1 FROM gold.dim_order_status)&#xA;BEGIN&#xA;    INSERT INTO gold.dim_order_status (order_status, description) VALUES&#xA;        ('created',      N'Order has been created'),&#xA;        ('approved',     N'Payment approved'),&#xA;        ('invoiced',     N'Invoice issued'),&#xA;        ('processing',   N'Order is being processed'),&#xA;        ('shipped',      N'Order shipped to carrier'),&#xA;        ('delivered',    N'Order delivered to customer'),&#xA;        ('unavailable',  N'Product unavailable'),&#xA;        ('canceled',     N'Order canceled');&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT 1 FROM datamart.dim_order_status)&#xA;BEGIN&#xA;    INSERT INTO datamart.dim_order_status (order_status, description) VALUES&#xA;        ('created',      N'Order has been created'),&#xA;        ('approved',     N'Payment approved'),&#xA;        ('invoiced',     N'Invoice issued'),&#xA;        ('processing',   N'Order is being processed'),&#xA;        ('shipped',      N'Order shipped to carrier'),&#xA;        ('delivered',    N'Order delivered to customer'),&#xA;        ('unavailable',  N'Product unavailable'),&#xA;        ('canceled',     N'Order canceled');&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -2950,19 +2950,19 @@ FROM staging.stg_geolocation;</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="268,42"
+          Size="268,41.6"
           Id="Package\DFT - Load dim_customer (SCD Type 2)"
           TopLeft="319,356" />
         <NodeLayout
-          Size="211,42"
+          Size="211.2,41.6"
           Id="Package\DFT - Load dim_geolocation"
           TopLeft="348,263" />
         <NodeLayout
-          Size="196,42"
+          Size="196,41.6"
           Id="Package\EST - Populate dim_date"
           TopLeft="358,70" />
         <NodeLayout
-          Size="234,42"
+          Size="233.6,41.6"
           Id="Package\EST - Populate dim_order_status"
           TopLeft="338,165" />
         <EdgeLayout
@@ -3040,13 +3040,75 @@ FROM staging.stg_geolocation;</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150,42"
+          Size="120,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\Multicast"
+          TopLeft="679,559" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Command"
+          TopLeft="623,649" />
+        <NodeLayout
+          Size="206.4,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\Derived Column (SCD cols)"
+          TopLeft="426,483" />
+        <NodeLayout
+          Size="268,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Dest - INSERT Changed Version"
+          TopLeft="758.571428571429,734.285714285714" />
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\Lookup dim_customer"
+          TopLeft="436,388" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\Derived Column"
+          TopLeft="271,287" />
+        <NodeLayout
+          Size="257.6,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Dest - INSERT New Customer"
+          TopLeft="404.571428571428,552.428571428571" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\Lookup dim_geolocation"
+          TopLeft="299,178" />
+        <NodeLayout
+          Size="120.8,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\Union All"
+          TopLeft="467,285" />
+        <NodeLayout
+          Size="150.4,41.6"
           Id="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Source"
           TopLeft="328,71" />
         <NodeLayout
-          Size="193,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\Lookup dim_geolocation"
-          TopLeft="299,178" />
+          Size="163.2,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\Derived Column 1"
+          TopLeft="806.666666666667,646.52380952381" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\DFT - Load dim_customer (SCD Type 2)\Conditional Split"
+          TopLeft="692,484" />
+        <EdgeLayout
+          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Union All Output 1]"
+          TopLeft="527.5,327">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[OLE DB Source Output]"
           TopLeft="399.25,113">
@@ -3069,10 +3131,98 @@ FROM staging.stg_geolocation;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="154,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\Derived Column"
-          TopLeft="271,287" />
+        <EdgeLayout
+          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Multicast Output 2]"
+          TopLeft="757.666666666667,601">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="130.5,45.5238095238097"
+              Start="0,0"
+              End="130.5,38.0238095238097">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.5689223057645" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.5689223057645"
+                    Point2="0,18.5689223057645"
+                    Point3="4,18.5689223057645" />
+                  <mssgle:LineSegment
+                    End="126.5,18.5689223057645" />
+                  <mssgle:CubicBezierSegment
+                    Point1="126.5,18.5689223057645"
+                    Point2="130.5,18.5689223057645"
+                    Point3="130.5,22.5689223057645" />
+                  <mssgle:LineSegment
+                    End="130.5,38.0238095238097" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Multicast Output 1]"
+          TopLeft="739,601">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-33,48"
+              Start="0,0"
+              End="-33,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="-4,24" />
+                  <mssgle:LineSegment
+                    End="-29,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-29,24"
+                    Point2="-33,24"
+                    Point3="-33,28" />
+                  <mssgle:LineSegment
+                    End="-33,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Lookup No Match Output1]"
+          TopLeft="528.25,430">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,16.9453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Lookup No Match Output]"
           TopLeft="395.5,220">
@@ -3109,30 +3259,40 @@ FROM staging.stg_geolocation;</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="121,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\Union All"
-          TopLeft="467,285" />
         <EdgeLayout
-          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Derived Column Output]"
-          TopLeft="425,307">
+          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Lookup Match Output1]"
+          TopLeft="556.666666666667,430">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="42,0"
+              EndConnector="212.833333333333,54"
               Start="0,0"
-              End="34.5,0">
+              End="212.833333333333,46.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="34.5,0" />
+                    End="0,17.8808234019502" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.8808234019502"
+                    Point2="0,21.8808234019502"
+                    Point3="4,21.8808234019502" />
+                  <mssgle:LineSegment
+                    End="208.833333333333,21.8808234019502" />
+                  <mssgle:CubicBezierSegment
+                    Point1="208.833333333333,21.8808234019502"
+                    Point2="212.833333333333,21.8808234019502"
+                    Point3="212.833333333333,25.8808234019502" />
+                  <mssgle:LineSegment
+                    End="212.833333333333,46.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="58.2252799479167,26.8808234019502,96.3827734375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3171,130 +3331,6 @@ FROM staging.stg_geolocation;</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="183,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\Lookup dim_customer"
-          TopLeft="436,388" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Union All Output 1]"
-          TopLeft="527.5,327">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,61"
-              Start="0,0"
-              End="0,53.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,53.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="206,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\Derived Column (SCD cols)"
-          TopLeft="426,483" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Lookup No Match Output1]"
-          TopLeft="528.25,430">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,53"
-              Start="0,0"
-              End="0,45.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,45.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-55.80638671875,16.9453125,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="258,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Dest - INSERT New Customer"
-          TopLeft="404.571428571428,552.428571428571" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Derived Column Output1]"
-          TopLeft="531.285714285714,525">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,27.4285714285714"
-              Start="0,0"
-              End="0,19.9285714285714">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.9285714285714" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="155,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\Conditional Split"
-          TopLeft="692,484" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Lookup Match Output1]"
-          TopLeft="556.666666666667,430">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="212.833333333333,54"
-              Start="0,0"
-              End="212.833333333333,46.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,17.8808234019502" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,17.8808234019502"
-                    Point2="0,21.8808234019502"
-                    Point3="4,21.8808234019502" />
-                  <mssgle:LineSegment
-                    End="208.833333333333,21.8808234019502" />
-                  <mssgle:CubicBezierSegment
-                    Point1="208.833333333333,21.8808234019502"
-                    Point2="212.833333333333,21.8808234019502"
-                    Point3="212.833333333333,25.8808234019502" />
-                  <mssgle:LineSegment
-                    End="212.833333333333,46.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="58.2252799479167,26.8808234019502,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="120,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\Multicast"
-          TopLeft="679,559" />
         <EdgeLayout
           Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Is_Changed]"
           TopLeft="769.5,526">
@@ -3331,86 +3367,6 @@ FROM staging.stg_geolocation;</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="166,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Command"
-          TopLeft="623,649" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Multicast Output 1]"
-          TopLeft="739,601">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-33,48"
-              Start="0,0"
-              End="-33,40.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20"
-                    Point2="0,24"
-                    Point3="-4,24" />
-                  <mssgle:LineSegment
-                    End="-29,24" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-29,24"
-                    Point2="-33,24"
-                    Point3="-33,28" />
-                  <mssgle:LineSegment
-                    End="-33,40.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="163,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\Derived Column 1"
-          TopLeft="806.666666666667,646.52380952381" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Multicast Output 2]"
-          TopLeft="757.666666666667,601">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="130.5,45.5238095238097"
-              Start="0,0"
-              End="130.5,38.0238095238097">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,14.5689223057645" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.5689223057645"
-                    Point2="0,18.5689223057645"
-                    Point3="4,18.5689223057645" />
-                  <mssgle:LineSegment
-                    End="126.5,18.5689223057645" />
-                  <mssgle:CubicBezierSegment
-                    Point1="126.5,18.5689223057645"
-                    Point2="130.5,18.5689223057645"
-                    Point3="130.5,22.5689223057645" />
-                  <mssgle:LineSegment
-                    End="130.5,38.0238095238097" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="268,42"
-          Id="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Dest - INSERT Changed Version"
-          TopLeft="758.571428571429,734.285714285714" />
         <EdgeLayout
           Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Derived Column Output2]"
           TopLeft="890.369047619048,688.52380952381">
@@ -3433,44 +3389,20 @@ FROM staging.stg_geolocation;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\DFT - Load dim_geolocation">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="171,42"
-          Id="Package\DFT - Load dim_geolocation\OLE DB Destination"
-          TopLeft="377,328" />
-        <NodeLayout
-          Size="193,42"
-          Id="Package\DFT - Load dim_geolocation\Lookup dim_geolocation"
-          TopLeft="364,217" />
-        <NodeLayout
-          Size="153,42"
-          Id="Package\DFT - Load dim_geolocation\stg_geolocation"
-          TopLeft="382,56" />
-        <NodeLayout
-          Size="154,42"
-          Id="Package\DFT - Load dim_geolocation\Derived Column"
-          TopLeft="379,136" />
         <EdgeLayout
-          Id="Package\DFT - Load dim_geolocation.Paths[OLE DB Source Output]"
-          TopLeft="457.25,98">
+          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Derived Column Output1]"
+          TopLeft="531.285714285714,525">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,38"
+              EndConnector="0,27.4285714285714"
               Start="0,0"
-              End="0,30.5">
+              End="0,19.9285714285714">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.5" />
+                    End="0,19.9285714285714" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3480,124 +3412,32 @@ FROM staging.stg_geolocation;</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT - Load dim_geolocation.Paths[Derived Column Output]"
-          TopLeft="458.25,178">
+          Id="Package\DFT - Load dim_customer (SCD Type 2).Paths[Derived Column Output]"
+          TopLeft="425,307">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39"
+              EndConnector="42,0"
               Start="0,0"
-              End="0,31.5">
+              End="34.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.5" />
+                    End="34.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT - Load dim_geolocation.Paths[Lookup No Match Output]"
-          TopLeft="461.5,259">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,69"
-              Start="0,0"
-              End="0,61.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,61.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-55.80638671875,24.9453125,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="155,42"
-          Id="Package\DFT - Load dim_geolocation\Conditional Split"
-          TopLeft="606,327" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_geolocation.Paths[Lookup Match Output]"
-          TopLeft="491.333333333333,259">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="192.166666666667,68"
-              Start="0,0"
-              End="192.166666666667,60.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.535457348407" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.535457348407"
-                    Point2="0,27.535457348407"
-                    Point3="4,27.535457348407" />
-                  <mssgle:LineSegment
-                    End="188.166666666667,27.535457348407" />
-                  <mssgle:CubicBezierSegment
-                    Point1="188.166666666667,27.535457348407"
-                    Point2="192.166666666667,27.535457348407"
-                    Point3="192.166666666667,31.535457348407" />
-                  <mssgle:LineSegment
-                    End="192.166666666667,60.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="47.8919466145833,32.535457348407,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="166,42"
-          Id="Package\DFT - Load dim_geolocation\OLE DB Command"
-          TopLeft="598,438" />
-        <EdgeLayout
-          Id="Package\DFT - Load dim_geolocation.Paths[Is_Changed]"
-          TopLeft="682.25,369">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,69"
-              Start="0,0"
-              End="0,61.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,61.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-26.63458984375,24.91845703125,53.2691796875,11.6630859375"
-              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_geolocation\OLE DB Destination">
+    design-time-name="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3610,38 +3450,7 @@ FROM staging.stg_geolocation;</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_geolocation\Lookup dim_geolocation">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[gold].[dim_geolocation]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_geolocation\stg_geolocation">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Source">
+    design-time-name="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Dest - INSERT Changed Version">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3712,8 +3521,168 @@ FROM staging.stg_geolocation;</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT - Load dim_geolocation">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\DFT - Load dim_geolocation\OLE DB Destination"
+          TopLeft="377,328" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\DFT - Load dim_geolocation\Lookup dim_geolocation"
+          TopLeft="364,217" />
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\DFT - Load dim_geolocation\core_geolocation"
+          TopLeft="382,56" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\DFT - Load dim_geolocation\OLE DB Command"
+          TopLeft="598,438" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\DFT - Load dim_geolocation\Conditional Split"
+          TopLeft="606,326.235294118317" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\DFT - Load dim_geolocation\Derived Column"
+          TopLeft="379,136" />
+        <EdgeLayout
+          Id="Package\DFT - Load dim_geolocation.Paths[OLE DB Source Output]"
+          TopLeft="458.5,97.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.4"
+              Start="0,0"
+              End="0,30.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load dim_geolocation.Paths[Lookup No Match Output]"
+          TopLeft="461.5,259">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69"
+              Start="0,0"
+              End="0,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,24.9453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load dim_geolocation.Paths[Lookup Match Output]"
+          TopLeft="491.2,258.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="192.4,67.6352941183173"
+              Start="0,0"
+              End="192.4,60.1352941183173">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.3881190997631" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.3881190997631"
+                    Point2="0,27.3881190997631"
+                    Point3="4,27.3881190997631" />
+                  <mssgle:LineSegment
+                    End="188.4,27.3881190997631" />
+                  <mssgle:CubicBezierSegment
+                    Point1="188.4,27.3881190997631"
+                    Point2="192.4,27.3881190997631"
+                    Point3="192.4,31.3881190997631" />
+                  <mssgle:LineSegment
+                    End="192.4,60.1352941183173" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="48.00861328125,32.3881190997631,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load dim_geolocation.Paths[Is_Changed]"
+          TopLeft="682.4,367.835294118317">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70.1647058816826"
+              Start="0,0"
+              End="0,62.6647058816826">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.6647058816826" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.63458984375,25.5008099720913,53.2691796875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT - Load dim_geolocation.Paths[Derived Column Output]"
+          TopLeft="458.25,178">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_customer (SCD Type 2)\OLE DB Dest - INSERT Changed Version">
+    design-time-name="Package\DFT - Load dim_geolocation\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3722,6 +3691,37 @@ FROM staging.stg_geolocation;</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load dim_geolocation\Lookup dim_geolocation">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[datamart].[dim_geolocation]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load dim_geolocation\core_geolocation">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Extract_Product_Items"
   DTS:PackageType="5"
-  DTS:VersionBuild="57"
-  DTS:VersionGUID="{8BAFC9A2-2E33-4A5C-A42B-DB7B966170D2}">
+  DTS:VersionBuild="58"
+  DTS:VersionGUID="{C458B128-FFB5-42A3-8E33-3D417862467F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1985,18 +1985,6 @@
                       externalMetadataColumnId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].ExternalColumns[product_category_name]"
                       lineageId="Package\DFT - Load Products\Derived Column.Outputs[Derived Column Output].Columns[clean_category_name]" />
                     <inputColumn
-                      refId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].Columns[clean_name_len]"
-                      cachedDataType="i4"
-                      cachedName="clean_name_len"
-                      externalMetadataColumnId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].ExternalColumns[product_name_lenght]"
-                      lineageId="Package\DFT - Load Products\Derived Column.Outputs[Derived Column Output].Columns[clean_name_len]" />
-                    <inputColumn
-                      refId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].Columns[clean_desc_len]"
-                      cachedDataType="i4"
-                      cachedName="clean_desc_len"
-                      externalMetadataColumnId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].ExternalColumns[product_description_lenght]"
-                      lineageId="Package\DFT - Load Products\Derived Column.Outputs[Derived Column Output].Columns[clean_desc_len]" />
-                    <inputColumn
                       refId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].Columns[clean_photos]"
                       cachedDataType="i4"
                       cachedName="clean_photos"
@@ -2049,14 +2037,6 @@
                       length="100"
                       name="product_category_name" />
                     <externalMetadataColumn
-                      refId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].ExternalColumns[product_name_lenght]"
-                      dataType="i4"
-                      name="product_name_lenght" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].ExternalColumns[product_description_lenght]"
-                      dataType="i4"
-                      name="product_description_lenght" />
-                    <externalMetadataColumn
                       refId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].ExternalColumns[product_photos_qty]"
                       dataType="i4"
                       name="product_photos_qty" />
@@ -2084,6 +2064,14 @@
                       name="product_width_cm"
                       precision="10"
                       scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].ExternalColumns[product_name_length]"
+                      dataType="i4"
+                      name="product_name_length" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load Products\Load stg_products.Inputs[OLE DB Destination Input].ExternalColumns[product_description_length]"
+                      dataType="i4"
+                      name="product_description_length" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -2297,7 +2285,7 @@
     design-time-name="Package\DFT - Load Category Translation">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="220,41.6"
           Id="Package\DFT - Load Category Translation\Load stg_category_translation"
@@ -2325,7 +2313,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2348,7 +2338,7 @@
     design-time-name="Package\DFT - Load Order Items">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="180.8,41.6"
           Id="Package\DFT - Load Order Items\Load stg_order_items"
@@ -2380,7 +2370,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2402,7 +2394,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

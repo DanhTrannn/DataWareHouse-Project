@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Extract_Seller_Order_Payment"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{DD49C8FC-4DA8-4475-B3A7-007C365E118E}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{9D2288B9-648C-47DD-A679-B8D28FAF22D7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -196,7 +196,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_id&quot;"
-              DTS:DTSID="{CBCE8767-DD51-477B-B604-D847186B38AE}"
+              DTS:DTSID="{7AFF6708-FAD1-460E-9890-8628589FEDB4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -205,7 +205,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_zip_code_prefix&quot;"
-              DTS:DTSID="{574B6841-CE0A-475B-8058-A2445EBCA339}"
+              DTS:DTSID="{C1787A24-FC8B-4231-A2AE-F3F3C033C9A4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -214,7 +214,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_city&quot;"
-              DTS:DTSID="{7F917F3E-93E3-4646-9F1E-2BAC43FE5119}"
+              DTS:DTSID="{CC5BCF9F-A0B8-402C-8288-5E5E2458C648}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -223,7 +223,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="&quot;seller_state&quot;"
-              DTS:DTSID="{67480ED7-AEFB-4DA0-8F84-F16B4556B419}"
+              DTS:DTSID="{86464967-9EDD-408B-BE31-0CFB1F02915A}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -2407,7 +2407,7 @@
         <NodeLayout
           Size="176.8,41.6"
           Id="Package\Load Sellers\OLE DB Destination"
-          TopLeft="533,318" />
+          TopLeft="533.714285715806,318" />
         <EdgeLayout
           Id="Package\Load Sellers.Paths[Flat File Source Output]"
           TopLeft="613.25,139">
@@ -2432,18 +2432,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Sellers.Paths[Data Conversion Output]"
-          TopLeft="618,252">
+          TopLeft="618.257142857903,251.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,66"
+              EndConnector="0,66.4"
               Start="0,0"
-              End="0,58.5">
+              End="0,58.9">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,58.5" />
+                    End="0,58.9" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

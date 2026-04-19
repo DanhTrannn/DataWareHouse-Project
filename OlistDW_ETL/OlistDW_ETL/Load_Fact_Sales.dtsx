@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Package4"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{45BD50A3-3181-4ABF-86A3-85C91769CE2B}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{298F99A7-265A-402D-893B-014F8339428E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -64,10 +64,10 @@
     COUNT(*)                                        AS total_items_sold,
     COUNT(DISTINCT fo.order_id)                     AS total_orders,
     AVG(CAST(fo.review_score AS DECIMAL(3,2)))      AS avg_review_score
-FROM gold.fact_orders fo
-INNER JOIN gold.dim_product dp
+FROM datamart.fact_orders fo
+INNER JOIN datamart.dim_product dp
     ON fo.product_key = dp.product_key
-INNER JOIN gold.dim_date dd
+INNER JOIN datamart.dim_date dd
     ON fo.order_date_key = dd.date_key
 WHERE fo.seller_key IS NOT NULL
   AND dp.category_key IS NOT NULL
@@ -291,7 +291,7 @@ GROUP BY
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[fact_sales]</property>
+                  name="OpenRowset">[datamart].[fact_sales]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -481,7 +481,7 @@ GROUP BY
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE gold.fact_sales;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="TRUNCATE TABLE datamart.fact_sales;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -508,13 +508,13 @@ GROUP BY
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="198.4,41.6"
-          Id="Package\EST - Truncate fact_sales"
-          TopLeft="180.714286098979,42.8235293742282" />
-        <NodeLayout
           Size="180,41.6"
           Id="Package\DFT - Load fact_sales"
           TopLeft="191.428571836073,123.882352832589" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\EST - Truncate fact_sales"
+          TopLeft="180.714286098979,42.8235293742282" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="280.671428967526,84.4235293742282">
@@ -546,13 +546,13 @@ GROUP BY
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="182.4,41.6"
-          Id="Package\DFT - Load fact_sales\Aggregated fact_sales"
-          TopLeft="170.000000361885,51.99999995442" />
-        <NodeLayout
           Size="151.2,41.6"
           Id="Package\DFT - Load fact_sales\Load fact_sales"
           TopLeft="180.000000383173,127.705882241002" />
+        <NodeLayout
+          Size="182.4,41.6"
+          Id="Package\DFT - Load fact_sales\Aggregated fact_sales"
+          TopLeft="170.000000361885,51.99999995442" />
         <EdgeLayout
           Id="Package\DFT - Load fact_sales.Paths[OLE DB Source Output]"
           TopLeft="258.400000372529,93.59999995442">
