@@ -11,8 +11,8 @@
   DTS:LocaleID="1066"
   DTS:ObjectName="Load_Dim_Product"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{8AD7D010-8F99-4130-A8A2-308E71B6AAF3}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{0417D487-3B0E-40A5-ABBE-17AF608179A5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -144,6 +144,299 @@
               </outputs>
             </component>
             <component
+              refId="Package\DFT - Load dim_product\core_products"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="core_products"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    p.product_id,
+    p.product_category_name,
+    p.product_name_length,
+    p.product_description_length,
+    p.product_photos_qty,
+    ISNULL(p.product_weight_g, 0)  AS product_weight_g,
+    ISNULL(p.product_length_cm, 0) AS product_length_cm,
+    ISNULL(p.product_height_cm, 0) AS product_height_cm,
+    ISNULL(p.product_width_cm, 0)  AS product_width_cm
+FROM core.products p;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load dim_product\core_products.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      length="50"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_id]"
+                      name="product_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_category_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_category_name]"
+                      length="100"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_category_name]"
+                      name="product_category_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_name_length]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_name_length]"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_name_length]"
+                      name="product_name_length"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_description_length]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_description_length]"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_description_length]"
+                      name="product_description_length"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_photos_qty]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_photos_qty]"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_photos_qty]"
+                      name="product_photos_qty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_weight_g]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_weight_g]"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_weight_g]"
+                      name="product_weight_g"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_length_cm]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_length_cm]"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_length_cm]"
+                      name="product_length_cm"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_height_cm]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_height_cm]"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_height_cm]"
+                      name="product_height_cm"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_width_cm]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_width_cm]"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_width_cm]"
+                      name="product_width_cm"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="product_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_category_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="product_category_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_name_length]"
+                      dataType="i4"
+                      name="product_name_length" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_description_length]"
+                      dataType="i4"
+                      name="product_description_length" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_photos_qty]"
+                      dataType="i4"
+                      name="product_photos_qty" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_weight_g]"
+                      dataType="numeric"
+                      name="product_weight_g"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_length_cm]"
+                      dataType="numeric"
+                      name="product_length_cm"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_height_cm]"
+                      dataType="numeric"
+                      name="product_height_cm"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].ExternalColumns[product_width_cm]"
+                      dataType="numeric"
+                      name="product_width_cm"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_id]"
+                      name="product_id" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_category_name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_category_name]"
+                      name="product_category_name" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_name_length]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_name_length]"
+                      name="product_name_length" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_description_length]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_description_length]"
+                      name="product_description_length" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_photos_qty]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_photos_qty]"
+                      name="product_photos_qty" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_weight_g]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_weight_g]"
+                      name="product_weight_g"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_length_cm]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_length_cm]"
+                      name="product_length_cm"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_height_cm]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_height_cm]"
+                      name="product_height_cm"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_width_cm]"
+                      dataType="numeric"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[product_width_cm]"
+                      name="product_width_cm"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\DFT - Load dim_product\Derived Column"
               componentClassID="Microsoft.DerivedColumn"
               contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -230,13 +523,13 @@
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [gold].[dim_product]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [datamart].[dim_product]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [gold].[dim_product]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [datamart].[dim_product]) [refTable]
 where [refTable].[product_id] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -422,14 +715,14 @@ where [refTable].[product_id] = ?</property>
                   expressionType="Notify"
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT category_key, category_name_portuguese
-FROM gold.dim_product_category;</property>
+FROM datamart.dim_product_category;</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT category_key, category_name_portuguese
-FROM gold.dim_product_category;) [refTable]
+FROM datamart.dim_product_category;) [refTable]
 where [refTable].[category_name_portuguese] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -466,7 +759,7 @@ where [refTable].[category_name_portuguese] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_category_name]};</property>
+                  name="ParameterMap">#{Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_category_name]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -494,7 +787,7 @@ where [refTable].[category_name_portuguese] = ?</property>
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="product_category_name"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_category_name]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_category_name]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -598,7 +891,7 @@ where [refTable].[category_name_portuguese] = ?</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[dim_product]</property>
+                  name="OpenRowset">[datamart].[dim_product]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -800,299 +1093,6 @@ where [refTable].[category_name_portuguese] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\DFT - Load dim_product\stg_products"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="stg_products"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset"></property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
-    p.product_id,
-    p.product_category_name,
-    p.product_name_lenght          AS product_name_length,
-    p.product_description_lenght   AS product_description_length,
-    p.product_photos_qty,
-    ISNULL(p.product_weight_g, 0)  AS product_weight_g,
-    ISNULL(p.product_length_cm, 0) AS product_length_cm,
-    ISNULL(p.product_height_cm, 0) AS product_height_cm,
-    ISNULL(p.product_width_cm, 0)  AS product_width_cm
-FROM staging.stg_products p;</property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1258</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">2</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\DFT - Load dim_product\stg_products.Connections[OleDbConnection]"
-                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_id]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
-                      length="50"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_id]"
-                      name="product_id"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_category_name]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_category_name]"
-                      length="100"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_category_name]"
-                      name="product_category_name"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_name_length]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_name_length]"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_name_length]"
-                      name="product_name_length"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_description_length]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_description_length]"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_description_length]"
-                      name="product_description_length"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_photos_qty]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_photos_qty]"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_photos_qty]"
-                      name="product_photos_qty"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_weight_g]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_weight_g]"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_weight_g]"
-                      name="product_weight_g"
-                      precision="10"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_length_cm]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_length_cm]"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_length_cm]"
-                      name="product_length_cm"
-                      precision="10"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_height_cm]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_height_cm]"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_height_cm]"
-                      name="product_height_cm"
-                      precision="10"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_width_cm]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_width_cm]"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_width_cm]"
-                      name="product_width_cm"
-                      precision="10"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_id]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="product_id" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_category_name]"
-                      dataType="wstr"
-                      length="100"
-                      name="product_category_name" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_name_length]"
-                      dataType="i4"
-                      name="product_name_length" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_description_length]"
-                      dataType="i4"
-                      name="product_description_length" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_photos_qty]"
-                      dataType="i4"
-                      name="product_photos_qty" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_weight_g]"
-                      dataType="numeric"
-                      name="product_weight_g"
-                      precision="10"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_length_cm]"
-                      dataType="numeric"
-                      name="product_length_cm"
-                      precision="10"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_height_cm]"
-                      dataType="numeric"
-                      name="product_height_cm"
-                      precision="10"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].ExternalColumns[product_width_cm]"
-                      dataType="numeric"
-                      name="product_width_cm"
-                      precision="10"
-                      scale="2" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_id]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_id]"
-                      name="product_id" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_category_name]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_category_name]"
-                      name="product_category_name" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_name_length]"
-                      dataType="i4"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_name_length]"
-                      name="product_name_length" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_description_length]"
-                      dataType="i4"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_description_length]"
-                      name="product_description_length" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_photos_qty]"
-                      dataType="i4"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_photos_qty]"
-                      name="product_photos_qty" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_weight_g]"
-                      dataType="numeric"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_weight_g]"
-                      name="product_weight_g"
-                      precision="10"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_length_cm]"
-                      dataType="numeric"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_length_cm]"
-                      name="product_length_cm"
-                      precision="10"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_height_cm]"
-                      dataType="numeric"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_height_cm]"
-                      name="product_height_cm"
-                      precision="10"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_width_cm]"
-                      dataType="numeric"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[product_width_cm]"
-                      name="product_width_cm"
-                      precision="10"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
               refId="Package\DFT - Load dim_product\Union All"
               componentClassID="Microsoft.UnionAll"
               contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
@@ -1110,7 +1110,7 @@ FROM staging.stg_products p;</property>
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="product_id"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_id]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_id]">
                       <properties>
                         <property
                           containsID="true"
@@ -1124,7 +1124,7 @@ FROM staging.stg_products p;</property>
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="product_category_name"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_category_name]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_category_name]">
                       <properties>
                         <property
                           containsID="true"
@@ -1137,7 +1137,7 @@ FROM staging.stg_products p;</property>
                       refId="Package\DFT - Load dim_product\Union All.Inputs[Union All Input 1].Columns[product_name_length]"
                       cachedDataType="i4"
                       cachedName="product_name_length"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_name_length]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_name_length]">
                       <properties>
                         <property
                           containsID="true"
@@ -1150,7 +1150,7 @@ FROM staging.stg_products p;</property>
                       refId="Package\DFT - Load dim_product\Union All.Inputs[Union All Input 1].Columns[product_description_length]"
                       cachedDataType="i4"
                       cachedName="product_description_length"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_description_length]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_description_length]">
                       <properties>
                         <property
                           containsID="true"
@@ -1163,7 +1163,7 @@ FROM staging.stg_products p;</property>
                       refId="Package\DFT - Load dim_product\Union All.Inputs[Union All Input 1].Columns[product_photos_qty]"
                       cachedDataType="i4"
                       cachedName="product_photos_qty"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_photos_qty]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_photos_qty]">
                       <properties>
                         <property
                           containsID="true"
@@ -1178,7 +1178,7 @@ FROM staging.stg_products p;</property>
                       cachedName="product_weight_g"
                       cachedPrecision="10"
                       cachedScale="2"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_weight_g]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_weight_g]">
                       <properties>
                         <property
                           containsID="true"
@@ -1193,7 +1193,7 @@ FROM staging.stg_products p;</property>
                       cachedName="product_length_cm"
                       cachedPrecision="10"
                       cachedScale="2"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_length_cm]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_length_cm]">
                       <properties>
                         <property
                           containsID="true"
@@ -1208,7 +1208,7 @@ FROM staging.stg_products p;</property>
                       cachedName="product_height_cm"
                       cachedPrecision="10"
                       cachedScale="2"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_height_cm]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_height_cm]">
                       <properties>
                         <property
                           containsID="true"
@@ -1223,7 +1223,7 @@ FROM staging.stg_products p;</property>
                       cachedName="product_width_cm"
                       cachedPrecision="10"
                       cachedScale="2"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_width_cm]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_width_cm]">
                       <properties>
                         <property
                           containsID="true"
@@ -1259,7 +1259,7 @@ FROM staging.stg_products p;</property>
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="product_id"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_id]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_id]">
                       <properties>
                         <property
                           containsID="true"
@@ -1273,7 +1273,7 @@ FROM staging.stg_products p;</property>
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="product_category_name"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_category_name]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_category_name]">
                       <properties>
                         <property
                           containsID="true"
@@ -1286,7 +1286,7 @@ FROM staging.stg_products p;</property>
                       refId="Package\DFT - Load dim_product\Union All.Inputs[Union All Input 2].Columns[product_name_length]"
                       cachedDataType="i4"
                       cachedName="product_name_length"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_name_length]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_name_length]">
                       <properties>
                         <property
                           containsID="true"
@@ -1299,7 +1299,7 @@ FROM staging.stg_products p;</property>
                       refId="Package\DFT - Load dim_product\Union All.Inputs[Union All Input 2].Columns[product_description_length]"
                       cachedDataType="i4"
                       cachedName="product_description_length"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_description_length]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_description_length]">
                       <properties>
                         <property
                           containsID="true"
@@ -1312,7 +1312,7 @@ FROM staging.stg_products p;</property>
                       refId="Package\DFT - Load dim_product\Union All.Inputs[Union All Input 2].Columns[product_photos_qty]"
                       cachedDataType="i4"
                       cachedName="product_photos_qty"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_photos_qty]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_photos_qty]">
                       <properties>
                         <property
                           containsID="true"
@@ -1327,7 +1327,7 @@ FROM staging.stg_products p;</property>
                       cachedName="product_weight_g"
                       cachedPrecision="10"
                       cachedScale="2"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_weight_g]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_weight_g]">
                       <properties>
                         <property
                           containsID="true"
@@ -1342,7 +1342,7 @@ FROM staging.stg_products p;</property>
                       cachedName="product_length_cm"
                       cachedPrecision="10"
                       cachedScale="2"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_length_cm]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_length_cm]">
                       <properties>
                         <property
                           containsID="true"
@@ -1357,7 +1357,7 @@ FROM staging.stg_products p;</property>
                       cachedName="product_height_cm"
                       cachedPrecision="10"
                       cachedScale="2"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_height_cm]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_height_cm]">
                       <properties>
                         <property
                           containsID="true"
@@ -1372,7 +1372,7 @@ FROM staging.stg_products p;</property>
                       cachedName="product_width_cm"
                       cachedPrecision="10"
                       cachedScale="2"
-                      lineageId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output].Columns[product_width_cm]">
+                      lineageId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output].Columns[product_width_cm]">
                       <properties>
                         <property
                           containsID="true"
@@ -1495,7 +1495,7 @@ FROM staging.stg_products p;</property>
                   description="The SQL command to be executed."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE gold.dim_product
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE datamart.dim_product
 SET category_key = ?,
     product_name_length = ?,
     product_description_length = ?,
@@ -1769,7 +1769,7 @@ WHERE product_key = ?;</property>
               refId="Package\DFT - Load dim_product.Paths[OLE DB Source Output]"
               endId="Package\DFT - Load dim_product\Lookup dim_product_category.Inputs[Lookup Input]"
               name="OLE DB Source Output"
-              startId="Package\DFT - Load dim_product\stg_products.Outputs[OLE DB Source Output]" />
+              startId="Package\DFT - Load dim_product\core_products.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\DFT - Load dim_product.Paths[Union All Output 1]"
               endId="Package\DFT - Load dim_product\Lookup dim_product.Inputs[Lookup Input]"
@@ -1811,7 +1811,7 @@ WHERE product_key = ?;</property>
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="category_name_english"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]" />
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_product_category\Conditional Split.Inputs[Conditional Split Input].Columns[existing_eng_name]"
                       cachedDataType="wstr"
@@ -1837,7 +1837,7 @@ WHERE product_key = ?;</property>
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]} != #{Package\DFT - Load dim_product_category\Lookup dim_product_category.Outputs[Lookup Match Output].Columns[existing_eng_name]}</property>
+                      name="Expression">#{Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]} != #{Package\DFT - Load dim_product_category\Lookup dim_product_category.Outputs[Lookup Match Output].Columns[existing_eng_name]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
@@ -1890,6 +1890,139 @@ WHERE product_key = ?;</property>
               </outputs>
             </component>
             <component
+              refId="Package\DFT - Load dim_product_category\core_category_translation"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="core_category_translation"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[stg_category_translation]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    product_category_name         AS category_name_portuguese,
+    product_category_name_english AS category_name_english
+FROM core.category_translation;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1258</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Load dim_product_category\core_category_translation.Connections[OleDbConnection]"
+                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].ExternalColumns[category_name_portuguese]"
+                      length="100"
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]"
+                      name="category_name_portuguese"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].ExternalColumns[category_name_english]"
+                      length="100"
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]"
+                      name="category_name_english"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].ExternalColumns[category_name_portuguese]"
+                      dataType="wstr"
+                      length="100"
+                      name="category_name_portuguese" />
+                    <externalMetadataColumn
+                      refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].ExternalColumns[category_name_english]"
+                      dataType="wstr"
+                      length="100"
+                      name="category_name_english" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Error Output].Columns[category_name_portuguese]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Error Output].Columns[category_name_portuguese]"
+                      name="category_name_portuguese" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Error Output].Columns[category_name_english]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Error Output].Columns[category_name_english]"
+                      name="category_name_english" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\DFT - Load dim_product_category\INSERT dim_product_category"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -1905,7 +2038,7 @@ WHERE product_key = ?;</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[gold].[dim_product_category]</property>
+                  name="OpenRowset">[datamart].[dim_product_category]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1967,14 +2100,14 @@ WHERE product_key = ?;</property>
                       cachedLength="100"
                       cachedName="category_name_portuguese"
                       externalMetadataColumnId="Package\DFT - Load dim_product_category\INSERT dim_product_category.Inputs[OLE DB Destination Input].ExternalColumns[category_name_portuguese]"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]" />
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_product_category\INSERT dim_product_category.Inputs[OLE DB Destination Input].Columns[category_name_english]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="category_name_english"
                       externalMetadataColumnId="Package\DFT - Load dim_product_category\INSERT dim_product_category.Inputs[OLE DB Destination Input].ExternalColumns[category_name_english]"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]" />
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2034,13 +2167,13 @@ WHERE product_key = ?;</property>
                   description="Specifies the SQL statement that generates the lookup table."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [gold].[dim_product_category]</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [datamart].[dim_product_category]</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
                   expressionType="Notify"
                   name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [gold].[dim_product_category]) [refTable]
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [datamart].[dim_product_category]) [refTable]
 where [refTable].[category_name_portuguese] = ? and [refTable].[category_name_english] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -2077,7 +2210,7 @@ where [refTable].[category_name_portuguese] = ? and [refTable].[category_name_en
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]};#{Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]};</property>
+                  name="ParameterMap">#{Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]};#{Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -2105,7 +2238,7 @@ where [refTable].[category_name_portuguese] = ? and [refTable].[category_name_en
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="category_name_portuguese"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]">
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -2122,7 +2255,7 @@ where [refTable].[category_name_portuguese] = ? and [refTable].[category_name_en
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="category_name_english"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]">
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -2226,139 +2359,6 @@ where [refTable].[category_name_portuguese] = ? and [refTable].[category_name_en
               </outputs>
             </component>
             <component
-              refId="Package\DFT - Load dim_product_category\stg_category_translation"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="stg_category_translation"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[staging].[stg_category_translation]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
-    product_category_name         AS category_name_portuguese,
-    product_category_name_english AS category_name_english
-FROM staging.stg_category_translation;</property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1258</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">2</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\DFT - Load dim_product_category\stg_category_translation.Connections[OleDbConnection]"
-                  connectionManagerID="{EBD54FEC-B16B-4A71-820D-637DA8D41382}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[OlistDW_OLEDB]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].ExternalColumns[category_name_portuguese]"
-                      length="100"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_portuguese]"
-                      name="category_name_portuguese"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].ExternalColumns[category_name_english]"
-                      length="100"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]"
-                      name="category_name_english"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].ExternalColumns[category_name_portuguese]"
-                      dataType="wstr"
-                      length="100"
-                      name="category_name_portuguese" />
-                    <externalMetadataColumn
-                      refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].ExternalColumns[category_name_english]"
-                      dataType="wstr"
-                      length="100"
-                      name="category_name_english" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Error Output].Columns[category_name_portuguese]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Error Output].Columns[category_name_portuguese]"
-                      name="category_name_portuguese" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Error Output].Columns[category_name_english]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Error Output].Columns[category_name_english]"
-                      name="category_name_english" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
               refId="Package\DFT - Load dim_product_category\UPDATE dim_product_category"
               componentClassID="Microsoft.OLEDBCommand"
               contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
@@ -2377,7 +2377,7 @@ FROM staging.stg_category_translation;</property>
                   description="The SQL command to be executed."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE gold.dim_product_category
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE datamart.dim_product_category
 SET category_name_english = ?
 WHERE category_key = ?;</property>
                 <property
@@ -2407,7 +2407,7 @@ WHERE category_key = ?;</property>
                       cachedLength="100"
                       cachedName="category_name_english"
                       externalMetadataColumnId="Package\DFT - Load dim_product_category\UPDATE dim_product_category.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]" />
+                      lineageId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output].Columns[category_name_english]" />
                     <inputColumn
                       refId="Package\DFT - Load dim_product_category\UPDATE dim_product_category.Inputs[OLE DB Command Input].Columns[existing_cat_key]"
                       cachedDataType="i4"
@@ -2496,7 +2496,7 @@ WHERE category_key = ?;</property>
               refId="Package\DFT - Load dim_product_category.Paths[OLE DB Source Output]"
               endId="Package\DFT - Load dim_product_category\Lookup dim_product_category.Inputs[Lookup Input]"
               name="OLE DB Source Output"
-              startId="Package\DFT - Load dim_product_category\stg_category_translation.Outputs[OLE DB Source Output]" />
+              startId="Package\DFT - Load dim_product_category\core_category_translation.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2515,7 +2515,7 @@ WHERE category_key = ?;</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EBD54FEC-B16B-4A71-820D-637DA8D41382}"
-          SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT 1 FROM gold.dim_payment_method)&#xA;BEGIN&#xA;    INSERT INTO gold.dim_payment_method (payment_type, description) VALUES&#xA;        ('credit_card', N'Credit Card payment'),&#xA;        ('boleto',      N'Boleto Bancário (Brazilian payment slip)'),&#xA;        ('voucher',     N'Voucher / Gift card'),&#xA;        ('debit_card',  N'Debit Card payment'),&#xA;        ('not_defined', N'Payment method not specified');&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT 1 FROM datamart.dim_payment_method)&#xA;BEGIN&#xA;    INSERT INTO datamart.dim_payment_method (payment_type, description) VALUES&#xA;        ('credit_card', N'Credit Card payment'),&#xA;        ('boleto',      N'Boleto Bancário (Brazilian payment slip)'),&#xA;        ('voucher',     N'Voucher / Gift card'),&#xA;        ('debit_card',  N'Debit Card payment'),&#xA;        ('not_defined', N'Payment method not specified');&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -2614,8 +2614,8 @@ WHERE category_key = ?;</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="139.2,41.6"
-          Id="Package\DFT - Load dim_product\stg_products"
+          Size="144.8,41.6"
+          Id="Package\DFT - Load dim_product\core_products"
           TopLeft="269.999995976686,55.9999991655349" />
         <NodeLayout
           Size="170.4,41.6"
@@ -2763,18 +2763,18 @@ WHERE category_key = ?;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT - Load dim_product.Paths[OLE DB Source Output]"
-          TopLeft="342.999996230006,97.5999991655349">
+          TopLeft="344.399996230006,97.5999991655349">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,35.3999988526107"
+              EndConnector="0,35.3999988526111"
               Start="0,0"
-              End="0,27.8999988526107">
+              End="0,27.8999988526111">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.8999988526107" />
+                    End="0,27.8999988526111" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2859,7 +2859,30 @@ WHERE category_key = ?;</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_product\stg_products">
+    design-time-name="Package\DFT - Load dim_product\Lookup dim_product_category">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Load dim_product\core_products">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2885,40 +2908,17 @@ WHERE category_key = ?;</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[gold].[dim_product]</Value>
+          type="q3:string">[datamart].[dim_product]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_product\Lookup dim_product_category">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2931,6 +2931,14 @@ WHERE category_key = ?;</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="200,41.6"
+          Id="Package\DFT - Load dim_product_category\core_category_translation"
+          TopLeft="297.142857775396,45.8823529009588" />
+        <NodeLayout
+          Size="220.8,41.6"
+          Id="Package\DFT - Load dim_product_category\Lookup dim_product_category"
+          TopLeft="284.285714890884,129.99999988605" />
+        <NodeLayout
           Size="223.2,41.6"
           Id="Package\DFT - Load dim_product_category\INSERT dim_product_category"
           TopLeft="485.000001032438,212.588235107776" />
@@ -2939,20 +2947,12 @@ WHERE category_key = ?;</property>
           Id="Package\DFT - Load dim_product_category\UPDATE dim_product_category"
           TopLeft="61.4285715593367,282.411764493399" />
         <NodeLayout
-          Size="220.8,41.6"
-          Id="Package\DFT - Load dim_product_category\Lookup dim_product_category"
-          TopLeft="284.285714890884,129.99999988605" />
-        <NodeLayout
           Size="154.4,41.6"
           Id="Package\DFT - Load dim_product_category\Conditional Split"
           TopLeft="100.71428592868,214.211764550374" />
-        <NodeLayout
-          Size="194.4,41.6"
-          Id="Package\DFT - Load dim_product_category\stg_category_translation"
-          TopLeft="297.142857775396,45.8823529009588" />
         <EdgeLayout
           Id="Package\DFT - Load dim_product_category.Paths[OLE DB Source Output]"
-          TopLeft="394.51428633314,87.4823529009588">
+          TopLeft="395.91428633314,87.4823529009588">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3072,15 +3072,25 @@ WHERE category_key = ?;</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_product_category\stg_category_translation">
+    design-time-name="Package\DFT - Load dim_product_category\Lookup dim_product_category">
     <Properties>
       <Property>
-        <Name>DataSourceViewID</Name>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[datamart].[dim_product_category]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q2:string">Table</Value>
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -3098,25 +3108,15 @@ WHERE category_key = ?;</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT - Load dim_product_category\Lookup dim_product_category">
+    design-time-name="Package\DFT - Load dim_product_category\core_category_translation">
     <Properties>
       <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[gold].[dim_product_category]</Value>
+        <Name>DataSourceViewID</Name>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\DataWareHouse-Project\\OlistDW_ETL\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Lifecycle.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Load_Fact_Lifecycle.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Master_ETL.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Master_ETL.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     },
     {
       "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Delivery_Payment.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
@@ -13,6 +13,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Customer_Orders.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
       "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Load_Fact_Customer_Orders.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Sales.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Load_Fact_Sales.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Orders.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Load_Fact_Orders.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     },
     {
       "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Dim_Seller.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
@@ -27,16 +35,24 @@
       "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Load_Dim_Date_Geo_Customer.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Transform_To_Core.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Transform_To_Core.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Extract_Seller_Order_Payment.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
       "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Extract_Seller_Order_Payment.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Master_ETL.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Master_ETL.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Extract_Product_Items.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Extract_Product_Items.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Orders.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Load_Fact_Orders.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Extract_Customer_Geo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Extract_Customer_Geo.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Lifecycle.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{242B8696-A19C-1480-8DC8-547944698F05}|OlistDW_ETL\\OlistDW_ETL.dtproj|solutionrelative:OlistDW_ETL\\Load_Fact_Lifecycle.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -59,6 +75,54 @@
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "Transform_To_Core.dtsx [Design]",
+              "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Transform_To_Core.dtsx",
+              "RelativeDocumentMoniker": "OlistDW_ETL\\Transform_To_Core.dtsx",
+              "ToolTip": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Transform_To_Core.dtsx [Design]",
+              "RelativeToolTip": "OlistDW_ETL\\Transform_To_Core.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-04-19T07:32:41.628Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Load_Fact_Sales.dtsx [Design]",
+              "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Sales.dtsx",
+              "RelativeDocumentMoniker": "OlistDW_ETL\\Load_Fact_Sales.dtsx",
+              "ToolTip": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Sales.dtsx [Design]",
+              "RelativeToolTip": "OlistDW_ETL\\Load_Fact_Sales.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-04-18T08:22:41.789Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Extract_Product_Items.dtsx [Design]",
+              "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Extract_Product_Items.dtsx",
+              "RelativeDocumentMoniker": "OlistDW_ETL\\Extract_Product_Items.dtsx",
+              "ToolTip": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Extract_Product_Items.dtsx [Design]",
+              "RelativeToolTip": "OlistDW_ETL\\Extract_Product_Items.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-04-18T08:22:23.907Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Extract_Customer_Geo.dtsx [Design]",
+              "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Extract_Customer_Geo.dtsx",
+              "RelativeDocumentMoniker": "OlistDW_ETL\\Extract_Customer_Geo.dtsx",
+              "ToolTip": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Extract_Customer_Geo.dtsx [Design]",
+              "RelativeToolTip": "OlistDW_ETL\\Extract_Customer_Geo.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-04-18T08:22:15.694Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Load_Fact_Orders.dtsx [Design]",
               "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Orders.dtsx",
               "RelativeDocumentMoniker": "OlistDW_ETL\\Load_Fact_Orders.dtsx",
@@ -74,15 +138,15 @@
               "Title": "Load_Fact_Delivery_Payment.dtsx [Design]",
               "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Delivery_Payment.dtsx",
               "RelativeDocumentMoniker": "OlistDW_ETL\\Load_Fact_Delivery_Payment.dtsx",
-              "ToolTip": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Delivery_Payment.dtsx [Design]",
-              "RelativeToolTip": "OlistDW_ETL\\Load_Fact_Delivery_Payment.dtsx [Design]",
+              "ToolTip": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Delivery_Payment.dtsx [Design]*",
+              "RelativeToolTip": "OlistDW_ETL\\Load_Fact_Delivery_Payment.dtsx [Design]*",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
               "WhenOpened": "2026-04-18T04:52:33.549Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 12,
               "Title": "Load_Fact_Lifecycle.dtsx [Design]",
               "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Fact_Lifecycle.dtsx",
               "RelativeDocumentMoniker": "OlistDW_ETL\\Load_Fact_Lifecycle.dtsx",
@@ -94,7 +158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "Master_ETL.dtsx [Design]",
               "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Master_ETL.dtsx",
               "RelativeDocumentMoniker": "OlistDW_ETL\\Master_ETL.dtsx",
@@ -118,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Load_Dim_Seller.dtsx [Design]",
               "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Dim_Seller.dtsx",
               "RelativeDocumentMoniker": "OlistDW_ETL\\Load_Dim_Seller.dtsx",
@@ -130,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Load_Dim_Product.dtsx [Design]",
               "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Dim_Product.dtsx",
               "RelativeDocumentMoniker": "OlistDW_ETL\\Load_Dim_Product.dtsx",
@@ -142,7 +206,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Load_Dim_Date_Geo_Customer.dtsx [Design]",
               "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Load_Dim_Date_Geo_Customer.dtsx",
               "RelativeDocumentMoniker": "OlistDW_ETL\\Load_Dim_Date_Geo_Customer.dtsx",
@@ -154,7 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Extract_Seller_Order_Payment.dtsx [Design]",
               "DocumentMoniker": "C:\\DataWareHouse-Project\\OlistDW_ETL\\OlistDW_ETL\\Extract_Seller_Order_Payment.dtsx",
               "RelativeDocumentMoniker": "OlistDW_ETL\\Extract_Seller_Order_Payment.dtsx",
